@@ -5,10 +5,10 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CursorGlow() {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  
+
   // Spring physics for smooth, delayed cursor following
   const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
   const smoothX = useSpring(cursorX, springConfig);
@@ -27,7 +27,7 @@ export default function CursorGlow() {
 
     window.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseleave', handleMouseLeave);
-    
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -50,7 +50,7 @@ export default function CursorGlow() {
         <div
           className="w-[700px] h-[700px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(0,217,255,0.18) 0%, rgba(168,85,247,0.10) 40%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0,217,255,0.09) 0%, rgba(168,85,247,0.04) 40%, transparent 70%)',
             filter: 'blur(40px)',
           }}
         />
@@ -70,7 +70,7 @@ export default function CursorGlow() {
         <div
           className="w-6 h-6 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(0,217,255,0.9) 0%, rgba(168,85,247,0.4) 50%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(0,217,255,0.6) 0%, rgba(168,85,247,0.4) 50%, transparent 70%)',
             boxShadow: '0 0 20px rgba(0,217,255,0.6), 0 0 40px rgba(0,217,255,0.3), 0 0 60px rgba(168,85,247,0.2)',
           }}
         />

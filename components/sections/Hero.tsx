@@ -146,15 +146,29 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={item} className="mt-16">
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="inline-block"
-          >
-            <svg className="w-6 h-6 text-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
+          <MagneticElement strength={0.5} distance={120}>
+            <motion.button
+              onClick={() => {
+                document.getElementById('about')?.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                });
+              }}
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: 0.9 }}
+              className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-cyan/40 bg-cyan/5 backdrop-blur-sm hover:bg-cyan/15 hover:border-cyan/70 transition-all duration-300 group cursor-pointer"
+              style={{
+                boxShadow: '0 0 15px rgba(0,217,255,0.15), 0 0 30px rgba(0,217,255,0.05)',
+              }}
+              aria-label="Scroll to About section"
+            >
+              <svg className="w-5 h-5 text-cyan group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.button>
+          </MagneticElement>
         </motion.div>
       </motion.div>
     </section>
