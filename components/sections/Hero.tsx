@@ -46,7 +46,7 @@ export default function Hero() {
           variants={item}
           className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 font-medium"
         >
-          Flutter Developer & Full-Stack Engineer
+          Software Engineer & Flutter Developer
         </motion.p>
 
         <motion.p 
