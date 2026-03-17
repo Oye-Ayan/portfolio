@@ -24,6 +24,17 @@ body {
   color: #fff;
   font-family: var(--font-body);
   overflow-x: hidden;
+  cursor: none;
+}
+
+/* Restore cursor on interactive elements */
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+  cursor: pointer;
 }
 
 .gradient-text {
@@ -37,6 +48,12 @@ body {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-effect:hover {
+  border-color: rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.05), 0 0 60px rgba(168, 85, 247, 0.03);
 }
 
 .glow-border {
@@ -62,8 +79,73 @@ body {
 }
 
 @keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* New shimmer animation for text and elements */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Slow rotation for floating shapes */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulsing glow effect */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(0, 217, 255, 0.2), 0 0 10px rgba(0, 217, 255, 0.1);
+  }
+
+  50% {
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4), 0 0 30px rgba(0, 217, 255, 0.2), 0 0 45px rgba(168, 85, 247, 0.1);
+  }
+}
+
+/* Drifting animation for particles */
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(10px, -15px);
+  }
+
+  50% {
+    transform: translate(-5px, -25px);
+  }
+
+  75% {
+    transform: translate(-15px, -10px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -80,10 +162,40 @@ body {
 }
 
 .tech-grid-bg {
-  background-image: 
-    linear-gradient(rgba(0, 217, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+  background-image:
+    linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
+  animation: grid-fade 4s ease-in-out infinite alternate;
+}
+
+@keyframes grid-fade {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.15), rgba(168, 85, 247, 0.15), transparent);
+}
+
+section:last-child::after {
+  display: none;
 }
 
 @layer utilities {
