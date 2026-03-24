@@ -5,6 +5,8 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CursorGlow() {
   const [isVisible, setIsVisible] = useState(false);
+  // Detect touch/mobile devices — hide cursor glow on them
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -14,7 +16,22 @@ export default function CursorGlow() {
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
+  // Detect touch/mobile device on mount
   useEffect(() => {
+    const checkTouchDevice = () => {
+      const hasTouchPoints = navigator.maxTouchPoints > 0;
+      const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      const hasNoHover = window.matchMedia('(hover: none)').matches;
+      // Device is touch-only if it has touch AND no fine pointer/hover
+      return (hasTouchPoints && hasCoarsePointer) || (hasTouchPoints && hasNoHover);
+    };
+    setIsTouchDevice(checkTouchDevice());
+  }, []);
+
+  useEffect(() => {
+    // Skip adding listeners on touch devices
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -32,7 +49,10 @@ export default function CursorGlow() {
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY, isVisible, isTouchDevice]);
+
+  // Don't render anything on touch/mobile devices
+  if (isTouchDevice) return null;
 
   return (
     <>
