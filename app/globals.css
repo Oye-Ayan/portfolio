@@ -24,7 +24,25 @@ body {
   color: #fff;
   font-family: var(--font-body);
   overflow-x: hidden;
+  /* cursor: none; — ORIGINAL, disabled for mobile fix below */
   cursor: none;
+}
+
+/* Restore default cursor on mobile/touch devices (no hover capability) */
+@media (hover: none),
+(pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: auto;
+  }
 }
 
 /* Restore cursor on interactive elements */
@@ -37,11 +55,26 @@ select,
   cursor: pointer;
 }
 
+
+
 .gradient-text {
+
+  color: #00D9FF;
   background: linear-gradient(135deg, #00D9FF 0%, #A855F7 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+@supports not (background-clip: text) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: #00D9FF;
+    color: #00D9FF;
+  }
 }
 
 .glass-effect {

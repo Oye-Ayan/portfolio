@@ -6,26 +6,24 @@ import Button from '../ui/Button';
 import FloatingShapes from '../effects/FloatingShapes';
 import MagneticElement from '../effects/MagneticElement';
 
-// Character-by-character text reveal component
 function AnimatedText({ text, className = '' }: { text: string; className?: string }) {
-  const chars = text.split('');
+  const words = text.split(' ');
 
   return (
     <span className={className}>
-      {chars.map((char, i) => (
+      {words.map((word, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 40, rotateX: -90 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 0.5,
-            delay: 0.8 + i * 0.03,
+            duration: 0.6,
+            delay: 0.6 + i * 0.12,
             ease: [0.215, 0.61, 0.355, 1],
           }}
           className="inline-block"
-          style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
         >
-          {char === ' ' ? '\u00A0' : char}
+          {word}{i < words.length - 1 ? '\u00A0' : ''}
         </motion.span>
       ))}
     </span>
@@ -47,7 +45,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 sm:px-8">
       {/* Background blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute w-96 h-96 bg-cyan/20 rounded-full blur-3xl -top-48 -left-48 animate-float" />
@@ -55,7 +53,7 @@ export default function Hero() {
         <div className="absolute w-64 h-64 bg-cyan/10 rounded-full blur-3xl top-1/3 right-1/4 animate-float" style={{ animationDelay: '4s' }} />
       </div>
 
-      {/* Floating geometric shapes with parallax */}
+      {/* Floating tech icon shapes with parallax */}
       <FloatingShapes />
 
       <motion.div
@@ -64,9 +62,9 @@ export default function Hero() {
         animate="show"
         className="max-w-6xl mx-auto text-center relative z-10"
       >
-        <motion.div variants={item} className="mb-6">
+        <motion.div variants={item} className="mb-4 sm:mb-6">
           <motion.span
-            className="text-cyan font-mono text-lg md:text-xl lg:text-2xl inline-block"
+            className="text-cyan font-mono text-base sm:text-lg md:text-xl lg:text-2xl inline-block"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
@@ -76,14 +74,14 @@ export default function Hero() {
 
         <motion.h1
           variants={item}
-          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 sm:mb-6 text-balance"
         >
           <AnimatedText text="Muhammad Ayan Khan" className="gradient-text" />
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-4 font-medium"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 mb-3 sm:mb-4 font-medium"
         >
           <motion.span
             initial={{ backgroundPosition: '200% 0' }}
@@ -103,13 +101,12 @@ export default function Hero() {
 
         <motion.p
           variants={item}
-          className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-12"
+          className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 px-2"
         >
           Building sleek, scalable mobile & web applications with clean architecture.
-          Currently crafting backend systems at eConceptions while pushing the boundaries of AI-integrated healthcare solutions.
         </motion.p>
 
-        <motion.div variants={item} className="flex flex-wrap justify-center gap-4 mb-12">
+        <motion.div variants={item} className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
           <MagneticElement strength={0.4}>
             <Button href="https://github.com/Oye-Ayan" variant="primary">
               <FaGithub className="text-xl" />
@@ -132,7 +129,7 @@ export default function Hero() {
 
         <motion.div
           variants={item}
-          className="flex flex-wrap justify-center gap-6 text-sm text-gray-400"
+          className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-400"
         >
           <a href="mailto:mayan921111@gmail.com" className="flex items-center gap-2 hover:text-cyan transition">
             <FaEnvelope /> mayan921111@gmail.com
@@ -145,7 +142,7 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.div variants={item} className="mt-16">
+        <motion.div variants={item} className="mt-12 sm:mt-16">
           <MagneticElement strength={0.5} distance={120}>
             <motion.button
               onClick={() => {
