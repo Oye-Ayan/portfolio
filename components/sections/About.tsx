@@ -46,7 +46,7 @@ export default function About() {
         >
           <Card className="text-center md:text-left">
             <p className="text-gray-300 text-lg leading-relaxed">
-              I'm a <span className="text-cyan font-semibold">Flutter Developer</span> and <span className="text-purple font-semibold">Full-Stack Engineer</span> with hands-on experience 
+              I'm a <span className="text-cyan font-semibold">Software Engineer</span> and <span className="text-purple font-semibold">Flutter Developer</span> with hands-on experience 
               in cross-platform app development using Flutter, Firebase, and Supabase. Currently working at <span className="text-cyan font-semibold">eConceptions</span> as a Junior Java Developer, 
               I contribute to backend microservices and API integration while exploring innovative mobile solutions.
             </p>
