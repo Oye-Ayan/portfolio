@@ -39,8 +39,7 @@ export default function Certifications() {
               Successfully completed professional internship in Flutter mobile app development, 
               demonstrating strong technical skills and team collaboration abilities.
             </p>
-
-            <Button href="https://bit.ly/Internship-POF" variant="primary">
+            <Button href="/pof_certificate.jpg" variant="primary">
               <FaExternalLinkAlt />
               View Certificate
             </Button>
