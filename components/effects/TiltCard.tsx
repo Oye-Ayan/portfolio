@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useRef, useState, ReactNode } from 'react';
@@ -13,7 +14,7 @@ interface TiltCardProps {
 export default function TiltCard({
   children,
   className = '',
-  tiltStrength = 10,
+  tiltStrength = 5,
   glareEnabled = true,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,6 @@ export default function TiltCard({
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    // Calculate tilt (normalized -1 to 1)
     const normalX = (e.clientX - centerX) / (rect.width / 2);
     const normalY = (e.clientY - centerY) / (rect.height / 2);
 
@@ -36,11 +36,10 @@ export default function TiltCard({
       rotateY: normalX * tiltStrength,
     });
 
-    // Calculate glare position (0-100%)
     const glareX = ((e.clientX - rect.left) / rect.width) * 100;
     const glareY = ((e.clientY - rect.top) / rect.height) * 100;
 
-    setGlare({ x: glareX, y: glareY, opacity: 0.15 });
+    setGlare({ x: glareX, y: glareY, opacity: 0.06 });
   };
 
   const handleMouseLeave = () => {
@@ -58,7 +57,7 @@ export default function TiltCard({
         rotateX: tilt.rotateX,
         rotateY: tilt.rotateY,
       }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       style={{
         perspective: 1000,
         transformStyle: 'preserve-3d',
@@ -66,28 +65,17 @@ export default function TiltCard({
     >
       {children}
 
-      {/* Spotlight/sheen overlay */}
+      {/* Subtle warm spotlight on hover */}
       {glareEnabled && (
         <motion.div
-          className="absolute inset-0 pointer-events-none rounded-xl"
+          className="absolute inset-0 pointer-events-none rounded-lg"
           animate={{ opacity: glare.opacity }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
           style={{
-            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(0,217,255,0.15) 0%, rgba(168,85,247,0.05) 40%, transparent 70%)`,
+            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,0.06) 0%, transparent 60%)`,
           }}
         />
       )}
-
-      {/* Border shimmer on hover */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none rounded-xl"
-        animate={{ opacity: glare.opacity > 0 ? 0.4 : 0 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          border: '1px solid rgba(0,217,255,0.2)',
-          boxShadow: `0 0 20px rgba(0,217,255,${glare.opacity * 0.3}), 0 0 40px rgba(168,85,247,${glare.opacity * 0.15})`,
-        }}
-      />
     </motion.div>
   );
 }

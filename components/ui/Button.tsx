@@ -1,3 +1,4 @@
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -11,27 +12,31 @@ interface ButtonProps {
   className?: string;
 }
 
-export default function Button({ 
-  children, 
-  variant = 'primary', 
-  href, 
+export default function Button({
+  children,
+  variant = 'primary',
+  href,
   onClick,
   className = ''
 }: ButtonProps) {
-  const baseStyles = 'px-8 py-4 rounded-lg font-semibold transition-all duration-300 inline-flex items-center gap-2';
-  
+  const baseStyles = `
+    px-6 py-3 rounded-md font-medium text-sm tracking-wide
+    inline-flex items-center gap-2.5
+    transition-all duration-300
+  `.replace(/\s+/g, ' ').trim();
+
   const variants = {
-    primary: 'bg-gradient-to-r from-cyan to-purple text-white hover:shadow-lg hover:shadow-cyan/50',
-    secondary: 'bg-dark-accent text-white hover:bg-dark-lighter border border-cyan/30',
-    outline: 'border-2 border-cyan text-cyan hover:bg-cyan/10'
+    primary: 'bg-accent text-dark font-semibold hover:bg-accent/90 active:scale-[0.98]',
+    secondary: 'bg-dark-accent text-text-primary border border-white/[0.06] hover:border-white/[0.12] hover:bg-dark-muted active:scale-[0.98]',
+    outline: 'border border-white/[0.1] text-text-primary hover:border-accent/40 hover:text-accent active:scale-[0.98]'
   };
 
   const Component = href ? 'a' : 'button';
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ y: -2 }}
+      whileTap={{ scale: 0.97 }}
       className="inline-block"
     >
       <Component

@@ -1,78 +1,77 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
+import ScrollReveal from '../effects/ScrollReveal';
 import { FaCode, FaMobile, FaLightbulb, FaRocket } from 'react-icons/fa';
 
 export default function About() {
   const highlights = [
     {
-      icon: <FaMobile className="text-3xl" />,
+      icon: <FaMobile className="text-2xl" />,
       title: "Mobile Expertise",
       description: "Flutter, Firebase, Supabase for production-ready apps"
     },
     {
-      icon: <FaCode className="text-3xl" />,
+      icon: <FaCode className="text-2xl" />,
       title: "Full-Stack Skills",
       description: "Backend systems with Java, PHP Laravel, Python"
     },
     {
-      icon: <FaLightbulb className="text-3xl" />,
+      icon: <FaLightbulb className="text-2xl" />,
       title: "AI Integration",
       description: "TensorFlow Lite, machine learning in healthcare"
     },
     {
-      icon: <FaRocket className="text-3xl" />,
+      icon: <FaRocket className="text-2xl" />,
       title: "Clean Architecture",
       description: "Scalable, maintainable, production-grade code"
     }
   ];
 
   return (
-    <section id="about" className="py-20 px-4">
+    <section id="about" className="py-28 md:py-40 px-6 sm:px-8">
       <div className="max-w-6xl mx-auto">
-        <SectionTitle 
-          title="About Me" 
-          subtitle="Results-driven developer with a passion for elegant solutions"
+        <SectionTitle
+          label="Overview"
+          title="About Me"
+          subtitle="Results-driven software engineer crafting elegant mobile & web applications"
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <Card className="text-center md:text-left">
-            <p className="text-gray-300 text-lg leading-relaxed">
-              I'm a <span className="text-cyan font-semibold">Software Engineer</span> and <span className="text-purple font-semibold">Flutter Developer</span> with hands-on experience 
-              in cross-platform app development using Flutter, Firebase, and Supabase. Currently working at <span className="text-cyan font-semibold">eConceptions</span> as a Junior Java Developer, 
-              I contribute to backend microservices and API integration while exploring innovative mobile solutions.
-            </p>
-            <p className="text-gray-300 text-lg leading-relaxed mt-4">
-              My final year project, <span className="text-cyan font-semibold">ArticuliCare</span>, demonstrates my ability to integrate AI with mobile technology for real-world healthcare applications. 
-              I'm passionate about crafting elegant UI/UX and delivering reliable, high-performance experiences.
-            </p>
-          </Card>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-start">
+          {/* Left - Bio text with bidirectional reveal */}
+          <ScrollReveal className="lg:col-span-3" direction="up" once={false}>
+            <div className="space-y-6 text-text-secondary text-lg md:text-xl leading-relaxed font-body">
+              <p>
+                I&apos;m a <span className="text-text-primary font-semibold">Software Engineer</span> and{' '}
+                <span className="text-accent font-semibold">Flutter Developer</span> with a focus on building high-performance cross-platform applications.
+              </p>
+              <p>
+                Currently at <span className="text-text-primary font-semibold">eConceptions</span> as a Junior Java Developer, I engineer microservices and robust API integrations. My work on <span className="text-accent font-semibold">ArticuliCare</span> leverages on-device AI for speech pathology detection.
+              </p>
+            </div>
+          </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {highlights.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <Card className="text-center h-full">
-                <div className="text-cyan mb-4 flex justify-center">{item.icon}</div>
-                <h3 className="text-xl font-display font-bold mb-2 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.description}</p>
-              </Card>
-            </motion.div>
-          ))}
+          {/* Right - Highlight cards */}
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            {highlights.map((item, index) => (
+              <ScrollReveal key={index} delay={index * 0.08} direction="up" once={false}>
+                <Card className="h-full" tilt={false}>
+                  <div className="flex items-start gap-4">
+                    <div className="text-accent shrink-0 mt-1">{item.icon}</div>
+                    <div>
+                      <h3 className="text-base font-display font-semibold text-text-primary mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-text-secondary text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

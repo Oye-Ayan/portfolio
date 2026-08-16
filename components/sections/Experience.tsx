@@ -1,9 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
-import { FaBriefcase } from 'react-icons/fa';
+import ScrollReveal from '../effects/ScrollReveal';
 
 export default function Experience() {
   const experiences = [
@@ -33,60 +32,41 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-20 px-4 bg-dark-lighter/30">
-      <div className="max-w-6xl mx-auto">
-        <SectionTitle 
-          title="Work Experience" 
-          subtitle="Professional journey in software development"
+    <section id="experience" className="py-28 md:py-40 px-6 sm:px-8">
+      <div className="max-w-5xl mx-auto">
+        <SectionTitle
+          label="Career"
+          title="Work Experience"
+          subtitle="Professional journey in software development and backend systems"
         />
 
-        <div className="relative space-y-8 md:ml-10">
-          {/* Full vertical line behind everything */}
-          <div className="hidden md:block absolute left-6 top-0 bottom-0 w-0.5 z-0 bg-gradient-to-b from-cyan via-purple to-cyan" />
-
+        <div className="space-y-8">
           {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="relative flex md:items-start"
-            >
-              {/* Icon with white overlay to "cut" the line */}
-              <div className="hidden md:flex flex-shrink-0 w-14 h-14 rounded-full bg-cyan/20 border-4 border-dark flex items-center justify-center z-10 -mt-2 relative">
-                {/* White circle to mask the line behind */}
-                <div className="absolute inset-0 bg-dark-lighter rounded-full -z-0" />
-                <FaBriefcase className="text-cyan text-xl z-10 relative" />
-              </div>
-
-              {/* Card */}
-              <div className="flex-1 md:ml-6">
-                <Card>
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-display font-bold text-white mb-1">
-                        {exp.role}
-                      </h3>
-                      <p className="text-cyan text-lg font-semibold">{exp.company}</p>
-                      <p className="text-gray-400 text-sm">{exp.location}</p>
-                    </div>
-                    <span className="text-purple font-mono text-sm mt-2 sm:mt-0">
-                      {exp.period}
-                    </span>
+            <ScrollReveal key={index} delay={index * 0.12} once={false} direction="up">
+              <Card tilt={false}>
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-6">
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-display font-bold text-text-primary tracking-tight">
+                      {exp.role}
+                    </h3>
+                    <p className="text-accent font-semibold text-base mt-0.5">{exp.company}</p>
+                    <p className="text-text-tertiary text-xs font-mono">{exp.location}</p>
                   </div>
+                  <span className="text-text-secondary font-mono text-xs whitespace-nowrap bg-white/[0.03] px-3 py-1 rounded border border-white/[0.06] self-start">
+                    {exp.period}
+                  </span>
+                </div>
 
-                  <ul className="space-y-2">
-                    {exp.description.map((item, i) => (
-                      <li key={i} className="text-gray-300 flex items-start gap-2">
-                        <span className="text-cyan mt-1.5">▹</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              </div>
-            </motion.div>
+                <ul className="space-y-3">
+                  {exp.description.map((item, i) => (
+                    <li key={i} className="text-text-secondary text-sm md:text-base leading-relaxed flex items-start gap-3">
+                      <span className="text-accent mt-1 flex-shrink-0 text-xs">▹</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </ScrollReveal>
           ))}
         </div>
       </div>

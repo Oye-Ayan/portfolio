@@ -1,50 +1,45 @@
+
 'use client';
 
-import { motion } from 'framer-motion';
 import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
-import { FaCertificate, FaExternalLinkAlt } from 'react-icons/fa';
+import ScrollReveal from '../effects/ScrollReveal';
+import { FaAward, FaExternalLinkAlt } from 'react-icons/fa';
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-20 px-4 bg-dark-lighter/30">
-      <div className="max-w-6xl mx-auto">
-        <SectionTitle 
-          title="Certifications" 
-          subtitle="Professional recognition and validated skills"
+    <section id="certifications" className="py-28 md:py-40 px-6 sm:px-8">
+      <div className="max-w-4xl mx-auto">
+        <SectionTitle
+          label="Credentials"
+          title="Certifications"
+          subtitle="Professional recognition and validated industry skills"
         />
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
-        >
-          <Card className="text-center">
+        <ScrollReveal once={false} scale={0.97}>
+          <Card tilt={false} className="text-center p-8 md:p-12">
             <div className="flex justify-center mb-6">
-              <div className="p-6 bg-gradient-to-br from-cyan/20 to-purple/20 rounded-full">
-                <FaCertificate className="text-6xl text-cyan" />
+              <div className="p-5 bg-accent/10 border border-accent/20 rounded-full text-accent text-3xl">
+                <FaAward />
               </div>
             </div>
 
-            <h3 className="text-2xl font-display font-bold text-white mb-2">
+            <h3 className="text-2xl font-display font-bold text-text-primary mb-2">
               Internship Certificate
             </h3>
-            <p className="text-cyan text-lg font-semibold mb-4">
+            <p className="text-accent text-base font-semibold mb-4">
               Pakistan Ordnance Factories (POF) IT Department
             </p>
-            <p className="text-gray-300 mb-6 max-w-xl mx-auto">
-              Successfully completed professional internship in Flutter mobile app development, 
-              demonstrating strong technical skills and team collaboration abilities.
+            <p className="text-text-secondary text-sm md:text-base leading-relaxed mb-8 max-w-xl mx-auto">
+              Successfully completed professional internship in Flutter mobile app development, demonstrating strong technical skills and team collaboration abilities.
             </p>
             <Button href="/pof_certificate.jpg" variant="primary">
-              <FaExternalLinkAlt />
+              <FaExternalLinkAlt className="text-sm" />
               View Certificate
             </Button>
           </Card>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );

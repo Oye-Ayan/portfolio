@@ -1,60 +1,3 @@
-/* ORIGINAL tailwind.config.ts - BACKUP:
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  content: [
-    "./pages/**\/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**\/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**\/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        dark: {
-          DEFAULT: '#0A0E27',
-          lighter: '#151B3D',
-          accent: '#1E2749'
-        },
-        cyan: {
-          DEFAULT: '#00D9FF',
-          light: '#5FFBF1',
-          dark: '#0099CC'
-        },
-        purple: {
-          DEFAULT: '#A855F7',
-          light: '#C084FC',
-          dark: '#7C3AED'
-        }
-      },
-      fontFamily: {
-        'display': ['var(--font-display)'],
-        'body': ['var(--font-body)'],
-      },
-      animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'gradient': 'gradient 8s linear infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px #00D9FF, 0 0 10px #00D9FF' },
-          '100%': { boxShadow: '0 0 10px #00D9FF, 0 0 20px #00D9FF, 0 0 30px #00D9FF' },
-        },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-      },
-    },
-  },
-  plugins: [],
-};
-export default config;
-*/
 
 import type { Config } from "tailwindcss";
 
@@ -68,66 +11,51 @@ const config: Config = {
     extend: {
       colors: {
         dark: {
-          DEFAULT: '#0A0E27',
-          lighter: '#151B3D',
-          accent: '#1E2749'
+          DEFAULT: '#0a0a0b',
+          lighter: '#111113',
+          accent: '#19191c',
+          muted: '#222226',
         },
-        cyan: {
-          DEFAULT: '#00D9FF',
-          light: '#5FFBF1',
-          dark: '#0099CC'
+        accent: {
+          DEFAULT: '#64d99a',
+          dim: 'rgba(100, 217, 154, 0.15)',
+          glow: 'rgba(100, 217, 154, 0.08)',
         },
-        purple: {
-          DEFAULT: '#A855F7',
-          light: '#C084FC',
-          dark: '#7C3AED'
-        }
+        text: {
+          primary: '#ececee',
+          secondary: '#7a7a80',
+          tertiary: '#4a4a50',
+        },
       },
       fontFamily: {
         'display': ['var(--font-display)'],
         'body': ['var(--font-body)'],
+        'mono': ['var(--font-mono)'],
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'gradient': 'gradient 8s linear infinite',
-        'shimmer': 'shimmer 3s linear infinite',
-        'rotate-slow': 'rotate-slow 20s linear infinite',
-        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-        'drift': 'drift 15s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.8s var(--ease-out-expo) forwards',
+        'slide-up': 'slideUp 0.8s var(--ease-out-expo) forwards',
+        'scale-in': 'scaleIn 0.6s var(--ease-out-expo) forwards',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        glow: {
-          '0%': { boxShadow: '0 0 5px #00D9FF, 0 0 10px #00D9FF' },
-          '100%': { boxShadow: '0 0 10px #00D9FF, 0 0 20px #00D9FF, 0 0 30px #00D9FF' },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
-        },
-        'rotate-slow': {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
-        },
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 5px rgba(0,217,255,0.2), 0 0 10px rgba(0,217,255,0.1)' },
-          '50%': { boxShadow: '0 0 15px rgba(0,217,255,0.4), 0 0 30px rgba(0,217,255,0.2), 0 0 45px rgba(168,85,247,0.1)' },
-        },
-        drift: {
-          '0%': { transform: 'translate(0, 0)' },
-          '25%': { transform: 'translate(10px, -15px)' },
-          '50%': { transform: 'translate(-5px, -25px)' },
-          '75%': { transform: 'translate(-15px, -10px)' },
-          '100%': { transform: 'translate(0, 0)' },
-        },
+      },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+        '30': '7.5rem',
+        '34': '8.5rem',
       },
     },
   },

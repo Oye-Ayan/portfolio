@@ -1,3 +1,4 @@
+
 'use client';
 
 import { ReactNode } from 'react';
@@ -13,14 +14,14 @@ interface CardProps {
 export default function Card({ children, className = '', hover = true, tilt = true }: CardProps) {
   if (tilt && hover) {
     return (
-      <TiltCard className={`glass-effect rounded-xl p-6 ${className}`}>
+      <TiltCard className={`glass-effect rounded-lg p-6 md:p-8 ${className}`}>
         {children}
       </TiltCard>
     );
   }
 
   return (
-    <div className={`glass-effect rounded-xl p-6 ${className}`}>
+    <div className={`glass-effect rounded-lg p-6 md:p-8 ${className}`}>
       {children}
     </div>
   );
