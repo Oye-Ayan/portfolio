@@ -128,7 +128,7 @@ export default function Contact() {
 
         {/* SITE FOOTER */}
         <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-text-tertiary">
-          <p>© 2026 Muhammad Ayan Khan</p>
+          <p>© 2024 Muhammad Ayan Khan</p>
           <p className="italic text-text-secondary">Think. Build. Repeat.</p>
           <p>Designed & Built by Ayan</p>
         </footer>

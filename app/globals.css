@@ -2,32 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Premium Typography ────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+/* ══════════════════════════════════════════════════════════════════════════
+   PREVIOUS globals.css BACKUP (commented out for restore):
+   - Used @import url Google Fonts for Syne + Space Grotesk + JetBrains Mono
+   - Accent color: #64d99a (AI-green)
+   - Font vars: --font-display: Syne, --font-body: Space Grotesk
+   - gradient-text, glass-effect, glow-border, custom-scrollbar, video-bg,
+     cursor: none, noise-overlay, tag styles, section dividers
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Self-hosted Satoshi (Fontshare) ──────────────────────────────────── */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* ── JetBrains Mono from Google Fonts (kept for mono role) ────────────── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 /* ── Design Tokens ─────────────────────────────────────────────────────── */
 :root {
   /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Space Grotesk', sans-serif;
+  --font-display: 'Satoshi', system-ui, sans-serif;
+  --font-body: 'Satoshi', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Colors - Premium Dark Palette */
-  --color-bg: #0a0a0b;
-  --color-surface: #111113;
-  --color-surface-elevated: #19191c;
+  /* Colors - Premium Dark Palette (Warm, not AI-generated) */
+  --color-bg: #0b0b0e;
+  --color-surface: #121215;
+  --color-surface-elevated: #1a1a1e;
   --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-hover: rgba(255, 255, 255, 0.12);
+  --color-border-hover: rgba(255, 255, 255, 0.14);
 
   /* Text */
-  --color-text-primary: #ececee;
-  --color-text-secondary: #7a7a80;
-  --color-text-tertiary: #4a4a50;
+  --color-text-primary: #e8e8ec;
+  --color-text-secondary: #8a8a92;
+  --color-text-tertiary: #52525a;
 
-  /* Accent - Single warm accent */
-  --color-accent: #64d99a;
-  --color-accent-dim: rgba(100, 217, 154, 0.15);
-  --color-accent-glow: rgba(100, 217, 154, 0.08);
+  /* Accent - Warm Amber (premium, not AI-green) */
+  --color-accent: #e8a87c;
+  --color-accent-dim: rgba(232, 168, 124, 0.12);
+  --color-accent-glow: rgba(232, 168, 124, 0.06);
 
   /* Spacing scale */
   --section-gap: clamp(6rem, 10vw, 10rem);
@@ -36,6 +82,11 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Radius system - ONE consistent scale */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 }
 
 /* ── Base Reset ────────────────────────────────────────────────────────── */
@@ -55,8 +106,10 @@ body {
   background: var(--color-bg);
   color: var(--color-text-primary);
   font-family: var(--font-body);
+  font-weight: 400;
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
 }
 
 /* ── Selection ─────────────────────────────────────────────────────────── */
@@ -65,75 +118,38 @@ body {
   color: var(--color-bg);
 }
 
-/* ── Font Classes ──────────────────────────────────────────────────────── */
-.font-display {
+/* ── Typography Scale ──────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--color-text-primary);
 }
 
-.font-body {
-  font-family: var(--font-body);
-}
+/* ── Font Classes ──────────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
 
-.font-mono {
-  font-family: var(--font-mono);
-}
-
-/* ── Gradient text ─────────────────────────────────────────────────────── */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-@supports not (background-clip: text) {
-  .gradient-text {
-    background: none;
-    -webkit-text-fill-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-}
-
-/* ── Glass Effect — Premium, Subtle ────────────────────────────────────── */
+/* ── Glass Effect (Selective, subtle) ──────────────────────────────────── */
 .glass-effect {
   background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
-  transition: border-color 0.5s var(--ease-out-expo),
-    box-shadow 0.5s var(--ease-out-expo),
-    transform 0.5s var(--ease-out-expo);
+  transition: border-color 0.4s var(--ease-out-expo),
+    box-shadow 0.4s var(--ease-out-expo);
 }
 
 .glass-effect:hover {
   border-color: var(--color-border-hover);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-/* ── Glow border - refined ─────────────────────────────────────────────── */
-.glow-border {
-  position: relative;
-}
-
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--color-accent), transparent 60%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0.4;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
 }
 
 /* ── Custom Scrollbar ──────────────────────────────────────────────────── */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -149,13 +165,12 @@ body {
   background: var(--color-text-secondary);
 }
 
-/* Firefox scrollbar */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-text-tertiary) var(--color-bg);
 }
 
-/* ── Smooth Section Dividers ───────────────────────────────────────────── */
+/* ── Section Dividers (subtle) ─────────────────────────────────────────── */
 section {
   position: relative;
 }
@@ -164,8 +179,8 @@ section::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 5%;
-  right: 5%;
+  left: 8%;
+  right: 8%;
   height: 1px;
   background: linear-gradient(90deg,
       transparent,
@@ -178,37 +193,15 @@ section:last-child::after {
   display: none;
 }
 
-/* ── Cursor — Desktop only ─────────────────────────────────────────────── */
+/* ── Cursor (Desktop only) ─────────────────────────────────────────────── */
 @media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
-    cursor: none;
-  }
+  body { cursor: none; }
+  a, button, input, textarea, select, [role="button"] { cursor: none; }
 }
 
-/* Touch device — default cursor */
-@media (hover: none),
-(pointer: coarse) {
-  body {
-    cursor: auto;
-  }
-
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
-    cursor: auto;
-  }
+@media (hover: none), (pointer: coarse) {
+  body { cursor: auto; }
+  a, button, input, textarea, select, [role="button"] { cursor: auto; }
 }
 
 /* ── Video Background helpers ──────────────────────────────────────────── */
@@ -235,10 +228,10 @@ section:last-child::after {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-      rgba(10, 10, 11, 0.75) 0%,
-      rgba(10, 10, 11, 0.6) 40%,
-      rgba(10, 10, 11, 0.85) 80%,
-      rgba(10, 10, 11, 1) 100%);
+      rgba(11, 11, 14, 0.75) 0%,
+      rgba(11, 11, 14, 0.55) 40%,
+      rgba(11, 11, 14, 0.85) 80%,
+      rgba(11, 11, 14, 1) 100%);
   z-index: 1;
 }
 
@@ -248,14 +241,13 @@ section:last-child::after {
     text-wrap: balance;
   }
 
-  /* Noise overlay for depth */
   .noise-overlay::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.025;
+    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 256px 256px;
@@ -264,10 +256,7 @@ section:last-child::after {
 
 /* ── Reduced Motion ────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -275,16 +264,16 @@ section:last-child::after {
   }
 }
 
-/* ── Tag Styles ────────────────────────────────────────────────────────── */
+/* ── Tag Styles (Refined, editorial) ───────────────────────────────────── */
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.2rem 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   transition: all 0.3s var(--ease-out-expo);
@@ -296,15 +285,16 @@ section:last-child::after {
   background: var(--color-accent-dim);
 }
 
-/* ── Responsive Typography Scale ───────────────────────────────────────── */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+/* ── Inline Skill Tags (no border, flowing) ────────────────────────────── */
+.skill-inline {
+  display: inline;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.3s var(--ease-out-expo);
+}
+
+.skill-inline:hover {
+  color: var(--color-accent);
 }

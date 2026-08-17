@@ -1,3 +1,9 @@
+/* ORIGINAL tailwind.config.ts BACKUP:
+ * - colors: dark (#0a0a0b), accent (#64d99a green), text (#ececee/#7a7a80/#4a4a50)
+ * - fontFamily: display (Syne), body (Space Grotesk), mono (JetBrains Mono)
+ * - animations: fadeIn, slideUp, scaleIn
+ * - spacing: 18/22/30/34
+ */
 
 import type { Config } from "tailwindcss";
 
@@ -11,26 +17,31 @@ const config: Config = {
     extend: {
       colors: {
         dark: {
-          DEFAULT: '#0a0a0b',
-          lighter: '#111113',
-          accent: '#19191c',
-          muted: '#222226',
+          DEFAULT: '#0b0b0e',
+          lighter: '#121215',
+          accent: '#1a1a1e',
+          muted: '#232328',
         },
         accent: {
-          DEFAULT: '#64d99a',
-          dim: 'rgba(100, 217, 154, 0.15)',
-          glow: 'rgba(100, 217, 154, 0.08)',
+          DEFAULT: '#e8a87c',
+          dim: 'rgba(232, 168, 124, 0.12)',
+          glow: 'rgba(232, 168, 124, 0.06)',
         },
         text: {
-          primary: '#ececee',
-          secondary: '#7a7a80',
-          tertiary: '#4a4a50',
+          primary: '#e8e8ec',
+          secondary: '#8a8a92',
+          tertiary: '#52525a',
         },
       },
       fontFamily: {
-        'display': ['var(--font-display)'],
-        'body': ['var(--font-body)'],
-        'mono': ['var(--font-mono)'],
+        'display': ['Satoshi', 'system-ui', 'sans-serif'],
+        'body': ['Satoshi', 'system-ui', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '10px',
+        'lg': '14px',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s var(--ease-out-expo) forwards',
