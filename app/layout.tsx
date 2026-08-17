@@ -166,23 +166,18 @@ export default function RootLayout({
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-        {/* 
-          Google Analytics — Uncomment and replace G-XXXXXXXXXX with your Measurement ID
-          after creating a Google Analytics 4 property at https://analytics.google.com
-        */}
-        {/* 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        {/* Google Analytics Tracking */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8J93HDK4N3" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
+              gtag('config', 'G-8J93HDK4N3');
             `,
           }}
         />
-        */}
       </head>
       <body className="antialiased custom-scrollbar noise-overlay">{children}</body>
     </html>
