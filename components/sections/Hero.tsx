@@ -41,6 +41,7 @@ export default function Hero() {
       id="home"
       ref={sectionRef}
       className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
+      aria-label="Hero — Muhammad Ayan Khan, Software Engineer and Flutter Developer"
     >
       {/* Video Background */}
       <motion.div
@@ -104,11 +105,11 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
         >
-          <Button href="https://github.com/Oye-Ayan" variant="primary">
+          <Button href="https://github.com/Oye-Ayan" variant="primary" aria-label="View Muhammad Ayan Khan's GitHub profile">
             <FaGithub className="text-lg" />
             GitHub
           </Button>
-          <Button href="https://www.linkedin.com/in/muhammadayankhan/" variant="outline">
+          <Button href="https://www.linkedin.com/in/muhammadayankhan/" variant="outline" aria-label="View Muhammad Ayan Khan's LinkedIn profile">
             <FaLinkedin className="text-lg" />
             LinkedIn
           </Button>

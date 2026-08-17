@@ -1,0 +1,10 @@
+# robots.txt — Muhammad Ayan Khan Portfolio
+# https://muhammad-ayan-khan.vercel.app
+
+User-agent: *
+Allow: /
+Disallow: /_next/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://muhammad-ayan-khan.vercel.app/sitemap.xml

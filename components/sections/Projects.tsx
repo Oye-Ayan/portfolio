@@ -55,7 +55,7 @@ const projects: ProjectData[] = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-28 md:py-40 overflow-hidden">
+    <section id="projects" className="py-28 md:py-40 overflow-hidden" aria-label="Featured projects by Muhammad Ayan Khan">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 mb-12 md:mb-16">
         <TextReveal
           as="h2"

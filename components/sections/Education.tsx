@@ -7,7 +7,7 @@ import { FaGraduationCap, FaStar } from 'react-icons/fa';
 
 export default function Education() {
   return (
-    <section id="education" className="py-28 md:py-40 px-6 sm:px-8">
+    <section id="education" className="py-28 md:py-40 px-6 sm:px-8" aria-label="Education — BS Software Engineering from COMSATS University">
       <div className="max-w-5xl mx-auto">
         <SectionTitle
           label="Academics"

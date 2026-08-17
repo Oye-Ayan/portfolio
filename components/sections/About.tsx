@@ -30,7 +30,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 md:py-40 px-6 sm:px-8">
+    <section id="about" className="py-28 md:py-40 px-6 sm:px-8" aria-label="About Muhammad Ayan Khan — Software Engineer overview">
       <div className="max-w-6xl mx-auto">
         <SectionTitle
           label="Overview"

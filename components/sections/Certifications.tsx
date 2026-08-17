@@ -56,7 +56,7 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-28 md:py-40 px-6 sm:px-8 relative">
+    <section id="certifications" className="py-28 md:py-40 px-6 sm:px-8 relative" aria-label="Professional certifications — IBM AI, Big Data, POF Internship">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16 md:mb-24">
           <TextReveal

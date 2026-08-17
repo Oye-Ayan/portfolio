@@ -56,7 +56,7 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-28 md:py-40 px-6 sm:px-8">
+    <section id="skills" className="py-28 md:py-40 px-6 sm:px-8" aria-label="Technical skills — Flutter, Java, Python, Firebase, and more">
       <div className="max-w-6xl mx-auto">
         <TextReveal
           as="h2"

@@ -42,7 +42,7 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-28 md:py-40 px-6 sm:px-8 relative overflow-hidden">
+    <section id="contact" className="py-28 md:py-40 px-6 sm:px-8 relative overflow-hidden" aria-label="Contact Muhammad Ayan Khan — Get in touch">
       <div className="max-w-6xl mx-auto relative z-10">
         <SectionTitle
           label="Get In Touch"
@@ -126,8 +126,8 @@ export default function Contact() {
         </ScrollReveal>
 
         {/* SITE FOOTER */}
-        <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs  text-text-tertiary">
-          <p>© 2024 Muhammad Ayan Khan</p>
+        <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs  text-text-tertiary" role="contentinfo">
+          <p>© 2025 Muhammad Ayan Khan. All rights reserved.</p>
           <p className="italic text-text-secondary">Think. Build. Repeat.</p>
           <p>Designed & Built by Ayan</p>
         </footer>

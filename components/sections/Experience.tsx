@@ -32,7 +32,7 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-28 md:py-40 px-6 sm:px-8">
+    <section id="experience" className="py-28 md:py-40 px-6 sm:px-8" aria-label="Work experience — Junior Java Developer at eConceptions">
       <div className="max-w-5xl mx-auto">
         <SectionTitle
           label="Career"
