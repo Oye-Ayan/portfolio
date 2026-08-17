@@ -1,4 +1,3 @@
-
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -161,3 +160,7 @@ export default function Hero() {
     </section>
   );
 }
+
+/* REDESIGNED HERO BACKUP (commented out for reference):
+ * iOS autoPlay fallback handler, portfolio_poster.png fallback, visibility change auto-pause.
+ */

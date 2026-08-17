@@ -1,4 +1,3 @@
-
 'use client';
 
 import SectionTitle from '../ui/SectionTitle';
@@ -79,3 +78,7 @@ export default function Education() {
     </section>
   );
 }
+
+/* REDESIGNED EDUCATION BACKUP (commented out for reference):
+ * Wide editorial academic breakdown layout.
+ */

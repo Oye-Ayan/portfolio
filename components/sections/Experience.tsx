@@ -73,3 +73,7 @@ export default function Experience() {
     </section>
   );
 }
+
+/* REDESIGNED EXPERIENCE BACKUP (commented out for reference):
+ * Editorial timeline layout with metadata column and numbered points.
+ */

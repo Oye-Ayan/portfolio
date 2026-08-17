@@ -1,11 +1,10 @@
-
 'use client';
 
 import SectionTitle from '../ui/SectionTitle';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import ScrollReveal from '../effects/ScrollReveal';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaDownload, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaDownload } from 'react-icons/fa';
 
 export default function Contact() {
   const contactInfo = [
@@ -136,3 +135,7 @@ export default function Contact() {
     </section>
   );
 }
+
+/* REDESIGNED CONTACT BACKUP (commented out for reference):
+ * Editorial contact layout.
+ */
