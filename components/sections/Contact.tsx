@@ -65,7 +65,7 @@ export default function Contact() {
                   <div key={index} className="flex items-center gap-4 p-4 rounded-lg bg-white/[0.02] border border-white/[0.04]">
                     <div className="text-accent">{item.icon}</div>
                     <div>
-                      <p className="text-text-tertiary text-xs font-mono">{item.label}</p>
+                      <p className="text-text-tertiary text-xs ">{item.label}</p>
                       {item.href ? (
                         <a href={item.href} className="text-text-primary hover:text-accent transition-colors text-sm font-medium">
                           {item.value}
@@ -106,7 +106,7 @@ export default function Contact() {
                 <h3 className="text-lg font-display font-bold mb-2 text-text-primary">
                   Download Resume
                 </h3>
-                <p className="text-text-secondary text-xs mb-6 font-mono">
+                <p className="text-text-secondary text-xs mb-6 ">
                   Get a complete copy of my background & project experience
                 </p>
                 <Button href="/resume.pdf" variant="primary">
@@ -126,7 +126,7 @@ export default function Contact() {
         </ScrollReveal>
 
         {/* SITE FOOTER */}
-        <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-text-tertiary">
+        <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs  text-text-tertiary">
           <p>© 2024 Muhammad Ayan Khan</p>
           <p className="italic text-text-secondary">Think. Build. Repeat.</p>
           <p>Designed & Built by Ayan</p>

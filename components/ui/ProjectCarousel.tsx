@@ -231,7 +231,7 @@ function ProjectCard({ project, index, activeIndex, reduce, onClick }: ProjectCa
           {/* Featured badge */}
           {project.featured && (
             <div className="absolute top-4 right-4">
-              <span className="px-3 py-1 text-[10px] font-mono font-medium tracking-wider uppercase bg-accent/90 text-dark rounded-full">
+              <span className="px-3 py-1 text-[10px]  font-medium tracking-wider uppercase bg-accent/90 text-dark rounded-full">
                 Featured
               </span>
             </div>
@@ -254,7 +254,7 @@ function ProjectCard({ project, index, activeIndex, reduce, onClick }: ProjectCa
                 </p>
               )}
             </div>
-            <span className="text-text-tertiary text-xs font-mono whitespace-nowrap mt-1">
+            <span className="text-text-tertiary text-xs  whitespace-nowrap mt-1">
               {project.period}
             </span>
           </div>
@@ -268,7 +268,7 @@ function ProjectCard({ project, index, activeIndex, reduce, onClick }: ProjectCa
             {project.tags.map((tag, tagIndex) => (
               <span
                 key={tagIndex}
-                className="text-[11px] font-mono text-text-tertiary tracking-wide"
+                className="text-[11px]  text-text-tertiary tracking-wide"
               >
                 {tag}{tagIndex < project.tags.length - 1 && <span className="text-text-tertiary/40 ml-1.5">/</span>}
               </span>

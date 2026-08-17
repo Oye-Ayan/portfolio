@@ -28,7 +28,7 @@ export default function Education() {
                 <p className="text-accent text-base font-medium mb-2">
                   COMSATS University Islamabad, Wah Campus
                 </p>
-                <div className="flex flex-wrap gap-4 text-text-tertiary text-xs font-mono">
+                <div className="flex flex-wrap gap-4 text-text-tertiary text-xs ">
                   <span>2021 – 2025</span>
                   <span className="flex items-center gap-1 text-accent font-semibold">
                     <FaStar className="text-accent text-xs" />
@@ -70,7 +70,7 @@ export default function Education() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.15} once={false} className="text-center">
-          <div className="inline-block px-4 py-2 rounded bg-surface border border-white/[0.06] text-xs font-mono text-text-tertiary">
+          <div className="inline-block px-4 py-2 rounded bg-surface border border-white/[0.06] text-xs  text-text-tertiary">
             <span className="text-accent font-semibold">Languages:</span> English (Fluent), Urdu (Native)
           </div>
         </ScrollReveal>

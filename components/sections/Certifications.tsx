@@ -81,10 +81,10 @@ export default function Certifications() {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                   <div className="md:col-span-8 space-y-4">
                     <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 font-mono text-[11px] uppercase font-bold text-dark bg-accent rounded">
+                      <span className="px-3 py-1  text-[11px] uppercase font-bold text-dark bg-accent rounded">
                         {cred.badge}
                       </span>
-                      <span className="text-text-tertiary text-xs font-mono">
+                      <span className="text-text-tertiary text-xs ">
                         {cred.period}
                       </span>
                     </div>
@@ -162,10 +162,10 @@ export default function Certifications() {
                     </div>
 
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="font-mono text-xs text-accent font-semibold">
+                      <span className=" text-xs text-accent font-semibold">
                         {cred.issuer}
                       </span>
-                      <span className="font-mono text-[11px] text-text-tertiary">
+                      <span className=" text-[11px] text-text-tertiary">
                         {cred.period}
                       </span>
                     </div>
@@ -185,7 +185,7 @@ export default function Certifications() {
                         href={cred.pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-xs font-mono font-medium text-text-primary hover:text-accent transition-colors"
+                        className="inline-flex items-center gap-2 text-xs  font-medium text-text-primary hover:text-accent transition-colors"
                       >
                         View Official Document
                         <FaExternalLinkAlt className="text-[10px]" />

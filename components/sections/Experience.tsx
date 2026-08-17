@@ -50,9 +50,9 @@ export default function Experience() {
                       {exp.role}
                     </h3>
                     <p className="text-accent font-semibold text-base mt-0.5">{exp.company}</p>
-                    <p className="text-text-tertiary text-xs font-mono">{exp.location}</p>
+                    <p className="text-text-tertiary text-xs ">{exp.location}</p>
                   </div>
-                  <span className="text-text-secondary font-mono text-xs whitespace-nowrap bg-white/[0.03] px-3 py-1 rounded border border-white/[0.06] self-start">
+                  <span className="text-text-secondary  text-xs whitespace-nowrap bg-white/[0.03] px-3 py-1 rounded border border-white/[0.06] self-start">
                     {exp.period}
                   </span>
                 </div>

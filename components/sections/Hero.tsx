@@ -75,7 +75,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-6"
         >
-          <span className="font-mono text-xs sm:text-sm tracking-[0.15em] text-accent uppercase">
+          <span className=" text-xs sm:text-sm tracking-[0.15em] text-accent uppercase">
             Software Engineer & Flutter Developer
           </span>
         </motion.div>
@@ -122,7 +122,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="flex flex-wrap justify-center gap-6 text-xs text-text-tertiary font-mono"
+          className="flex flex-wrap justify-center gap-6 text-xs text-text-tertiary "
         >
           <a href="mailto:mayan921111@gmail.com" className="hover:text-accent transition-colors duration-300">
             mayan921111@gmail.com

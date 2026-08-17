@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
   --font-display: 'Syne', sans-serif;
@@ -122,16 +122,29 @@ body {
   body {
     cursor: none;
   }
-  a, button, input, textarea, select, [role="button"] {
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
     cursor: none;
   }
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   body {
     cursor: auto;
   }
-  a, button, input, textarea, select, [role="button"] {
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
     cursor: auto;
   }
 }
@@ -178,7 +191,3 @@ section::after {
 section:last-child::after {
   display: none;
 }
-
-/* REDESIGNED CSS BACKUP (commented out for reference):
- * Satoshi font-face definitions, warm amber palette variables, refined tag system.
- */

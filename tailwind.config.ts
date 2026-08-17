@@ -24,7 +24,6 @@ const config: Config = {
       fontFamily: {
         display: ['Syne', 'sans-serif'],
         body: ['Space Grotesk', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },

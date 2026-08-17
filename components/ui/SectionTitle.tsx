@@ -25,7 +25,7 @@ export default function SectionTitle({ title, subtitle, label, align = 'left' }:
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-block font-mono text-xs font-semibold tracking-[0.18em] uppercase text-accent mb-3"
+          className="inline-block  text-xs font-semibold tracking-[0.18em] uppercase text-accent mb-3"
         >
           {label}
         </motion.span>
