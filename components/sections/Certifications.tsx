@@ -119,7 +119,7 @@ export default function Certifications() {
                         className="inline-flex items-center gap-2 px-5 py-3 rounded-[10px] border border-white/[0.1] text-text-primary hover:border-white/[0.2] transition-colors text-sm font-medium"
                       >
                         <FaSearchPlus className="text-xs text-accent" />
-                        Preview Badge Artwork
+                        Preview Badge
                       </button>
                     </div>
                   </div>

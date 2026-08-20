@@ -35,12 +35,13 @@ export default function JsonLd() {
     },
     alumniOf: {
       '@type': 'EducationalOrganization',
-      name: 'University of Wah',
+      name: 'COMSATS University Islamabad, Wah Campus',
+      url: 'https://www.comsats.edu.pk',
     },
     worksFor: {
       '@type': 'Organization',
       name: 'eConceptions',
-      url: 'https://econceptions.com',
+      url: 'https://www.econceptions.mobi',
     },
     knowsAbout: [
       'Flutter',
@@ -93,8 +94,8 @@ export default function JsonLd() {
     description:
       'Professional portfolio showcasing mobile apps, full-stack projects, and innovative AI-powered solutions by Muhammad Ayan Khan.',
     mainEntity: { '@id': `${baseUrl}/#person` },
-    dateCreated: '2024-01-01',
-    dateModified: new Date().toISOString().split('T')[0],
+    dateCreated: "2024-08-15T00:00:00Z",
+    dateModified: new Date().toISOString(),
     inLanguage: 'en-US',
   };
 

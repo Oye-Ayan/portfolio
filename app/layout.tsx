@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   // ── Long-tail keywords targeting branded + specialization searches ──
   keywords: [
     "Muhammad Ayan Khan",
+    "ayan",
+    "muhammad ayan khan",
+    "muhammad-ayan-khan",
+    "muhammadayankhan",
+    "muhammadayankhan.vercel.app",
+    "ayan-khan.vercel.app",
+    "muhammad-ayan-khan.vercel.app",
     "Muhammad Ayan Khan portfolio",
     "Muhammad Ayan Khan software engineer",
     "Software Engineer Pakistan",
