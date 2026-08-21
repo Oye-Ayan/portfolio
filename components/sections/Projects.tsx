@@ -6,29 +6,88 @@ import HorizontalScrollCarousel from '../effects/HorizontalScrollCarousel';
 import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink, FiArrowUpRight, FiMaximize2 } from 'react-icons/fi';
 import { useState } from 'react';
-import ArticuliCareShowcase from '../ui/ArticuliCareShowcase';
+import ProjectShowcase, { ProjectShowcaseData } from '../ui/ProjectShowcase';
+
+const articuliCareImages = [
+  "/fyp_interface/IMG-20250508-WA0011.jpg", "/fyp_interface/IMG-20250508-WA0012.jpg",
+  "/fyp_interface/IMG-20250508-WA0013.jpg", "/fyp_interface/IMG-20250508-WA0015.jpg",
+  "/fyp_interface/IMG-20250508-WA0016.jpg", "/fyp_interface/IMG-20250508-WA0019.jpg",
+  "/fyp_interface/IMG-20250519-WA0003.jpg", "/fyp_interface/IMG-20250519-WA0004.jpg",
+  "/fyp_interface/IMG-20250519-WA0005.jpg", "/fyp_interface/IMG-20250519-WA0006.jpg",
+  "/fyp_interface/IMG-20250519-WA0007.jpg", "/fyp_interface/IMG-20250519-WA0008.jpg",
+  "/fyp_interface/IMG-20250519-WA0009.jpg", "/fyp_interface/IMG-20250519-WA0010.jpg",
+  "/fyp_interface/IMG-20250519-WA0011.jpg", "/fyp_interface/IMG-20250519-WA0012.jpg",
+  "/fyp_interface/IMG-20250519-WA0013.jpg", "/fyp_interface/IMG-20250519-WA0014.jpg",
+  "/fyp_interface/IMG-20250519-WA0015.jpg", "/fyp_interface/IMG-20250519-WA0016.jpg",
+  "/fyp_interface/IMG-20250519-WA0017.jpg", "/fyp_interface/IMG-20250519-WA0018.jpg",
+  "/fyp_interface/IMG-20250519-WA0019.jpg", "/fyp_interface/IMG-20250519-WA0020.jpg",
+  "/fyp_interface/IMG-20250519-WA0021.jpg"
+];
+
+const loanApprovalImages = [
+  "/loan_approval_interface/main.png",
+  "/loan_approval_interface/validation.png",
+  "/loan_approval_interface/approve.png",
+  "/loan_approval_interface/reject.png"
+];
+
+const apparelStoreImages = [
+  "/ayan_apparel_interface/homepage.png",
+  "/ayan_apparel_interface/shop.png",
+  "/ayan_apparel_interface/cart1.png",
+  "/ayan_apparel_interface/cart.png",
+  "/ayan_apparel_interface/checkout.png",
+  "/ayan_apparel_interface/order_confirmation.png",
+  "/ayan_apparel_interface/user_account.png",
+  "/ayan_apparel_interface/user_orders.png",
+  "/ayan_apparel_interface/user_payment.png",
+  "/ayan_apparel_interface/wishlist.png",
+  "/ayan_apparel_interface/aboutus.png",
+  "/ayan_apparel_interface/blog.png",
+  "/ayan_apparel_interface/contactus.png",
+  "/ayan_apparel_interface/login.png",
+  "/ayan_apparel_interface/register.png",
+  "/ayan_apparel_interface/delete_account.png"
+];
 
 const projects = [
   {
     title: "ArticuliCare",
     subtitle: "Final Year Project",
     description: "AI-powered Flutter mobile app for detecting articulation disorders using Firebase, TFLite, and Supabase. Features real-time speech analysis, personalized therapy recommendations, and progress tracking.",
+    role: "Lead Developer / ML Integrator",
+    platform: "Cross-Platform Mobile",
     tags: ["Flutter", "Firebase", "TFLite", "Supabase", "AI/ML"],
     featured: true,
-    image: "/projects/articulicare.png",
+    image: "/projects/articulicare_main.jpeg",
     demo: "https://youtu.be/BXg7ROtlc-M?si=Ruo2QvH0yKmTkV1t",
+    github: "https://github.com/Oye-Ayan/Articu",
+    caseStudyImages: articuliCareImages,
+    isMobileLayout: true,
   },
   {
     title: "Loan Approval Prediction",
+    subtitle: "Machine Learning Application",
     description: "Machine learning application using Streamlit and Google Colab for predicting loan approval likelihood based on applicant data.",
+    role: "Machine Learning Engineer",
+    platform: "Web Application",
     tags: ["Python", "Streamlit", "ML", "Colab"],
     image: "/projects/loan-prediction.png",
+    github: "https://github.com/Oye-Ayan/Loan-Approval-",
+    caseStudyImages: loanApprovalImages,
+    isMobileLayout: false,
   },
   {
-    title: "Gaming E-commerce",
-    description: "Full-stack Laravel-based e-commerce platform with admin panel, shopping cart, checkout module, and payment integration.",
+    title: "Apparel Store E-commerce",
+    subtitle: "Full-Stack Web Application",
+    description: "Full-stack Laravel-based e-commerce platform with an admin panel, shopping cart, checkout module, and payment integration. Built using modern MVC architecture.",
+    role: "Full-Stack Developer",
+    platform: "Web Application",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap"],
     image: "/projects/ecommerce.png",
+    github: "https://github.com/Oye-Ayan/ayan-apparel-Ecommerce",
+    caseStudyImages: apparelStoreImages,
+    isMobileLayout: false,
   },
   {
     title: "ChatMate AI",
@@ -37,13 +96,13 @@ const projects = [
     image: "/projects/chatmate.png",
   },
   {
-    title: "Dript Store UI",
+    title: "Dripit Store UI",
     description: "High-fidelity UI/UX design using Figma focused on accessibility, responsive layouts, and seamless user flows for e-commerce.",
     tags: ["Figma", "UI/UX", "HCI", "Design"],
     image: "/projects/dript-store.png",
   },
   {
-    title: "Banking Manager",
+    title: "Bank Management System",
     description: "Java desktop application with user authentication, transaction history, and account management modules using NetBeans.",
     tags: ["Java", "NetBeans", "Swing", "MySQL"],
     image: "/projects/banking-app.png",
@@ -51,11 +110,26 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [isCaseStudyOpen, setIsCaseStudyOpen] = useState(false);
+  const [activeProject, setActiveProject] = useState<ProjectShowcaseData | null>(null);
+
+  const openCaseStudy = (project: any) => {
+    setActiveProject({
+      title: project.title,
+      subtitle: project.subtitle,
+      description: project.description,
+      role: project.role,
+      platform: project.platform,
+      tags: project.tags,
+      demo: project.demo,
+      github: project.github,
+      images: project.caseStudyImages,
+      isMobileLayout: project.isMobileLayout,
+    });
+  };
 
   return (
     <>
-      <ArticuliCareShowcase isOpen={isCaseStudyOpen} onClose={() => setIsCaseStudyOpen(false)} />
+      <ProjectShowcase isOpen={!!activeProject} onClose={() => setActiveProject(null)} project={activeProject} />
 
       <section id="projects" className="py-28 md:py-40 bg-[#0a0a0b]" aria-label="Featured projects by Muhammad Ayan Khan">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 mb-12 md:mb-16">
@@ -80,13 +154,13 @@ export default function Projects() {
 
         <HorizontalScrollCarousel>
           {projects.map((project, i) => {
-            const isArticuliCare = project.title === "ArticuliCare";
+            const hasCaseStudy = !!project.caseStudyImages;
 
             return (
               <div
                 key={i}
-                onClick={isArticuliCare ? () => setIsCaseStudyOpen(true) : undefined}
-                className={`w-[320px] sm:w-[450px] md:w-[600px] flex-shrink-0 flex flex-col bg-[#121214] border border-white/[0.05] rounded-3xl overflow-hidden hover:border-accent/[0.4] transition-colors duration-500 group ${isArticuliCare ? 'cursor-pointer' : ''}`}
+                onClick={hasCaseStudy ? () => openCaseStudy(project) : undefined}
+                className={`w-[320px] sm:w-[450px] md:w-[600px] flex-shrink-0 flex flex-col bg-[#121214] border border-white/[0.05] rounded-3xl overflow-hidden hover:border-accent/[0.4] transition-colors duration-500 group ${hasCaseStudy ? 'cursor-pointer' : ''}`}
               >
                 <div className="relative aspect-[16/10] bg-black/40 border-b border-white/[0.05] overflow-hidden p-6 flex items-center justify-center">
                   <img
@@ -96,7 +170,7 @@ export default function Projects() {
                   />
 
                   {/* Interactive Overlay for Case Study */}
-                  {isArticuliCare && (
+                  {hasCaseStudy && (
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
                       <span className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-sm bg-accent/20 border border-accent/50 px-6 py-3 rounded-full">
                         <FiMaximize2 className="text-xl" /> View Case Study
