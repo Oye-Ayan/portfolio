@@ -67,7 +67,7 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: contentY }}
-        className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 text-center"
       >
         {/* Role label */}
         <motion.div
@@ -82,7 +82,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Name - large editorial display */}
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-display font-bold tracking-tighter leading-[0.95] mb-8">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-bold tracking-tighter leading-[1.05] mb-8">
           {nameWords.map((word, i) => (
             <RevealWord key={i} word={word} index={i} total={nameWords.length} />
           ))}

@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
 :root {
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Space Grotesk', sans-serif;
+  --font-display: var(--font-outfit), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --color-accent: #64d99a;
   --color-bg: #0a0a0b;
@@ -20,6 +18,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -107,14 +106,14 @@ body {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.25;
-  filter: contrast(1.1) brightness(0.8);
+  opacity: 0.5;
+  filter: contrast(1.1) brightness(0.9);
 }
 
 .video-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(10, 10, 11, 0.4) 0%, rgba(10, 10, 11, 0.85) 70%, #0a0a0b 100%);
+  background: radial-gradient(circle at center, rgba(10, 10, 11, 0.45) 0%, rgba(10, 10, 11, 0.8) 70%, #0a0a0b 100%);
   z-index: 1;
 }
 

@@ -22,8 +22,8 @@ const config: Config = {
         'text-tertiary': '#71717a',
       },
       fontFamily: {
-        display: ['Syne', 'sans-serif'],
-        body: ['Space Grotesk', 'sans-serif'],
+        display: ['var(--font-outfit)', 'sans-serif'],
+        body: ['var(--font-inter)', 'sans-serif'],
       },
     },
   },

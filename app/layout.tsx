@@ -1,5 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 const BASE_URL = 'https://muhammad-ayan-khan.vercel.app';
 
@@ -164,7 +177,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
       <head>
         {/* Preconnect to critical third-party origins for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
