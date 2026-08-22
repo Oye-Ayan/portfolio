@@ -32,6 +32,8 @@ const loanApprovalImages = [
 ];
 
 const apparelStoreImages = [
+  "/ayan_apparel_interface/register.png",
+  "/ayan_apparel_interface/login.png",
   "/ayan_apparel_interface/homepage.png",
   "/ayan_apparel_interface/shop.png",
   "/ayan_apparel_interface/cart1.png",
@@ -45,8 +47,6 @@ const apparelStoreImages = [
   "/ayan_apparel_interface/aboutus.png",
   "/ayan_apparel_interface/blog.png",
   "/ayan_apparel_interface/contactus.png",
-  "/ayan_apparel_interface/login.png",
-  "/ayan_apparel_interface/register.png",
   "/ayan_apparel_interface/delete_account.png"
 ];
 
@@ -93,7 +93,7 @@ const projects = [
     role: "Machine Learning Engineer",
     platform: "Web Application",
     tags: ["Python", "Streamlit", "ML", "Colab"],
-    image: "/projects/loan-prediction.png",
+    image: "/projects/loan-prediction.jpeg",
     github: "https://github.com/Oye-Ayan/Loan-Approval-",
     caseStudyImages: loanApprovalImages,
     isMobileLayout: false,
@@ -105,7 +105,7 @@ const projects = [
     role: "Full-Stack Developer",
     platform: "Web Application",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap"],
-    image: "/projects/ecommerce.png",
+    image: "/projects/ecommerce.jpeg",
     github: "https://github.com/Oye-Ayan/ayan-apparel-Ecommerce",
     caseStudyImages: apparelStoreImages,
     isMobileLayout: false,

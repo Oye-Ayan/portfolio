@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import Button from '../ui/Button';
 
 function RevealWord({ word, index, total }: { word: string; index: number; total: number }) {
@@ -24,6 +24,16 @@ function RevealWord({ word, index, total }: { word: string; index: number; total
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(e => console.log("Video autoplay failed:", e));
+    }
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end start'],
@@ -49,13 +59,13 @@ export default function Hero() {
         style={{ scale: videoScale, opacity: videoOpacity }}
       >
         <video
+          ref={videoRef}
           className="video-bg"
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster=""
         >
           <source src="/portfolio_vid.mp4" type="video/mp4" />
         </video>
