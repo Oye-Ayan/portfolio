@@ -104,18 +104,22 @@ export default function ProjectShowcase({ isOpen, onClose, project }: ProjectSho
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: "100%", transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] bg-[#0a0a0b] flex flex-col lg:flex-row overflow-hidden"
+          // ORIGINAL: className="fixed inset-0 z-[100] bg-[#0a0a0b] flex flex-col lg:flex-row overflow-hidden"
+          className="fixed inset-0 z-[100] bg-[#0a0a0b] overflow-hidden"
         >
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 lg:right-10 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] hover:scale-105 transition-all duration-300"
+            // ORIGINAL: className="absolute top-6 right-6 lg:right-10 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] hover:scale-105 transition-all duration-300"
+            className="absolute top-6 right-6 lg:right-10 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-[#121214]/80 lg:bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-md shadow-lg"
             aria-label="Close Case Study"
           >
             <FaTimes className="text-xl" />
           </button>
 
-          {/* Left Column: Sticky Project Details */}
-          <div className="w-full lg:w-[45%] xl:w-[40%] h-auto lg:h-full p-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#0a0a0b] z-20">
+          <div className="w-full h-full overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row overscroll-contain">
+            {/* Left Column: Sticky Project Details */}
+            {/* ORIGINAL: className="w-full lg:w-[45%] xl:w-[40%] h-auto lg:h-full p-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#0a0a0b] z-20" */}
+            <div className="w-full lg:w-[45%] xl:w-[40%] h-auto lg:h-full pt-24 pb-12 px-6 sm:px-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#0a0a0b] z-20 shrink-0">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -189,7 +193,8 @@ export default function ProjectShowcase({ isOpen, onClose, project }: ProjectSho
           {/* Right Column: Scrollable Gallery */}
           <div 
             ref={scrollContainerRef}
-            className="w-full lg:w-[55%] xl:w-[60%] h-[60vh] lg:h-full overflow-y-auto custom-scrollbar bg-[#121214] p-8 md:p-12 lg:p-20 relative"
+            // ORIGINAL: className="w-full lg:w-[55%] xl:w-[60%] h-[60vh] lg:h-full overflow-y-auto custom-scrollbar bg-[#121214] p-8 md:p-12 lg:p-20 relative"
+            className="w-full lg:w-[55%] xl:w-[60%] h-auto lg:h-full lg:overflow-y-auto custom-scrollbar bg-[#121214] p-6 sm:p-8 md:p-12 lg:p-20 relative shrink-0"
           >
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
 
@@ -209,6 +214,7 @@ export default function ProjectShowcase({ isOpen, onClose, project }: ProjectSho
                 </div>
               ))}
             </motion.div>
+          </div>
           </div>
         </motion.div>
       )}
