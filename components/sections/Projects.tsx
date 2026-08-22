@@ -62,6 +62,15 @@ const dipStoreImages = [
   "/dipstore_interface/account.png"
 ];
 
+const bmsImages = [
+  "/bms_interface/bank_register.png",
+  "/bms_interface/bank_login.png",
+  "/bms_interface/bank_mainpage.png",
+  "/bms_interface/success_transfer.png",
+  "/bms_interface/withdraw_success.png",
+  "/bms_interface/acc_notfound.png"
+];
+
 const projects = [
   {
     title: "ArticuliCare",
@@ -126,9 +135,15 @@ const projects = [
   },
   {
     title: "Bank Management System",
-    description: "Java desktop application with user authentication, transaction history, and account management modules using NetBeans.",
+    subtitle: "Java Desktop Application",
+    description: "Robust desktop banking application built with Java Swing and MySQL. Features secure user authentication, real-time transaction processing, and comprehensive account management modules.",
+    role: "Java Developer",
+    platform: "Desktop Application",
     tags: ["Java", "NetBeans", "Swing", "MySQL"],
-    image: "/projects/banking-app.png",
+    image: "/projects/banking_app.jpeg",
+    github: "https://github.com/Oye-Ayan/Bank-Management-System",
+    caseStudyImages: bmsImages,
+    isMobileLayout: false,
   }
 ];
 
