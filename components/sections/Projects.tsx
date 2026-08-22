@@ -50,6 +50,18 @@ const apparelStoreImages = [
   "/ayan_apparel_interface/delete_account.png"
 ];
 
+const chatMateImages = [
+  "/chatMate_interface/ChatMatelayout.png",
+  "/chatMate_interface/preview_chatmate.png"
+];
+
+const dipStoreImages = [
+  "/dipstore_interface/dipstoresplash.png",
+  "/dipstore_interface/dipstorelogin.png",
+  "/dipstore_interface/shop.png",
+  "/dipstore_interface/account.png"
+];
+
 const projects = [
   {
     title: "ArticuliCare",
@@ -91,15 +103,26 @@ const projects = [
   },
   {
     title: "ChatMate AI",
-    description: "Smart chatbot using Botpress for real-time analytics and natural language interaction with custom conversation flows.",
-    tags: ["Botpress", "NLP", "JavaScript"],
-    image: "/projects/chatmate.png",
+    subtitle: "Conversational AI Agent",
+    description: "Intelligent chatbot rapidly architected and deployed utilizing a powerful no-code platform (Botpress). Designed for natural language interaction, highly customized conversation flows, and real-time user analytics.",
+    role: "AI Integrator",
+    platform: "Web Widget",
+    tags: ["Botpress", "No-Code", "NLP", "AI"],
+    image: "/projects/chatMate.jpeg",
+    caseStudyImages: chatMateImages,
+    isMobileLayout: false,
   },
   {
-    title: "Dripit Store UI",
-    description: "High-fidelity UI/UX design using Figma focused on accessibility, responsive layouts, and seamless user flows for e-commerce.",
+    title: "Dip Store UI",
+    subtitle: "High-Fidelity App Design",
+    description: "High-fidelity UI/UX design using Figma focused on accessibility, responsive layouts, and seamless user flows for an e-commerce platform.",
+    role: "UI/UX Designer",
+    platform: "Mobile App Design",
     tags: ["Figma", "UI/UX", "HCI", "Design"],
-    image: "/projects/dript-store.png",
+    image: "/projects/DipStore.jpeg",
+    demo: "https://www.figma.com/design/LSSVf2YNsTLvAya7Cyerel/Dipstore?node-id=0-1&t=e4bICOSXtuUkNRtX-1",
+    caseStudyImages: dipStoreImages,
+    isMobileLayout: true,
   },
   {
     title: "Bank Management System",
@@ -228,9 +251,6 @@ export default function Projects() {
             );
           })}
 
-          {/* CTA is the final item in the horizontal track — the pin
-            releases the moment this is in view, flowing straight
-            into the next section with no dead scroll. */}
           <a
             href="https://github.com/Oye-Ayan"
             target="_blank"
