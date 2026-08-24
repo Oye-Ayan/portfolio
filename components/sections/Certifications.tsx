@@ -24,7 +24,6 @@ const certifications: ExpandingCardItem[] = [
       'Foundational mastery in Big Data architecture, distributed storage, Hadoop ecosystem, MapReduce processing framework, and data analytics pipelines.',
     imgSrc: '/certifications/bigdata101_preview-1.png',
     icon: Database,
-    pdfSrc: '/BigData101.pdf',
   },
   {
     id: 'flutter-internship',
@@ -42,7 +41,6 @@ const certifications: ExpandingCardItem[] = [
       'Applied Machine Learning and Python project demonstrating end-to-end data analysis, model training, and evaluation pipelines.',
     imgSrc: '/certifications/Ml&Python.png',
     icon: Code2,
-    pdfSrc: '/ML&Python_Certificate.pdf',
   },
 ];
 

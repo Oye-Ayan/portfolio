@@ -19,7 +19,6 @@ export interface ExpandingCardItem {
   icon: LucideIcon;
   date?: string;
   verifyUrl?: string;
-  pdfSrc?: string;
 }
 
 interface ExpandingCardsProps {
@@ -101,11 +100,7 @@ export default function ExpandingCards({
       if (interactionTimer.current) clearTimeout(interactionTimer.current);
 
       if (index === activeIndex) {
-        if (items[index].pdfSrc) {
-          window.open(items[index].pdfSrc, '_blank', 'noopener,noreferrer');
-        } else {
-          setLightboxSrc(items[index].imgSrc);
-        }
+        setLightboxSrc(items[index].imgSrc);
       } else {
         setActiveIndex(index);
       }
