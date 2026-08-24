@@ -33,7 +33,7 @@ export default function LoadingScreen() {
               Ayan Khan
             </span>
           </motion.div>
-          
+
           {/* Subtle loading indicator line */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
