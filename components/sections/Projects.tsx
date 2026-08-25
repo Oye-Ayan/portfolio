@@ -211,7 +211,7 @@ export default function Projects() {
                   {hasCaseStudy && (
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
                       <span className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-sm bg-accent/20 border border-accent/50 px-6 py-3 rounded-full">
-                        <FiMaximize2 className="text-xl" /> View Case Study
+                        <FiMaximize2 className="text-xl" /> View More
                       </span>
                     </div>
                   )}
