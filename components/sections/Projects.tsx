@@ -255,6 +255,7 @@ export default function Projects() {
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="flex items-center gap-2.5 text-sm font-semibold text-accent hover:text-white transition-colors group/link"
                       >
                         <FiExternalLink className="text-lg" /> Live Demo

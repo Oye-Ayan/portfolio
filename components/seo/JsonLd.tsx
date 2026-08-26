@@ -95,7 +95,7 @@ export default function JsonLd() {
       'Professional portfolio showcasing mobile apps, full-stack projects, and innovative AI-powered solutions by Muhammad Ayan Khan.',
     mainEntity: { '@id': `${baseUrl}/#person` },
     dateCreated: "2024-08-15T00:00:00Z",
-    dateModified: new Date().toISOString(),
+    dateModified: "2026-08-25T00:00:00Z",
     inLanguage: 'en-US',
   };
 

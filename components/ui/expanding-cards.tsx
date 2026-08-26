@@ -33,17 +33,21 @@ const SPRING = { type: 'spring' as const, stiffness: 300, damping: 30 };
 
 const CONTENT_SPRING = { type: 'spring' as const, stiffness: 260, damping: 25 };
 
-// ─── Responsive Hook ─────────────────────────────────────────────────────────
-
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const mq = window.matchMedia('(min-width: 768px)');
     setIsDesktop(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+    if (mq.addEventListener) {
+      mq.addEventListener('change', handler);
+      return () => mq.removeEventListener('change', handler);
+    } else if ((mq as any).addListener) {
+      (mq as any).addListener(handler);
+      return () => (mq as any).removeListener(handler);
+    }
   }, []);
 
   return isDesktop;
@@ -66,17 +70,19 @@ export default function ExpandingCards({
   // ── Scroll-driven auto-advance ──────────────────────────────────────────
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.75', 'end 0.25'],
+    offset: ['start 75%', 'end 25%'],
   });
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (isUserInteracting) return;
+    if (isUserInteracting || typeof v !== 'number' || isNaN(v)) return;
     const clamped = Math.max(0, Math.min(0.999, v));
     const idx = Math.min(
-      Math.floor(clamped * items.length),
-      items.length - 1,
+      Math.floor(clamped * (items?.length || 1)),
+      (items?.length || 1) - 1,
     );
-    setActiveIndex(idx);
+    if (!isNaN(idx) && idx >= 0 && idx < items.length) {
+      setActiveIndex(idx);
+    }
   });
 
   // ── Hover ───────────────────────────────────────────────────────────────
