@@ -42,8 +42,8 @@ export default function Button({
       <Component
         href={href}
         onClick={onClick}
-        target={href ? '_blank' : undefined}
-        rel={href ? 'noopener noreferrer' : undefined}
+        target={href && href.startsWith('http') ? '_blank' : undefined}
+        rel={href && href.startsWith('http') ? 'noopener noreferrer' : undefined}
         className={`${baseStyles} ${variants[variant]} ${className}`}
       >
         {children}

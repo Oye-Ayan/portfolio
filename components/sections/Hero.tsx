@@ -123,7 +123,7 @@ export default function Hero() {
             <FaLinkedin className="text-lg" />
             LinkedIn
           </Button>
-          <Button href="#contact" variant="secondary">
+          <Button href="#contact" variant="outline">
             Get in Touch
           </Button>
         </motion.div>
@@ -172,6 +172,3 @@ export default function Hero() {
   );
 }
 
-/* REDESIGNED HERO BACKUP (commented out for reference):
- * iOS autoPlay fallback handler, portfolio_poster.png fallback, visibility change auto-pause.
- */
