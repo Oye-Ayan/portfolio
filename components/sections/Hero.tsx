@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useRef, useEffect } from 'react';
 import Button from '../ui/Button';
+import Hero3DScene from '../3d/Hero3DScene';
 
 function RevealWord({ word, index, total }: { word: string; index: number; total: number }) {
   return (
@@ -40,7 +41,7 @@ export default function Hero() {
   });
 
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const videoOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.8], [0.35, 0]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   const name = 'Muhammad Ayan Khan';
@@ -55,7 +56,7 @@ export default function Hero() {
     >
       {/* Video Background */}
       <motion.div
-        className="video-bg-container"
+        className="video-bg-container pointer-events-none"
         style={{ scale: videoScale, opacity: videoOpacity }}
       >
         <video
@@ -72,12 +73,15 @@ export default function Hero() {
       </motion.div>
 
       {/* Dark overlay gradient */}
-      <div className="video-overlay" />
+      <div className="video-overlay pointer-events-none" />
+
+      {/* Interactive 3D WebGL Centerpiece (Desktop & Mobile) */}
+      <Hero3DScene />
 
       {/* Content */}
       <motion.div
         style={{ y: contentY }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 text-center"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 text-center pointer-events-none"
       >
         {/* Role label */}
         <motion.div
@@ -113,7 +117,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 pointer-events-auto"
         >
           <Button href="https://github.com/Oye-Ayan" variant="primary" aria-label="View Muhammad Ayan Khan's GitHub profile">
             <FaGithub className="text-lg" />
@@ -133,7 +137,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="flex flex-wrap justify-center gap-6 text-xs text-text-tertiary "
+          className="flex flex-wrap justify-center gap-6 text-xs text-text-tertiary pointer-events-auto"
         >
           <a href="mailto:mayan921111@gmail.com" className="hover:text-accent transition-colors duration-300">
             mayan921111@gmail.com

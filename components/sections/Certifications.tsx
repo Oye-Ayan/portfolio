@@ -1,9 +1,5 @@
 'use client';
 
-/*
-BACKUP PREVIOUS CODE:
-import { Brain, Database, Smartphone, Code2 } from 'lucide-react';
-*/
 import { Brain, Database, Smartphone, Code2, Lightbulb } from 'lucide-react';
 import SectionTitle from '../ui/SectionTitle';
 import ScrollReveal from '../effects/ScrollReveal';

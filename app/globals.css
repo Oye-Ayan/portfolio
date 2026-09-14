@@ -53,6 +53,67 @@ body {
   border-color: rgba(100, 217, 154, 0.2);
 }
 
+/* 3D Perspective & Spatial Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.translate-z-0 {
+  transform: translateZ(0px);
+}
+
+.translate-z-4 {
+  transform: translateZ(16px);
+}
+
+.translate-z-8 {
+  transform: translateZ(28px);
+}
+
+.translate-z-12 {
+  transform: translateZ(40px);
+}
+
+.translate-z-16 {
+  transform: translateZ(56px);
+}
+
+.translate-z-20 {
+  transform: translateZ(72px);
+}
+
+/* 3D Glass Surface */
+.glass-3d {
+  background: rgba(18, 18, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-3d:hover {
+  border-color: rgba(100, 217, 154, 0.3);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.7),
+              0 0 25px -5px rgba(100, 217, 154, 0.15),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+}
+
 .glow-border {
   position: relative;
 }

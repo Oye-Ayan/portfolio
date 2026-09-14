@@ -9,6 +9,7 @@ import Certifications from "@/components/sections/Certifications";
 import Contact from "@/components/sections/Contact";
 import CursorGlow from "@/components/effects/CursorGlow";
 import ParticleField from "@/components/effects/ParticleField";
+import FloatingShapes from "@/components/effects/FloatingShapes";
 import JsonLd from "@/components/seo/JsonLd";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import FloatingNav from "@/components/ui/FloatingNav";
@@ -24,9 +25,10 @@ export default function Home() {
         <FloatingNav />
         <div className="tech-grid-bg fixed inset-0 -z-10" />
 
-        {/* Global interactive effects */}
+        {/* Global interactive 3D effects */}
         <CursorGlow />
         <ParticleField />
+        <FloatingShapes />
 
         <Navbar />
         <Hero />

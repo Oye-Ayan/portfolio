@@ -52,14 +52,16 @@ export default function About() {
             </div>
           </ScrollReveal>
 
-          {/* Right - Highlight cards */}
+          {/* Right - 3D Highlight cards */}
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
             {highlights.map((item, index) => (
               <ScrollReveal key={index} delay={index * 0.08} direction="up" once={false}>
-                <Card className="h-full" tilt={false}>
-                  <div className="flex items-start gap-4">
-                    <div className="text-accent shrink-0 mt-1">{item.icon}</div>
-                    <div>
+                <Card className="h-full group" tilt={true}>
+                  <div className="flex items-start gap-4 preserve-3d">
+                    <div className="w-12 h-12 rounded-xl bg-accent/[0.08] border border-accent/20 flex items-center justify-center text-accent shrink-0 [transform:translateZ(28px)] transition-transform duration-300 shadow-[0_0_20px_rgba(100,217,154,0.15)]">
+                      {item.icon}
+                    </div>
+                    <div className="[transform:translateZ(18px)] transition-transform duration-300">
                       <h3 className="text-base font-display font-semibold text-text-primary mb-1">
                         {item.title}
                       </h3>

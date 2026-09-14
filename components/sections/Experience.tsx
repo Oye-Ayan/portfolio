@@ -43,21 +43,21 @@ export default function Experience() {
         <div className="space-y-8">
           {experiences.map((exp, index) => (
             <ScrollReveal key={index} delay={index * 0.12} once={false} direction="up">
-              <Card tilt={false}>
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-6">
-                  <div>
+              <Card tilt={true} className="group">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-6 preserve-3d">
+                  <div className="[transform:translateZ(20px)] transition-transform duration-300">
                     <h3 className="text-xl md:text-2xl font-display font-bold text-text-primary tracking-tight">
                       {exp.role}
                     </h3>
                     <p className="text-accent font-semibold text-base mt-0.5">{exp.company}</p>
-                    <p className="text-text-tertiary text-xs ">{exp.location}</p>
+                    <p className="text-text-tertiary text-xs">{exp.location}</p>
                   </div>
-                  <span className="text-text-secondary  text-xs whitespace-nowrap bg-white/[0.03] px-3 py-1 rounded border border-white/[0.06] self-start">
+                  <span className="text-text-secondary text-xs whitespace-nowrap bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/[0.08] self-start [transform:translateZ(24px)] shadow-[0_0_15px_rgba(100,217,154,0.1)]">
                     {exp.period}
                   </span>
                 </div>
 
-                <ul className="space-y-3">
+                <ul className="space-y-3 [transform:translateZ(12px)]">
                   {exp.description.map((item, i) => (
                     <li key={i} className="text-text-secondary text-sm md:text-base leading-relaxed flex items-start gap-3">
                       <span className="text-accent mt-1 flex-shrink-0 text-xs">▹</span>
@@ -73,7 +73,3 @@ export default function Experience() {
     </section>
   );
 }
-
-/* REDESIGNED EXPERIENCE BACKUP (commented out for reference):
- * Editorial timeline layout with metadata column and numbered points.
- */
