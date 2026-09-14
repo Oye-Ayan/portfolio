@@ -2,11 +2,24 @@
 
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { useTheme } from '../theme/ThemeContext';
 
 export default function Hero3DScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isInteractive, setIsInteractive] = useState(false);
+  const { theme } = useTheme();
+
+  // References for live theme color transitions
+  const themeObjectsRef = useRef<{
+    innerMat: THREE.MeshPhysicalMaterial;
+    wireMat: THREE.MeshBasicMaterial;
+    nodesMat: THREE.PointsMaterial;
+    particleMat: THREE.PointsMaterial;
+    keyLight: THREE.DirectionalLight;
+    ambientLight: THREE.AmbientLight;
+    centerLight: THREE.PointLight;
+  } | null>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -20,7 +33,6 @@ export default function Hero3DScene() {
     let height = container.clientHeight || window.innerHeight;
 
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    // Camera distance adapts to screen width
     const isMobile = width < 768;
     camera.position.z = isMobile ? 12 : 9.5;
 
@@ -39,17 +51,18 @@ export default function Hero3DScene() {
     const masterGroup = new THREE.Group();
     scene.add(masterGroup);
 
-    // Subtle downward shift on mobile to harmoniously align with hero text
     if (isMobile) {
       masterGroup.position.y = 0.2;
     }
 
+    const isCurrentDark = document.documentElement.classList.contains('dark');
+
     // ─── 1. Inner Faceted Crystal Core ─────────────────────────────────────
     const innerGeo = new THREE.IcosahedronGeometry(1.6, 0);
     const innerMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0a1f16,
-      emissive: 0x184f35,
-      emissiveIntensity: 0.7,
+      color: isCurrentDark ? 0x0a1f16 : 0x065f46,
+      emissive: isCurrentDark ? 0x184f35 : 0x047857,
+      emissiveIntensity: isCurrentDark ? 0.7 : 0.8,
       roughness: 0.15,
       metalness: 0.8,
       clearcoat: 1.0,
@@ -64,10 +77,10 @@ export default function Hero3DScene() {
     // ─── 2. Outer Wireframe Lattice ────────────────────────────────────────
     const wireGeo = new THREE.IcosahedronGeometry(2.1, 1);
     const wireMat = new THREE.MeshBasicMaterial({
-      color: 0x64d99a,
+      color: isCurrentDark ? 0x64d99a : 0x059669,
       wireframe: true,
       transparent: true,
-      opacity: 0.45,
+      opacity: isCurrentDark ? 0.45 : 0.6,
     });
     const wireMesh = new THREE.Mesh(wireGeo, wireMat);
     masterGroup.add(wireMesh);
@@ -84,7 +97,7 @@ export default function Hero3DScene() {
     nodesGeo.setAttribute('position', new THREE.BufferAttribute(nodeCoords, 3));
 
     const nodesMat = new THREE.PointsMaterial({
-      color: 0xa3f7cb,
+      color: isCurrentDark ? 0xa3f7cb : 0x047857,
       size: isMobile ? 0.08 : 0.09,
       transparent: true,
       opacity: 0.9,
@@ -161,7 +174,7 @@ export default function Hero3DScene() {
 
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0x64d99a,
+      color: isCurrentDark ? 0x64d99a : 0x059669,
       size: isMobile ? 0.045 : 0.055,
       transparent: true,
       opacity: 0.65,
@@ -171,10 +184,10 @@ export default function Hero3DScene() {
     masterGroup.add(particlePoints);
 
     // ─── 6. Dynamic Illumination ───────────────────────────────────────────
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    const ambientLight = new THREE.AmbientLight(0xffffff, isCurrentDark ? 0.6 : 1.0);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0x64d99a, 3.2);
+    const keyLight = new THREE.DirectionalLight(isCurrentDark ? 0x64d99a : 0x10b981, isCurrentDark ? 3.2 : 3.8);
     keyLight.position.set(5, 6, 6);
     scene.add(keyLight);
 
@@ -182,9 +195,20 @@ export default function Hero3DScene() {
     rimLight.position.set(-6, -4, -4);
     scene.add(rimLight);
 
-    const centerLight = new THREE.PointLight(0x64d99a, 4.0, 10);
+    const centerLight = new THREE.PointLight(isCurrentDark ? 0x64d99a : 0x059669, 4.0, 10);
     centerLight.position.set(0, 0, 0);
     masterGroup.add(centerLight);
+
+    // Store refs for live theme updates
+    themeObjectsRef.current = {
+      innerMat,
+      wireMat,
+      nodesMat,
+      particleMat,
+      keyLight,
+      ambientLight,
+      centerLight,
+    };
 
     // ─── Interaction & Physics State ───────────────────────────────────────
     let mouseX = 0;
@@ -200,7 +224,6 @@ export default function Hero3DScene() {
     let velocityX = 0;
     let velocityY = 0;
 
-    // Pointer move (Parallax on desktop, drag on both)
     const handlePointerMove = (e: PointerEvent) => {
       if (isDragging) {
         const deltaX = e.clientX - prevPointerX;
@@ -221,7 +244,6 @@ export default function Hero3DScene() {
       }
     };
 
-    // Pointer Down (Drag to rotate — works on Desktop & Mobile)
     const handlePointerDown = (e: PointerEvent) => {
       isDragging = true;
       prevPointerX = e.clientX;
@@ -257,7 +279,7 @@ export default function Hero3DScene() {
 
     window.addEventListener('resize', handleResize);
 
-    // ─── Visibility Optimization (Intersection Observer) ───────────────────
+    // ─── Visibility Optimization ───────────────────────────────────────────
     let isVisible = true;
     let animationFrameId: number;
 
@@ -282,14 +304,11 @@ export default function Hero3DScene() {
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
 
-      // Inertia decay after dragging
       if (!isDragging) {
         targetRotY += velocityX;
         targetRotX += velocityY;
         velocityX *= 0.95;
         velocityY *= 0.95;
-
-        // Base ambient spin
         targetRotY += 0.003;
       }
 
@@ -361,6 +380,37 @@ export default function Hero3DScene() {
     };
   }, []);
 
+  // ─── Update materials dynamically on theme change ────────────────────────
+  useEffect(() => {
+    if (!themeObjectsRef.current) return;
+    const isDark = theme === 'dark';
+    const { innerMat, wireMat, nodesMat, particleMat, keyLight, ambientLight, centerLight } = themeObjectsRef.current;
+
+    if (isDark) {
+      innerMat.color.setHex(0x0a1f16);
+      innerMat.emissive.setHex(0x184f35);
+      wireMat.color.setHex(0x64d99a);
+      wireMat.opacity = 0.45;
+      nodesMat.color.setHex(0xa3f7cb);
+      particleMat.color.setHex(0x64d99a);
+      keyLight.color.setHex(0x64d99a);
+      keyLight.intensity = 3.2;
+      centerLight.color.setHex(0x64d99a);
+      ambientLight.intensity = 0.6;
+    } else {
+      innerMat.color.setHex(0x065f46);
+      innerMat.emissive.setHex(0x047857);
+      wireMat.color.setHex(0x059669);
+      wireMat.opacity = 0.6;
+      nodesMat.color.setHex(0x047857);
+      particleMat.color.setHex(0x059669);
+      keyLight.color.setHex(0x10b981);
+      keyLight.intensity = 3.8;
+      centerLight.color.setHex(0x059669);
+      ambientLight.intensity = 1.0;
+    }
+  }, [theme]);
+
   return (
     <div
       ref={containerRef}
@@ -374,7 +424,7 @@ export default function Hero3DScene() {
       />
 
       {!isInteractive && (
-        <div className="absolute bottom-6 right-6 pointer-events-none hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/10 text-[11px] text-white/50 backdrop-blur-md transition-opacity">
+        <div className="absolute bottom-6 right-6 pointer-events-none hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface/50 border border-border text-[11px] text-text-tertiary backdrop-blur-md transition-opacity">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
           <span>Interactive 3D Core • Drag to Rotate</span>
         </div>

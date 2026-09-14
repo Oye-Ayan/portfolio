@@ -249,8 +249,8 @@ function ExpandCard({
         relative overflow-hidden rounded-[14px] md:rounded-[18px]
         border transition-all duration-500 ease-out
         ${isActive
-          ? 'border-accent/30 shadow-[0_0_30px_rgba(100,217,154,0.06)]'
-          : 'border-white/[0.06] hover:border-white/[0.1]'
+          ? 'border-accent/40 shadow-[0_0_30px_rgba(100,217,154,0.12)]'
+          : 'border-border hover:border-accent/30'
         }
         ${isActive ? 'cursor-zoom-in' : 'cursor-pointer'}
       `}
@@ -276,15 +276,15 @@ function ExpandCard({
         style={{ opacity: isActive ? 1 : 0 }}
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
         {isDesktop && (
-          <div className="absolute inset-0 bg-gradient-to-r from-dark/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent" />
         )}
       </div>
 
       {/* ── Extra darkening for collapsed cards ── */}
       <div
-        className="absolute inset-0 bg-dark/40 transition-opacity duration-500"
+        className="absolute inset-0 bg-black/40 transition-opacity duration-500"
         style={{ opacity: isActive ? 0 : 1 }}
         aria-hidden="true"
       />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -68,7 +69,7 @@ export default function Navbar() {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.04]'
+            ? 'bg-surface/85 backdrop-blur-xl border-b border-border shadow-sm'
             : 'bg-transparent'
         }`}
       >
@@ -113,13 +114,14 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Resume button - Desktop */}
+            {/* Actions - Desktop */}
             <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
               <motion.a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-2 text-[13px] font-medium rounded-md bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20 transition-all duration-300"
+                className="px-5 py-2 text-[13px] font-medium rounded-xl bg-accent/10 text-accent border border-accent/20 hover:bg-accent/20 transition-all duration-300 shadow-sm"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -127,31 +129,34 @@ export default function Navbar() {
               </motion.a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center"
-              whileTap={{ scale: 0.9 }}
-              aria-label="Toggle navigation menu"
-            >
-              <div className="w-6 h-5 flex flex-col justify-between">
-                <motion.span
-                  animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="block w-full h-[2px] bg-text-primary origin-center"
-                />
-                <motion.span
-                  animate={isOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="block w-full h-[2px] bg-text-primary"
-                />
-                <motion.span
-                  animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="block w-full h-[2px] bg-text-primary origin-center"
-                />
-              </div>
-            </motion.button>
+            {/* Actions - Mobile Header */}
+            <div className="flex md:hidden items-center gap-2">
+              <ThemeToggle />
+              <motion.button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative z-50 w-10 h-10 flex items-center justify-center rounded-xl bg-surface/50 border border-border"
+                whileTap={{ scale: 0.9 }}
+                aria-label="Toggle navigation menu"
+              >
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <motion.span
+                    animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="block w-full h-[2px] bg-text-primary origin-center"
+                  />
+                  <motion.span
+                    animate={isOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="block w-full h-[2px] bg-text-primary"
+                  />
+                  <motion.span
+                    animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="block w-full h-[2px] bg-text-primary origin-center"
+                  />
+                </div>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -164,9 +169,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#0a0a0b]/95 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-40 bg-surface/95 backdrop-blur-2xl md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-2">
+            <div className="flex flex-col items-center justify-center h-full gap-3">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
@@ -179,7 +184,7 @@ export default function Navbar() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   onClick={() => handleNavClick(link.href)}
-                  className={`text-3xl font-display font-bold tracking-tight py-3 transition-colors ${
+                  className={`text-2xl sm:text-3xl font-display font-bold tracking-tight py-2 transition-colors ${
                     activeSection === link.href.slice(1)
                       ? 'text-accent'
                       : 'text-text-secondary hover:text-text-primary'
@@ -188,6 +193,7 @@ export default function Navbar() {
                   {link.label}
                 </motion.button>
               ))}
+
               <motion.a
                 href="/resume.pdf"
                 target="_blank"
@@ -200,7 +206,7 @@ export default function Navbar() {
                   delay: navLinks.length * 0.06,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="mt-6 px-8 py-3 text-lg font-medium rounded-md bg-accent/10 text-accent border border-accent/20"
+                className="mt-6 px-8 py-3 text-base font-medium rounded-xl bg-accent/10 text-accent border border-accent/20"
               >
                 Resume
               </motion.a>

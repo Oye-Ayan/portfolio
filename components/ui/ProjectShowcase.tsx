@@ -55,15 +55,15 @@ function DesktopScreenshot({ src, index, scrollYProgress }: { src: string, index
   return (
     <motion.div
       style={{ y: yOffset }}
-      className="relative rounded-xl border border-white/[0.05] bg-[#1a1a1e] shadow-2xl overflow-hidden w-full max-w-4xl mx-auto ring-1 ring-white/[0.02]"
+      className="relative rounded-xl border border-border bg-surface shadow-2xl overflow-hidden w-full max-w-4xl mx-auto"
     >
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/[0.05] to-transparent z-10 pointer-events-none mix-blend-overlay"></div>
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/[0.05] dark:from-white/[0.05] to-transparent z-10 pointer-events-none mix-blend-overlay"></div>
 
       {/* Fake Browser Chrome */}
-      <div className="w-full h-8 bg-[#121214] border-b border-white/[0.05] flex items-center px-4 gap-2">
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10"></div>
-        <div className="w-2.5 h-2.5 rounded-full bg-white/10"></div>
+      <div className="w-full h-8 bg-surface border-b border-border flex items-center px-4 gap-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-red-400/80"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></div>
+        <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></div>
       </div>
 
       <img
@@ -95,11 +95,11 @@ function ProjectShowcaseModal({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: '100%', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed inset-0 z-[100] bg-[#0a0a0b] overflow-hidden"
+      className="fixed inset-0 z-[100] bg-dark overflow-hidden"
     >
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 lg:right-10 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-[#121214]/80 lg:bg-white/[0.05] border border-white/[0.1] text-white hover:bg-white/[0.1] hover:scale-105 transition-all duration-300 backdrop-blur-md shadow-lg"
+        className="absolute top-6 right-6 lg:right-10 z-50 w-12 h-12 flex items-center justify-center rounded-full bg-surface/90 border border-border text-text-primary hover:bg-surface hover:scale-105 transition-all duration-300 backdrop-blur-md shadow-lg"
         aria-label="Close Case Study"
       >
         <FaTimes className="text-xl" />
@@ -107,45 +107,45 @@ function ProjectShowcaseModal({
 
       <div className="w-full h-full overflow-y-auto lg:overflow-hidden flex flex-col lg:flex-row overscroll-contain">
         {/* Left Column: Sticky Project Details */}
-        <div className="w-full lg:w-[45%] xl:w-[40%] h-auto lg:h-full pt-24 pb-12 px-6 sm:px-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/[0.05] bg-[#0a0a0b] z-20 shrink-0">
+        <div className="w-full lg:w-[45%] xl:w-[40%] h-auto lg:h-full pt-24 pb-12 px-6 sm:px-8 md:p-12 lg:p-16 xl:p-24 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border bg-dark z-20 shrink-0">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <span className="px-3 py-1 text-xs font-bold text-[#0a0a0b] bg-accent rounded-md uppercase tracking-wider">
+              <span className="px-3 py-1 text-xs font-bold text-dark bg-accent rounded-md uppercase tracking-wider">
                 {project.subtitle || 'Project Showcase'}
               </span>
               {project.period && (
-                <span className="text-[#71717a] text-sm font-medium tracking-wide">
+                <span className="text-text-secondary text-sm font-medium tracking-wide">
                   {project.period}
                 </span>
               )}
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-[1.1] mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary tracking-tight leading-[1.1] mb-6">
               {project.title}
             </h2>
 
-            <p className="text-[#a1a1aa] text-lg leading-relaxed font-body mb-10 max-w-xl">
+            <p className="text-text-secondary text-lg leading-relaxed font-body mb-10 max-w-xl">
               {project.description}
             </p>
 
             <div className="grid grid-cols-2 gap-8 mb-12">
               <div>
-                <p className="text-[#71717a] text-xs uppercase tracking-widest font-semibold mb-2">Role</p>
-                <p className="text-white font-medium">{project.role}</p>
+                <p className="text-text-secondary text-xs uppercase tracking-widest font-semibold mb-2">Role</p>
+                <p className="text-text-primary font-medium">{project.role}</p>
               </div>
               <div>
-                <p className="text-[#71717a] text-xs uppercase tracking-widest font-semibold mb-2">Platform</p>
-                <p className="text-white font-medium">{project.platform}</p>
+                <p className="text-text-secondary text-xs uppercase tracking-widest font-semibold mb-2">Platform</p>
+                <p className="text-text-primary font-medium">{project.platform}</p>
               </div>
               <div className="col-span-2">
-                <p className="text-[#71717a] text-xs uppercase tracking-widest font-semibold mb-3">Technologies</p>
+                <p className="text-text-secondary text-xs uppercase tracking-widest font-semibold mb-3">Technologies</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 text-xs font-semibold text-white bg-white/[0.03] border border-white/[0.1] rounded">
+                    <span key={tag} className="px-3 py-1.5 text-xs font-semibold text-text-primary bg-surface border border-border rounded">
                       {tag}
                     </span>
                   ))}
@@ -159,7 +159,7 @@ function ProjectShowcaseModal({
                   href={project.demo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-[#0a0a0b] rounded-xl font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/20"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-dark rounded-xl font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/20"
                 >
                   <FiExternalLink className="text-lg" /> Watch Demo
                 </a>
@@ -169,7 +169,7 @@ function ProjectShowcaseModal({
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-white/[0.03] border border-white/[0.1] text-white rounded-xl font-bold text-sm transition-transform hover:-translate-y-1 hover:bg-white/[0.08]"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-surface border border-border text-text-primary rounded-xl font-bold text-sm transition-transform hover:-translate-y-1 hover:border-accent/40"
                 >
                   <FaGithub className="text-lg" /> Source Code
                 </a>
@@ -181,9 +181,9 @@ function ProjectShowcaseModal({
         {/* Right Column: Scrollable Gallery */}
         <div
           ref={scrollContainerRef}
-          className="w-full lg:w-[55%] xl:w-[60%] h-auto lg:h-full lg:overflow-y-auto custom-scrollbar bg-[#121214] p-6 sm:p-8 md:p-12 lg:p-20 relative shrink-0"
+          className="w-full lg:w-[55%] xl:w-[60%] h-auto lg:h-full lg:overflow-y-auto custom-scrollbar bg-surface/50 p-6 sm:p-8 md:p-12 lg:p-20 relative shrink-0"
         >
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
 
           <motion.div
             initial={{ opacity: 0, y: 50 }}

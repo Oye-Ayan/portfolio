@@ -170,7 +170,7 @@ export default function Projects() {
     <>
       <ProjectShowcase isOpen={!!activeProject} onClose={() => setActiveProject(null)} project={activeProject} />
 
-      <section id="projects" className="py-28 md:py-40 bg-[#0a0a0b]" aria-label="Featured projects by Muhammad Ayan Khan">
+      <section id="projects" className="py-28 md:py-40 bg-dark" aria-label="Featured projects by Muhammad Ayan Khan">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 mb-12 md:mb-16">
           <TextReveal
             as="h2"
@@ -180,12 +180,12 @@ export default function Projects() {
           </TextReveal>
           <TextReveal
             as="h3"
-            className="text-4xl md:text-5xl font-display font-bold text-white tracking-tight mb-4"
+            className="text-4xl md:text-5xl font-display font-bold text-text-primary tracking-tight mb-4"
           >
             Projects & Case Studies
           </TextReveal>
           <ScrollReveal once={false} delay={0.15}>
-            <p className="text-[#a1a1aa] text-lg leading-relaxed max-w-xl">
+            <p className="text-text-secondary text-lg leading-relaxed max-w-xl">
               Mobile apps, machine learning systems, and full-stack platforms built with care and clean architecture.
             </p>
           </ScrollReveal>
@@ -203,9 +203,9 @@ export default function Projects() {
               >
                 <div
                   onClick={hasCaseStudy ? () => openCaseStudy(project) : undefined}
-                  className={`w-full h-full flex flex-col bg-[#121214] border border-white/[0.06] rounded-3xl overflow-hidden hover:border-accent/[0.4] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8),0_0_30px_-10px_rgba(100,217,154,0.15)] transition-all duration-500 group preserve-3d ${hasCaseStudy ? 'cursor-pointer' : ''}`}
+                  className={`w-full h-full flex flex-col bg-surface border border-border rounded-3xl overflow-hidden hover:border-accent/[0.4] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1),0_0_30px_-10px_rgba(5,150,105,0.15)] dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8),0_0_30px_-10px_rgba(100,217,154,0.15)] transition-all duration-500 group preserve-3d ${hasCaseStudy ? 'cursor-pointer' : ''}`}
                 >
-                  <div className="relative aspect-[16/10] bg-black/40 border-b border-white/[0.05] overflow-hidden p-6 flex items-center justify-center [transform:translateZ(12px)]">
+                  <div className="relative aspect-[16/10] bg-black/5 dark:bg-black/40 border-b border-border overflow-hidden p-6 flex items-center justify-center [transform:translateZ(12px)]">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -214,8 +214,8 @@ export default function Projects() {
 
                     {/* Interactive Overlay for Case Study */}
                     {hasCaseStudy && (
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
-                        <span className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-sm bg-accent/20 border border-accent/50 px-6 py-3 rounded-full [transform:translateZ(25px)]">
+                      <div className="absolute inset-0 bg-black/50 dark:bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20 backdrop-blur-sm">
+                        <span className="flex items-center gap-2 text-white font-bold tracking-widest uppercase text-sm bg-accent/30 dark:bg-accent/20 border border-accent/60 px-6 py-3 rounded-full [transform:translateZ(25px)] shadow-lg">
                           <FiMaximize2 className="text-xl" /> View More
                         </span>
                       </div>
@@ -223,7 +223,7 @@ export default function Projects() {
 
                     {project.featured && (
                       <div className="absolute top-4 right-4 z-30 [transform:translateZ(30px)]">
-                        <span className="px-3 py-1 text-[10px] font-bold text-[#0a0a0b] bg-accent rounded-md uppercase tracking-wider shadow-lg shadow-accent/20">
+                        <span className="px-3 py-1 text-[10px] font-bold text-dark bg-accent rounded-md uppercase tracking-wider shadow-lg shadow-accent/20">
                           Featured
                         </span>
                       </div>
@@ -231,7 +231,7 @@ export default function Projects() {
                   </div>
 
                   <div className="p-8 flex flex-col flex-1 preserve-3d">
-                    <h4 className="text-2xl font-display font-bold text-white mb-2 tracking-tight [transform:translateZ(18px)]">
+                    <h4 className="text-2xl font-display font-bold text-text-primary mb-2 tracking-tight [transform:translateZ(18px)]">
                       {project.title}
                     </h4>
                     {project.subtitle && (
@@ -239,7 +239,7 @@ export default function Projects() {
                         {project.subtitle}
                       </p>
                     )}
-                    <p className="text-[#a1a1aa] text-sm leading-relaxed mb-8 flex-1 font-body [transform:translateZ(10px)]">
+                    <p className="text-text-secondary text-sm leading-relaxed mb-8 flex-1 font-body [transform:translateZ(10px)]">
                       {project.description}
                     </p>
 
@@ -247,7 +247,7 @@ export default function Projects() {
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-2.5 py-1 text-[10px] font-bold text-white bg-white/[0.03] border border-white/[0.1] rounded tracking-wider uppercase"
+                          className="px-2.5 py-1 text-[10px] font-semibold text-text-primary bg-surface/80 border border-border rounded tracking-wider uppercase"
                         >
                           {tag}
                         </span>
@@ -255,13 +255,13 @@ export default function Projects() {
                     </div>
 
                     {project.demo && (
-                      <div className="mt-auto flex items-center justify-between pt-5 border-t border-white/[0.05] [transform:translateZ(14px)]">
+                      <div className="mt-auto flex items-center justify-between pt-5 border-t border-border [transform:translateZ(14px)]">
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-2.5 text-sm font-semibold text-accent hover:text-white transition-colors group/link"
+                          className="flex items-center gap-2.5 text-sm font-semibold text-accent hover:text-text-primary transition-colors group/link"
                         >
                           <FiExternalLink className="text-lg" /> Live Demo
                         </a>
@@ -281,20 +281,20 @@ export default function Projects() {
               href="https://github.com/Oye-Ayan"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full h-full flex flex-col items-center justify-center text-center gap-6 bg-[#121214] border border-white/[0.05] rounded-3xl p-10 hover:border-accent/[0.4] transition-colors duration-500 group preserve-3d"
+              className="w-full h-full flex flex-col items-center justify-center text-center gap-6 bg-surface border border-border rounded-3xl p-10 hover:border-accent/[0.4] transition-colors duration-500 group preserve-3d"
             >
-              <span className="w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/[0.1] flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-colors duration-500 [transform:translateZ(25px)] shadow-[0_0_20px_rgba(100,217,154,0.2)]">
-                <FaGithub className="text-3xl text-white group-hover:text-[#0a0a0b] transition-colors duration-500" />
+              <span className="w-16 h-16 rounded-2xl bg-surface border border-border flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-colors duration-500 [transform:translateZ(25px)] shadow-[0_0_20px_rgba(5,150,105,0.15)] dark:shadow-[0_0_20px_rgba(100,217,154,0.2)]">
+                <FaGithub className="text-3xl text-text-primary group-hover:text-dark transition-colors duration-500" />
               </span>
               <div className="[transform:translateZ(18px)]">
-                <h4 className="text-2xl font-display font-bold text-white tracking-tight mb-2">
+                <h4 className="text-2xl font-display font-bold text-text-primary tracking-tight mb-2">
                   More on GitHub
                 </h4>
-                <p className="text-[#a1a1aa] text-sm leading-relaxed font-body">
+                <p className="text-text-secondary text-sm leading-relaxed font-body">
                   Explore the rest of the code, experiments, and side projects.
                 </p>
               </div>
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:text-white transition-colors [transform:translateZ(20px)]">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent group-hover:text-text-primary transition-colors [transform:translateZ(20px)]">
                 View Profile <FiArrowUpRight className="text-lg" />
               </span>
             </a>

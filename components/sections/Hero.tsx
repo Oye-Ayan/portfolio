@@ -96,7 +96,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Name - large editorial display */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-bold tracking-tighter leading-[1.05] mb-8">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-bold text-text-primary tracking-tighter leading-[1.05] mb-8">
           {nameWords.map((word, i) => (
             <RevealWord key={i} word={word} index={i} total={nameWords.length} />
           ))}
@@ -166,7 +166,7 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center pt-1.5"
+            className="w-5 h-8 rounded-full border border-border flex items-start justify-center pt-1.5"
           >
             <motion.div className="w-1 h-1.5 rounded-full bg-text-secondary" />
           </motion.div>

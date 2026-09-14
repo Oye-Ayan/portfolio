@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,17 +10,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#0a0a0b',
-        surface: '#121214',
-        'surface-hover': '#1a1a1e',
+        dark: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        'surface-hover': 'var(--color-surface-hover)',
+        border: 'var(--color-border)',
         accent: {
-          DEFAULT: '#64d99a',
-          hover: '#4ece88',
-          glow: 'rgba(100, 217, 154, 0.15)',
+          DEFAULT: 'var(--color-accent)',
+          hover: 'var(--color-accent-hover)',
+          glow: 'var(--color-accent-glow)',
         },
-        'text-primary': '#ececee',
-        'text-secondary': '#a1a1aa',
-        'text-tertiary': '#71717a',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
+        'text-tertiary': 'var(--color-text-tertiary)',
       },
       fontFamily: {
         display: ['var(--font-outfit)', 'sans-serif'],
@@ -31,7 +33,3 @@ const config: Config = {
 };
 
 export default config;
-
-/* REDESIGNED TAILWIND CONFIG BACKUP (commented out):
- * Accent #e8a87c (warm amber), Satoshi font-family.
- */

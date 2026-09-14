@@ -26,9 +26,9 @@ export default function Button({
   `.replace(/\s+/g, ' ').trim();
 
   const variants = {
-    primary: 'bg-accent text-dark font-semibold hover:bg-accent/90 active:scale-[0.98]',
-    secondary: 'bg-dark-accent text-text-primary border border-white/[0.06] hover:border-white/[0.12] hover:bg-dark-muted active:scale-[0.98]',
-    outline: 'border border-white/[0.1] text-text-primary hover:border-accent/40 hover:text-accent active:scale-[0.98]'
+    primary: 'bg-accent text-white dark:text-dark font-semibold hover:bg-accent/90 shadow-sm active:scale-[0.98]',
+    secondary: 'bg-surface text-text-primary border border-border hover:border-accent/40 hover:bg-surface/80 active:scale-[0.98]',
+    outline: 'border border-border text-text-primary hover:border-accent/60 hover:text-accent hover:bg-accent/[0.04] active:scale-[0.98]'
   };
 
   const Component = href ? 'a' : 'button';

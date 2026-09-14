@@ -82,7 +82,7 @@ export default function Skills() {
                       key={skillIndex}
                       whileHover={{ y: -4, scale: 1.04 }}
                       whileTap={{ scale: 0.97 }}
-                      className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-accent/40 hover:bg-white/[0.04] hover:shadow-[0_10px_25px_-5px_rgba(100,217,154,0.18)] transition-all duration-300 group cursor-default preserve-3d"
+                      className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border hover:border-accent/50 hover:bg-black/[0.04] dark:hover:bg-white/[0.04] hover:shadow-[0_10px_25px_-5px_rgba(5,150,105,0.12)] dark:hover:shadow-[0_10px_25px_-5px_rgba(100,217,154,0.18)] transition-all duration-300 group cursor-default preserve-3d"
                     >
                       <div className="text-lg text-text-tertiary group-hover:text-accent [transform:translateZ(14px)] transition-all duration-300 drop-shadow-[0_0_8px_rgba(100,217,154,0.3)]">
                         {skill.icon}
@@ -97,7 +97,7 @@ export default function Skills() {
 
               {/* Divider between groups */}
               {catIndex < skillCategories.length - 1 && (
-                <div className="border-b border-white/[0.04] mt-12 md:mt-16" />
+                <div className="border-b border-border mt-12 md:mt-16" />
               )}
             </ScrollReveal>
           ))}

@@ -38,7 +38,7 @@ export default function Education() {
               </div>
             </div>
 
-            <div className="space-y-6 pt-4 border-t border-white/[0.06] preserve-3d">
+            <div className="space-y-6 pt-4 border-t border-border preserve-3d">
               <div className="[transform:translateZ(14px)]">
                 <h4 className="text-sm font-semibold text-text-primary mb-1">Final Year Project</h4>
                 <p className="text-text-secondary text-sm md:text-base leading-relaxed">
@@ -70,7 +70,7 @@ export default function Education() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.15} once={false} className="text-center">
-          <div className="inline-block px-4 py-2 rounded-full bg-surface border border-white/[0.06] text-xs text-text-tertiary shadow-lg">
+          <div className="inline-block px-4 py-2 rounded-full bg-surface border border-border text-xs text-text-tertiary shadow-lg">
             <span className="text-accent font-semibold">Languages:</span> English (Fluent), Urdu (Native)
           </div>
         </ScrollReveal>

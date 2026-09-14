@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -177,8 +178,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`scroll-smooth ${inter.variable} ${outfit.variable}`}>
       <head>
+        {/* Anti-flash theme initialization script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('theme');
+                  var isDark = stored ? stored === 'dark' : (window.matchMedia('(prefers-color-scheme: dark)').matches);
+                  if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                  } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+
         {/* Preconnect to critical third-party origins for faster loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -199,7 +221,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased custom-scrollbar noise-overlay">{children}</body>
+      <body className="antialiased custom-scrollbar noise-overlay">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

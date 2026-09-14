@@ -52,7 +52,7 @@ export default function Experience() {
                     <p className="text-accent font-semibold text-base mt-0.5">{exp.company}</p>
                     <p className="text-text-tertiary text-xs">{exp.location}</p>
                   </div>
-                  <span className="text-text-secondary text-xs whitespace-nowrap bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/[0.08] self-start [transform:translateZ(24px)] shadow-[0_0_15px_rgba(100,217,154,0.1)]">
+                  <span className="text-text-secondary text-xs whitespace-nowrap bg-surface px-3 py-1.5 rounded-lg border border-border self-start [transform:translateZ(24px)] shadow-[0_0_15px_rgba(100,217,154,0.05)]">
                     {exp.period}
                   </span>
                 </div>

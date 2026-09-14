@@ -63,7 +63,7 @@ export default function Contact() {
 
                 <div className="space-y-4 [transform:translateZ(18px)]">
                   {contactInfo.map((item, index) => (
-                    <div key={index} className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-accent/30 transition-colors">
+                    <div key={index} className="flex items-center gap-4 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border hover:border-accent/30 transition-colors">
                       <div className="text-accent text-lg drop-shadow-[0_0_8px_rgba(100,217,154,0.3)]">{item.icon}</div>
                       <div>
                         <p className="text-text-tertiary text-xs">{item.label}</p>
@@ -96,7 +96,7 @@ export default function Contact() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] hover:border-accent/40 hover:bg-white/[0.04] transition-all text-text-primary hover:text-accent font-medium text-sm"
+                        className="flex items-center gap-4 p-4 rounded-xl bg-black/[0.02] dark:bg-white/[0.02] border border-border hover:border-accent/40 hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-all text-text-primary hover:text-accent font-medium text-sm"
                       >
                         <div className="text-accent drop-shadow-[0_0_8px_rgba(100,217,154,0.3)]">{social.icon}</div>
                         <span>{social.label}</span>
@@ -128,13 +128,13 @@ export default function Contact() {
 
         {/* GIANT EDITORIAL WATERMARK NAME */}
         <ScrollReveal once={false} delay={0.2} className="py-12 overflow-hidden">
-          <div className="text-center font-display font-extrabold text-[12vw] leading-none tracking-tighter text-white/[0.04] select-none pointer-events-none whitespace-nowrap uppercase">
+          <div className="text-center font-display font-extrabold text-[12vw] leading-none tracking-tighter text-black/[0.04] dark:text-white/[0.04] select-none pointer-events-none whitespace-nowrap uppercase">
             AYAN KHAN
           </div>
         </ScrollReveal>
 
         {/* SITE FOOTER */}
-        <footer className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-tertiary" role="contentinfo">
+        <footer className="pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-text-tertiary" role="contentinfo">
           <p>© 2025 Muhammad Ayan Khan. All rights reserved.</p>
           <p className="italic text-text-secondary">Think. Build. Repeat.</p>
           <p>Designed & Built by Ayan</p>

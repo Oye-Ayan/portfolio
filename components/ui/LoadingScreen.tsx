@@ -21,7 +21,7 @@ export default function LoadingScreen() {
           key="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0a0a0b]"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-dark"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ export default function LoadingScreen() {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center gap-4"
           >
-            <span className="text-xl font-semibold tracking-[0.3em] text-white uppercase">
+            <span className="text-xl font-semibold tracking-[0.3em] text-text-primary uppercase">
               Ayan Khan
             </span>
           </motion.div>
