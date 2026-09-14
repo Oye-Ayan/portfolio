@@ -29,7 +29,7 @@ const certifications: ExpandingCardItem[] = [
   },
   {
     id: 'flutter-internship',
-    title: 'Flutter Mobile Engineering Internship',
+    title: 'POF Internship in Flutter',
     description:
       'Official recognition for leading cross-platform Flutter application development, Firebase integration, and Agile sprint execution.',
     imgSrc: '/certifications/pof_certificate.jpg',
