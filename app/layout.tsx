@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -208,23 +209,40 @@ export default function RootLayout({
         {/* DNS Prefetch for external resources */}
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-        {/* Google Analytics Tracking */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8J93HDK4N3" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-8J93HDK4N3');
-            `,
-          }}
+        {/* Preload self-hosted Satoshi fonts — only the weights used above the fold */}
+        <link
+          rel="preload"
+          href="/fonts/Satoshi-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Satoshi-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body className="antialiased custom-scrollbar noise-overlay">
         <ThemeProvider>
           {children}
         </ThemeProvider>
+
+        {/* Google Analytics — loaded after page is interactive, zero LCP impact */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8J93HDK4N3"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-config" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8J93HDK4N3');
+          `}
+        </Script>
       </body>
     </html>
   );

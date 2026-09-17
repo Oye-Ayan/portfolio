@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useRef, useEffect } from 'react';
 import Button from '../ui/Button';
-import Hero3DScene from '../3d/Hero3DScene';
+import Hero3DScene from '../3d/Hero3DSceneDynamic';
 
 function RevealWord({ word, index, total }: { word: string; index: number; total: number }) {
   return (
@@ -28,10 +28,22 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(e => console.log("Video autoplay failed:", e));
+    const video = videoRef.current;
+    if (!video) return;
+
+    const loadVideo = () => {
+      video.defaultMuted = true;
+      video.muted = true;
+      video.preload = 'auto';
+      video.load();
+      video.play().catch(() => {});
+    };
+
+    // Defer video load until after LCP — doesn't compete with fonts/JS bundles
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadVideo, { timeout: 2000 });
+    } else {
+      setTimeout(loadVideo, 1500);
     }
   }, []);
 
@@ -62,11 +74,10 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="video-bg"
-          autoPlay
           loop
           muted
           playsInline
-          preload="auto"
+          preload="none"
         >
           <source src="/portfolio_vid.mp4" type="video/mp4" />
         </video>

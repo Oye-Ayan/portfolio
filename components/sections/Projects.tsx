@@ -8,6 +8,7 @@ import { FiExternalLink, FiArrowUpRight, FiMaximize2 } from 'react-icons/fi';
 import { useState } from 'react';
 import ProjectShowcase, { ProjectShowcaseData } from '../ui/ProjectShowcase';
 import TiltCard from '../effects/TiltCard';
+import Image from 'next/image';
 
 const articuliCareImages = [
   "/fyp_interface/IMG-20250508-WA0011.jpg", "/fyp_interface/IMG-20250508-WA0012.jpg",
@@ -205,12 +206,20 @@ export default function Projects() {
                   onClick={hasCaseStudy ? () => openCaseStudy(project) : undefined}
                   className={`w-full h-full flex flex-col bg-surface border border-border rounded-3xl overflow-hidden hover:border-accent/[0.4] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1),0_0_30px_-10px_rgba(5,150,105,0.15)] dark:hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8),0_0_30px_-10px_rgba(100,217,154,0.15)] transition-all duration-500 group preserve-3d ${hasCaseStudy ? 'cursor-pointer' : ''}`}
                 >
-                  <div className="relative aspect-[16/10] bg-black/5 dark:bg-black/40 border-b border-border overflow-hidden p-6 flex items-center justify-center [transform:translateZ(12px)]">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
+                  <div className="relative aspect-[16/10] bg-black/5 dark:bg-black/40 border-b border-border overflow-hidden [transform:translateZ(12px)]">
+                    <div className="absolute inset-0 p-6 flex items-center justify-center">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 640px) 320px, (max-width: 768px) 450px, 600px"
+                          className="object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+                          loading="lazy"
+                          quality={85}
+                        />
+                      </div>
+                    </div>
 
                     {/* Interactive Overlay for Case Study */}
                     {hasCaseStudy && (
