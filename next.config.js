@@ -19,6 +19,21 @@ const nextConfig = {
 
   async headers() {
     return [
+      // SEO: Root page — tell Google the content is fresh
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow, max-image-preview:large, max-snippet:-1',
+          },
+        ],
+      },
+      // Static fonts — immutable forever
       {
         source: '/fonts/(.*)',
         headers: [
@@ -28,6 +43,7 @@ const nextConfig = {
           },
         ],
       },
+      // Portfolio video
       {
         source: '/portfolio_vid(.*)',
         headers: [
@@ -41,6 +57,7 @@ const nextConfig = {
           },
         ],
       },
+      // Next.js optimized images
       {
         source: '/_next/image(.*)',
         headers: [

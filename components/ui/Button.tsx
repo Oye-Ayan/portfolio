@@ -26,9 +26,9 @@ export default function Button({
   `.replace(/\s+/g, ' ').trim();
 
   const variants = {
-    primary: 'bg-accent text-white dark:text-dark font-semibold hover:bg-accent/90 shadow-sm active:scale-[0.98]',
-    secondary: 'bg-surface text-text-primary border border-border hover:border-accent/40 hover:bg-surface/80 active:scale-[0.98]',
-    outline: 'border border-border text-text-primary hover:border-accent/60 hover:text-accent hover:bg-accent/[0.04] active:scale-[0.98]'
+    primary: 'bg-accent text-white dark:text-dark font-semibold hover:bg-accent-hover shadow-[0_2px_8px_rgba(5,150,105,0.25)] dark:shadow-[0_2px_8px_rgba(100,217,154,0.2)] hover:shadow-[0_4px_16px_rgba(5,150,105,0.35)] dark:hover:shadow-[0_4px_16px_rgba(100,217,154,0.3)] active:scale-[0.98]',
+    secondary: 'bg-surface text-text-primary border border-border hover:border-accent/40 hover:bg-surface/80 shadow-[0_1px_3px_rgba(120,100,70,0.06)] dark:shadow-none active:scale-[0.98]',
+    outline: 'border border-border text-text-primary hover:border-accent/60 hover:text-accent hover:bg-accent/[0.04] shadow-[0_1px_3px_rgba(120,100,70,0.06)] dark:shadow-none active:scale-[0.98]'
   };
 
   const Component = href ? 'a' : 'button';

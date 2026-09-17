@@ -1,18 +1,21 @@
 /**
  * JsonLd.tsx — Structured Data for Google Rich Results
- * 
- * Provides three schema types:
- * 1. Person — Who you are, your job, skills, social profiles
- * 2. WebSite — Identifies your website to Google
- * 3. ProfilePage — Marks this as a professional profile page
- * 
+ *
+ * Provides five schema types:
+ * 1. Person         — Who you are, occupation, credentials, social profiles
+ * 2. WebSite        — Identifies your website to Google
+ * 3. ProfilePage    — Marks this as a professional profile page
+ * 4. BreadcrumbList — Navigation structure for rich results
+ * 5. ItemList       — Top projects for knowledge panel enrichment
+ *
  * Validated against https://schema.org and Google Rich Results Test
  */
 
 export default function JsonLd() {
   const baseUrl = 'https://muhammad-ayan-khan.vercel.app';
+  const now = new Date().toISOString();
 
-  // Schema 1: Person — the most important for personal branding
+  // Schema 1: Person — the most important for personal branding & E-E-A-T
   const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -37,6 +40,38 @@ export default function JsonLd() {
       '@type': 'EducationalOrganization',
       name: 'COMSATS University Islamabad, Wah Campus',
       url: 'https://www.comsats.edu.pk',
+    },
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: 'Bachelor of Science in Software Engineering',
+      educationalLevel: 'Bachelor',
+      recognizedBy: {
+        '@type': 'EducationalOrganization',
+        name: 'COMSATS University Islamabad',
+      },
+    },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: 'Software Engineer',
+      occupationLocation: {
+        '@type': 'Country',
+        name: 'Pakistan',
+      },
+      description:
+        'Develops cross-platform mobile applications using Flutter and Dart, backend microservices with Java Spring and Grails, and AI-powered healthcare solutions.',
+      skills: [
+        'Flutter',
+        'Dart',
+        'Firebase',
+        'Java',
+        'Spring Boot',
+        'Python',
+        'Clean Architecture',
+        'REST APIs',
+        'TensorFlow Lite',
+        'Groovy and Grails',
+      ],
     },
     worksFor: {
       '@type': 'Organization',
@@ -94,9 +129,76 @@ export default function JsonLd() {
     description:
       'Professional portfolio showcasing mobile apps, full-stack projects, and innovative AI-powered solutions by Muhammad Ayan Khan.',
     mainEntity: { '@id': `${baseUrl}/#person` },
-    dateCreated: "2024-08-15T00:00:00Z",
-    dateModified: "2026-08-25T00:00:00Z",
+    dateCreated: '2024-08-15T00:00:00Z',
+    dateModified: now,
     inLanguage: 'en-US',
+  };
+
+  // Schema 4: BreadcrumbList — navigation structure for rich results
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Projects',
+        item: `${baseUrl}/#projects`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Experience',
+        item: `${baseUrl}/#experience`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Contact',
+        item: `${baseUrl}/#contact`,
+      },
+    ],
+  };
+
+  // Schema 5: ItemList — top projects for knowledge panel enrichment
+  const projectsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Projects by Muhammad Ayan Khan',
+    description:
+      'Selected software projects built by Muhammad Ayan Khan, Flutter Developer and Software Engineer.',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'ArticuliCare',
+        description:
+          'On-device AI-powered speech pathology detection app built with Flutter and TensorFlow Lite.',
+        url: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'eConceptions Backend Services',
+        description:
+          'Backend microservices and SOAP/REST API integrations built with Java Spring and Grails.',
+        url: baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'POF Internal Flutter Application',
+        description:
+          'Flutter-based internal mobile application with Firebase backend, built during internship at Pakistan Ordnance Factories.',
+        url: baseUrl,
+      },
+    ],
   };
 
   return (
@@ -112,6 +214,14 @@ export default function JsonLd() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
       />
     </>
   );

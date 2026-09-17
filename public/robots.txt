@@ -1,10 +1,9 @@
-# robots.txt — Muhammad Ayan Khan Portfolio
-# https://muhammad-ayan-khan.vercel.app
-
 User-agent: *
 Allow: /
+
+# Block crawling of build artifacts and internal Next.js routes
 Disallow: /_next/
 Disallow: /api/
 
-# Sitemap
+# Sitemap location
 Sitemap: https://muhammad-ayan-khan.vercel.app/sitemap.xml

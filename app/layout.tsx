@@ -19,7 +19,10 @@ const outfit = Outfit({
 const BASE_URL = 'https://muhammad-ayan-khan.vercel.app';
 
 export const viewport: Viewport = {
-  themeColor: '#64d99a',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#64d99a' },
+    { media: '(prefers-color-scheme: light)', color: '#059669' },
+  ],
   width: 'device-width',
   initialScale: 1,
 };
@@ -36,66 +39,18 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Muhammad Ayan Khan — Software Engineer & Flutter Developer based in Pakistan. Specializing in high-performance mobile apps (Flutter, Firebase, Supabase), backend microservices (Java, Spring, Grails), clean architecture, and AI integration.",
 
-  // ── Long-tail keywords targeting branded + specialization searches ──
+  // ── Focused keywords — quality over quantity ──
   keywords: [
     "Muhammad Ayan Khan",
-    "ayan",
-    "muhammad ayan khan",
-    "muhammad-ayan-khan",
-    "muhammadayankhan",
-    "muhammadayankhan.vercel.app",
-    "ayan-khan.vercel.app",
-    "muhammad-ayan-khan.vercel.app",
     "Muhammad Ayan Khan portfolio",
     "Muhammad Ayan Khan software engineer",
-    "Software Engineer Pakistan",
     "Flutter Developer Pakistan",
+    "Software Engineer Wah Cantt",
     "Flutter Developer portfolio",
-    "Mobile App Developer Wah Cantt",
-    "Full-Stack Developer",
     "Java Developer Pakistan",
-    "Firebase Flutter developer",
-    "Supabase developer",
-    "Clean Architecture developer",
-    "AI integration mobile apps",
-    "TensorFlow Lite Flutter",
     "ArticuliCare app",
     "eConceptions developer",
-    "Cross-platform mobile development",
-    "Backend microservices Java",
-    "PHP Laravel developer",
-    "Python developer Pakistan",
-    "Muhammad Ayan Khan github",
-    "Muhammad Ayan Khan linkedin",
-    "Muhammad Ayan Khan twitter",
-    "Muhammad Ayan Khan instagram",
-    "Muhammad Ayan Khan facebook",
-    "Muhammad Ayan Khan whatsapp",
-    "Muhammad Ayan Khan Telegram",
-    "Muhammad Ayan Khan whatsapp",
-    "Muhammad Ayan Khan Telegram",
-    "Artificial Intelligence Developer",
-    "Machine Learning Engineer",
-    "AI Developer Pakistan",
-    "Machine Learning Engineer Pakistan",
-    "AI Developer Wah Cantt",
-    "Machine Learning Engineer Wah Cantt",
-    "AI Developer portfolio",
-    "Machine Learning Engineer portfolio",
-    "AI Developer github",
-    "Machine Learning Engineer github",
-    "AI Developer linkedin",
-    "Machine Learning Engineer linkedin",
-    "AI Developer twitter",
-    "Machine Learning Engineer twitter",
-    "AI Developer instagram",
-    "Machine Learning Engineer instagram",
-    "AI Developer facebook",
-    "Machine Learning Engineer facebook",
-    "AI Developer whatsapp",
-    "Machine Learning Engineer whatsapp",
-    "AI Developer Telegram",
-    "Machine Learning Engineer Telegram",
+    "Mobile App Developer Pakistan",
   ],
 
   authors: [{ name: "Muhammad Ayan Khan", url: BASE_URL }],
@@ -119,6 +74,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/opengraph-image.png",
+        secureUrl: `${BASE_URL}/opengraph-image.png`,
         width: 1200,
         height: 630,
         alt: "Muhammad Ayan Khan — Software Engineer & Flutter Developer Portfolio",
@@ -164,9 +120,11 @@ export const metadata: Metadata = {
     },
   },
 
-  // ── Google Search Console verification ──
+  // ── Search Console verifications ──
   verification: {
     google: "3c3f9f1308fd91bb",
+    // Add your Bing Webmaster Tools verification code at https://www.bing.com/webmasters
+    // bing: "YOUR_BING_VERIFY_CODE",
   },
 
   // ── Category ──
