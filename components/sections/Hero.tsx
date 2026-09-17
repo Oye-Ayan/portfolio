@@ -86,6 +86,12 @@ export default function Hero() {
       {/* Dark overlay gradient */}
       <div className="video-overlay pointer-events-none" />
 
+      {/* Light mode: ambient aurora glow behind content */}
+      <div className="absolute inset-0 pointer-events-none z-[1] dark:hidden">
+        <div className="absolute top-[-10%] left-[50%] -translate-x-1/2 w-[90vw] h-[70vh] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(5,150,105,0.08)_0%,rgba(16,185,129,0.04)_40%,transparent_70%)] blur-[72px]" />
+        <div className="absolute top-[15%] right-[-5%] w-[45vw] h-[45vh] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(245,200,120,0.07)_0%,transparent_65%)] blur-[60px]" />
+      </div>
+
       {/* Interactive 3D WebGL Centerpiece (Desktop & Mobile) */}
       <Hero3DScene />
 

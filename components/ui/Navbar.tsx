@@ -69,7 +69,7 @@ export default function Navbar() {
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-surface/85 backdrop-blur-xl border-b border-border shadow-sm'
+            ? 'dark:bg-[rgba(18,18,20,0.85)] bg-[rgba(255,255,255,0.90)] backdrop-blur-xl border-b dark:border-white/[0.06] border-black/[0.08] dark:shadow-[0_1px_0_rgba(255,255,255,0.04)] shadow-[0_1px_0_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.07)]'
             : 'bg-transparent'
         }`}
       >

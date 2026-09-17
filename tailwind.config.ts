@@ -10,6 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        bg: 'var(--color-bg)',
+        'bg-alt': 'var(--color-bg-alt)',
         dark: 'var(--color-bg)',
         surface: 'var(--color-surface)',
         'surface-hover': 'var(--color-surface-hover)',

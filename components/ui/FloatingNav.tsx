@@ -16,7 +16,7 @@ export default function FloatingNav() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col items-center gap-4 p-3 bg-surface/90 backdrop-blur-xl border border-border rounded-full shadow-2xl shadow-black/10 dark:shadow-black/50"
+      className="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden xl:flex flex-col items-center gap-4 p-3 bg-[rgba(255,255,255,0.92)] dark:bg-[rgba(18,18,20,0.90)] backdrop-blur-xl border border-black/[0.09] dark:border-white/[0.06] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08),0_8px_24px_rgba(0,0,0,0.10),0_0_0_1px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.04)]"
     >
       {links.map((link, i) => (
         <a

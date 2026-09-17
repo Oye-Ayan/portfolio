@@ -2,61 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════════════ */
+
 :root {
   --font-display: var(--font-outfit), sans-serif;
   --font-body: var(--font-inter), sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* ── Light Theme — Warm Editorial Palette ── */
-  --color-bg: #f7f5f0;
-  --color-surface: rgba(255, 252, 247, 0.92);
-  --color-surface-solid: #fffcf7;
-  --color-surface-hover: rgba(255, 249, 240, 0.96);
-  --color-border: rgba(120, 100, 70, 0.1);
-  --color-border-hover: rgba(5, 150, 105, 0.4);
-  --color-text-primary: #1a1612;
-  --color-text-secondary: #5a5248;
-  --color-text-tertiary: #8a8078;
-  --color-accent: #059669;
-  --color-accent-hover: #047857;
-  --color-accent-glow: rgba(5, 150, 105, 0.18);
+  /* ─── Light Theme: Warm Parchment Editorial ─── */
+  --color-bg:             #f4f1eb;
+  --color-bg-alt:         #edeae2;
+  --color-surface:        #ffffff;
+  --color-surface-hover:  #faf8f3;
+  --color-border:         rgba(30, 20, 5, 0.10);
+  --color-border-hover:   rgba(5, 150, 105, 0.50);
+  --color-text-primary:   #111008;
+  --color-text-secondary: #4a4535;
+  --color-text-tertiary:  #8a8070;
+  --color-accent:         #059669;
+  --color-accent-hover:   #047857;
+  --color-accent-glow:    rgba(5, 150, 105, 0.20);
 
-  /* Light-mode specific shadow tokens */
-  --shadow-card: 0 2px 4px rgba(120, 100, 70, 0.04),
-                 0 8px 24px rgba(120, 100, 70, 0.07),
-                 0 20px 48px rgba(120, 100, 70, 0.06),
-                 inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  --shadow-card-hover: 0 4px 8px rgba(5, 150, 105, 0.04),
-                       0 12px 32px rgba(120, 100, 70, 0.10),
-                       0 28px 60px rgba(120, 100, 70, 0.09),
-                       0 0 0 1px rgba(5, 150, 105, 0.08),
-                       inset 0 1px 0 rgba(255, 255, 255, 1);
-  --shadow-tag: 0 1px 3px rgba(120, 100, 70, 0.08),
-                0 4px 10px rgba(5, 150, 105, 0.06);
+  /* Light shadow system — warm-tinted, multi-layer */
+  --shadow-sm:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 2px 6px rgba(0,0,0,0.06);
+
+  --shadow-card:
+    0 1px 2px  rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.06),
+    0 12px 28px rgba(0,0,0,0.07),
+    0 24px 48px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255,255,255,1.00);
+
+  --shadow-card-hover:
+    0 2px 4px  rgba(0,0,0,0.05),
+    0 8px 20px rgba(5,150,105,0.08),
+    0 20px 44px rgba(0,0,0,0.10),
+    0 32px 64px rgba(0,0,0,0.07),
+    0 0 0 1px rgba(5,150,105,0.12),
+    inset 0 1px 0 rgba(255,255,255,1.00);
+
+  --shadow-nav:
+    0 1px 0 rgba(0,0,0,0.06),
+    0 4px 16px rgba(0,0,0,0.08),
+    0 8px 32px rgba(0,0,0,0.05);
+
+  --shadow-tag:
+    0 1px 3px rgba(0,0,0,0.08),
+    0 2px 8px rgba(5,150,105,0.10);
 }
 
 .dark {
-  /* ── Dark Theme Tokens (Signature Aesthetic) ── */
-  --color-bg: #0a0a0b;
-  --color-surface: #121214;
-  --color-surface-solid: #121214;
-  --color-surface-hover: #1a1a1e;
-  --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-hover: rgba(100, 217, 154, 0.25);
-  --color-text-primary: #ececee;
+  /* ─── Dark Theme: Deep Noir Signature ─── */
+  --color-bg:             #0a0a0b;
+  --color-bg-alt:         #0f0f11;
+  --color-surface:        #121214;
+  --color-surface-hover:  #1a1a1e;
+  --color-border:         rgba(255,255,255,0.06);
+  --color-border-hover:   rgba(100,217,154,0.25);
+  --color-text-primary:   #ececee;
   --color-text-secondary: #a1a1aa;
-  --color-text-tertiary: #71717a;
-  --color-accent: #64d99a;
-  --color-accent-hover: #4ece88;
-  --color-accent-glow: rgba(100, 217, 154, 0.15);
+  --color-text-tertiary:  #71717a;
+  --color-accent:         #64d99a;
+  --color-accent-hover:   #4ece88;
+  --color-accent-glow:    rgba(100,217,154,0.15);
 
-  --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.6),
-                 inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
-  --shadow-card-hover: 0 25px 50px -10px rgba(0, 0, 0, 0.7),
-                       0 0 25px -5px rgba(100, 217, 154, 0.15),
-                       inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+  --shadow-sm: none;
+  --shadow-card:
+    0 20px 40px -15px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,255,255,0.12);
+
+  --shadow-card-hover:
+    0 25px 50px -10px rgba(0,0,0,0.7),
+    0 0 25px -5px rgba(100,217,154,0.15),
+    inset 0 1px 1px rgba(255,255,255,0.18);
+
+  --shadow-nav: 0 1px 0 rgba(255,255,255,0.04);
   --shadow-tag: none;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE RESET
+═══════════════════════════════════════════════════════════════ */
 
 * {
   margin: 0;
@@ -76,26 +106,28 @@ body {
   color: var(--color-text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* ── Warm grain noise overlay for light mode ── */
-body::before {
+/* ─── Light mode: warm parchment paper texture ─── */
+html:not(.dark) body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: 200px 200px;
+}
+
+/* ─── Light mode: fixed warm gradient wash behind everything ─── */
+html:not(.dark) body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  transition: opacity 0.3s ease;
-}
-
-/* Activate grain on light theme */
-html:not(.dark) body::before {
-  opacity: 0.028;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(5,150,105,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(245,195,100,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(244,241,235,1) 30%, rgba(237,234,226,1) 100%);
 }
 
 ::selection {
@@ -103,9 +135,9 @@ html:not(.dark) body::before {
   color: #ffffff;
 }
 
-.dark ::selection {
-  color: var(--color-bg);
-}
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+═══════════════════════════════════════════════════════════════ */
 
 .gradient-text {
   background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 50%, var(--color-accent) 100%);
@@ -114,76 +146,108 @@ html:not(.dark) body::before {
   background-clip: text;
 }
 
-/* ── Light mode aurora ambient glow behind hero ── */
-.light-aurora {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
+/* ═══════════════════════════════════════════════════════════════
+   GLASS SURFACES
+═══════════════════════════════════════════════════════════════ */
 
-.light-aurora::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80vw;
-  height: 60vh;
-  background: radial-gradient(ellipse at center, rgba(5, 150, 105, 0.06) 0%, rgba(16, 185, 129, 0.03) 40%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(48px);
-}
-
-.light-aurora::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  right: -10%;
-  width: 50vw;
-  height: 50vh;
-  background: radial-gradient(ellipse at center, rgba(245, 208, 143, 0.07) 0%, transparent 65%);
-  border-radius: 50%;
-  filter: blur(64px);
-}
-
-/* ── Glass effect — premium in both themes ── */
 .glass-effect {
   background: var(--color-surface);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
   border: 1px solid var(--color-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-html:not(.dark) .glass-effect {
-  box-shadow: 0 2px 8px rgba(120, 100, 70, 0.05),
-              0 8px 24px rgba(120, 100, 70, 0.06),
-              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dark .glass-effect {
-  background: rgba(18, 18, 20, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(18,18,20,0.65);
 }
 
 .glass-effect:hover {
   border-color: var(--color-border-hover);
 }
 
-/* ── 3D Perspective & Spatial Utilities ── */
-.preserve-3d {
+/* ─── Primary card surface ─── */
+.glass-3d {
+  background: var(--color-surface);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
   transform-style: preserve-3d;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.3s ease, transform 0.35s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.perspective-1000 {
-  perspective: 1000px;
+/* Light mode: premium frosted card treatment */
+html:not(.dark) .glass-3d {
+  background: linear-gradient(145deg, #ffffff 0%, #fdfbf8 100%);
 }
 
-.perspective-1200 {
-  perspective: 1200px;
+/* Subtle top-edge shimmer — the "premium" detail */
+html:not(.dark) .glass-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,0.0) 5%,
+    rgba(255,255,255,1.0) 30%,
+    rgba(255,255,255,1.0) 70%,
+    rgba(255,255,255,0.0) 95%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
+/* Subtle left accent strip on cards in light mode */
+html:not(.dark) .glass-3d::after {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 0;
+  width: 2px;
+  height: 76%;
+  background: linear-gradient(180deg, transparent 0%, rgba(5,150,105,0.25) 30%, rgba(5,150,105,0.25) 70%, transparent 100%);
+  border-radius: 0 1px 1px 0;
+  pointer-events: none;
+}
+
+.glass-3d:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-card-hover);
+}
+
+html:not(.dark) .glass-3d:hover {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fdfb 60%, #f0faf5 100%);
+}
+
+.dark .glass-3d {
+  background: rgba(18,18,20,0.72);
+  border-color: rgba(255,255,255,0.08);
+}
+
+.dark .glass-3d::before,
+.dark .glass-3d::after {
+  display: none;
+}
+
+.dark .glass-3d:hover {
+  border-color: rgba(100,217,154,0.30);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3D SPATIAL UTILITIES
+═══════════════════════════════════════════════════════════════ */
+
+.preserve-3d  { transform-style: preserve-3d; }
+.perspective-1000  { perspective: 1000px; }
+.perspective-1200  { perspective: 1200px; }
 .backface-hidden {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -196,46 +260,10 @@ html:not(.dark) .glass-effect {
 .translate-z-16 { transform: translateZ(56px); }
 .translate-z-20 { transform: translateZ(72px); }
 
-/* ── 3D Glass Surface — the main card style ── */
-.glass-3d {
-  background: var(--color-surface);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
-  transform-style: preserve-3d;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.3s ease, transform 0.35s ease;
-  position: relative;
-}
+/* ═══════════════════════════════════════════════════════════════
+   GLOW BORDER EFFECT
+═══════════════════════════════════════════════════════════════ */
 
-/* Premium light-mode inner highlight line */
-html:not(.dark) .glass-3d::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9) 40%, rgba(255, 255, 255, 0.9) 60%, transparent);
-  border-radius: 0 0 1px 1px;
-  pointer-events: none;
-}
-
-.glass-3d:hover {
-  border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-card-hover);
-}
-
-.dark .glass-3d {
-  background: rgba(18, 18, 20, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.dark .glass-3d:hover {
-  border-color: rgba(100, 217, 154, 0.3);
-}
-
-/* ── Glow border accent ── */
 .glow-border {
   position: relative;
 }
@@ -255,34 +283,28 @@ html:not(.dark) .glass-3d::before {
   opacity: 1;
 }
 
-/* ── Custom Scrollbar ── */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+═══════════════════════════════════════════════════════════════ */
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
+.custom-scrollbar::-webkit-scrollbar       { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: var(--color-bg); }
 
 html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #c4b9a8;
+  background: #c8bfaf;
   border-radius: 3px;
 }
-
 html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #a69d90;
+  background: #a8998a;
 }
 
-.dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 3px;
-}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb        { background: #27272a; border-radius: 3px; }
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover  { background: #3f3f46; }
 
-.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
+/* ═══════════════════════════════════════════════════════════════
+   VIDEO BACKGROUND
+═══════════════════════════════════════════════════════════════ */
 
-/* ── Video Background ── */
 .video-bg-container {
   position: absolute;
   inset: 0;
@@ -300,8 +322,8 @@ html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.3;
-  filter: contrast(1.05) brightness(1.1);
+  opacity: 0.18;
+  filter: contrast(1.05) brightness(1.05) saturate(0.8);
   transition: opacity 0.3s ease;
 }
 
@@ -310,26 +332,29 @@ html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   filter: contrast(1.1) brightness(0.9);
 }
 
-/* ── Video overlay — warm cream for light, deep noir for dark ── */
+/* ─── Light video overlay: warm editorial vignette ─── */
 .video-overlay {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse at 50% 40%,
-    rgba(247, 245, 240, 0.50) 0%,
-    rgba(247, 245, 240, 0.82) 55%,
-    rgba(247, 245, 240, 0.96) 80%,
-    #f7f5f0 100%
+    ellipse 120% 100% at 50% 30%,
+    rgba(244,241,235,0.30) 0%,
+    rgba(244,241,235,0.70) 45%,
+    rgba(244,241,235,0.92) 70%,
+    #f4f1eb 90%
   );
   z-index: 1;
   transition: background 0.3s ease;
 }
 
 .dark .video-overlay {
-  background: radial-gradient(circle at center, rgba(10, 10, 11, 0.45) 0%, rgba(10, 10, 11, 0.8) 70%, #0a0a0b 100%);
+  background: radial-gradient(circle at center, rgba(10,10,11,0.45) 0%, rgba(10,10,11,0.8) 70%, #0a0a0b 100%);
 }
 
-/* ── Cursor hiding for desktop pointer devices ── */
+/* ═══════════════════════════════════════════════════════════════
+   CURSOR (DESKTOP POINTER ONLY)
+═══════════════════════════════════════════════════════════════ */
+
 @media (hover: hover) and (pointer: fine) {
   body { cursor: none; }
   a, button, input, textarea, select, [role="button"] { cursor: none; }
@@ -340,13 +365,18 @@ html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   a, button, input, textarea, select, [role="button"] { cursor: auto; }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════════════ */
+
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
 }
 
-/* ── Tag component ── */
+/* ═══════════════════════════════════════════════════════════════
+   TAG / CHIP COMPONENT
+═══════════════════════════════════════════════════════════════ */
+
 .tag {
   display: inline-flex;
   align-items: center;
@@ -358,16 +388,16 @@ html:not(.dark) .custom-scrollbar::-webkit-scrollbar-thumb:hover {
 }
 
 html:not(.dark) .tag {
-  background: rgba(5, 150, 105, 0.06);
+  background: rgba(5,150,105,0.08);
   color: var(--color-accent);
-  border: 1px solid rgba(5, 150, 105, 0.18);
+  border: 1px solid rgba(5,150,105,0.22);
   box-shadow: var(--shadow-tag);
 }
 
 .dark .tag {
-  background: rgba(100, 217, 154, 0.08);
+  background: rgba(100,217,154,0.08);
   color: #64d99a;
-  border: 1px solid rgba(100, 217, 154, 0.2);
+  border: 1px solid rgba(100,217,154,0.2);
 }
 
 .tag:hover {
@@ -376,7 +406,10 @@ html:not(.dark) .tag {
   transform: translateY(-1px);
 }
 
-/* ── Section divider ── */
+/* ═══════════════════════════════════════════════════════════════
+   SECTION DIVIDERS
+═══════════════════════════════════════════════════════════════ */
+
 section {
   position: relative;
 }
@@ -395,16 +428,80 @@ section:last-child::after {
   display: none;
 }
 
-/* ── Light mode — subtle warm section background alternation ── */
+/* ─── Light mode: warm section stripe alternation ─── */
 html:not(.dark) section:nth-child(even) {
-  background: linear-gradient(180deg, transparent 0%, rgba(120, 100, 70, 0.018) 50%, transparent 100%);
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(30,20,5,0.025) 30%,
+    rgba(30,20,5,0.025) 70%,
+    transparent 100%
+  );
 }
 
-/* ── Light mode contact/skill item rows ── */
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: SKILL CHIPS & INLINE ITEM ROWS
+═══════════════════════════════════════════════════════════════ */
+
+/* Override the bg-black/[0.02] Tailwind utility for light mode — it's imperceptibly transparent */
 html:not(.dark) .bg-black\/\[0\.02\] {
-  background: rgba(120, 100, 70, 0.035) !important;
+  background-color: rgba(30,20,5,0.045) !important;
 }
 
 html:not(.dark) .hover\:bg-black\/\[0\.04\]:hover {
-  background: rgba(120, 100, 70, 0.06) !important;
+  background-color: rgba(30,20,5,0.075) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: NAVBAR ENHANCEMENTS
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) nav.bg-surface\/85 {
+  background: rgba(255,255,255,0.88) !important;
+  box-shadow: var(--shadow-nav);
+  border-bottom: 1px solid rgba(30,20,5,0.08) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: FLOATING SIDEBAR NAV
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) .shadow-black\/10 {
+  --tw-shadow-color: rgba(0,0,0,0.12);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.08),
+    0 8px 24px rgba(0,0,0,0.10),
+    0 0 0 1px rgba(30,20,5,0.07);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: SECTION LABEL (accent uppercase tracker)
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) .text-accent {
+  text-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: EXPERIENCE / EDUCATION — PERIOD BADGE
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) .bg-surface {
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: SKILL CHIP HOVER GLOW
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) .hover\:shadow-\[0_10px_25px_-5px_rgba\(5\,150\,105\,0\.12\)\]:hover {
+  box-shadow: 0 8px 24px -4px rgba(5,150,105,0.18), 0 2px 8px rgba(0,0,0,0.06) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT MODE: EDITORIAL WATERMARK TEXT
+═══════════════════════════════════════════════════════════════ */
+
+html:not(.dark) .text-black\/\[0\.04\] {
+  color: rgba(30,20,5,0.07) !important;
 }
