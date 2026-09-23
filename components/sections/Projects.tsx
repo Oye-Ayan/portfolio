@@ -6,9 +6,12 @@ import HorizontalScrollCarousel from '../effects/HorizontalScrollCarousel';
 import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink, FiArrowUpRight, FiMaximize2 } from 'react-icons/fi';
 import { useState } from 'react';
-import ProjectShowcase, { ProjectShowcaseData } from '../ui/ProjectShowcase';
+import dynamic from 'next/dynamic';
+import type { ProjectShowcaseData } from '../ui/ProjectShowcase';
 import TiltCard from '../effects/TiltCard';
 import Image from 'next/image';
+
+const ProjectShowcase = dynamic(() => import('../ui/ProjectShowcase'), { ssr: false });
 
 const articuliCareImages = [
   "/fyp_interface/IMG-20250508-WA0011.jpg", "/fyp_interface/IMG-20250508-WA0012.jpg",

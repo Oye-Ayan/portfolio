@@ -34,16 +34,15 @@ export default function Hero() {
     const loadVideo = () => {
       video.defaultMuted = true;
       video.muted = true;
-      video.preload = 'auto';
-      video.load();
+      video.preload = 'metadata';
       video.play().catch(() => {});
     };
 
-    // Defer video load until after LCP — doesn't compete with fonts/JS bundles
+    // Defer video load until after initial paint so it never competes with fonts and critical JS
     if ('requestIdleCallback' in window) {
       requestIdleCallback(loadVideo, { timeout: 2000 });
     } else {
-      setTimeout(loadVideo, 1500);
+      setTimeout(loadVideo, 1200);
     }
   }, []);
 

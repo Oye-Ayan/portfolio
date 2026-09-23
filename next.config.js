@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable gzip and brotli compression
+  compress: true,
+
   images: {
     remotePatterns: [
       {
@@ -7,19 +10,17 @@ const nextConfig = {
         hostname: 'raw.githubusercontent.com',
       },
     ],
-    // AVIF first (30% smaller than WebP), WebP fallback
+    // AVIF first (highest compression ratio), WebP fallback
     formats: ['image/avif', 'image/webp'],
-    // Cache optimized images for 30 days on Vercel
-    minimumCacheTTL: 2592000,
+    // Cache optimized images for 1 year
+    minimumCacheTTL: 31536000,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  compress: true,
-
   async headers() {
     return [
-      // SEO: Root page — tell Google the content is fresh
+      // SEO: Root page — fresh with stale-while-revalidate
       {
         source: '/',
         headers: [
@@ -33,23 +34,13 @@ const nextConfig = {
           },
         ],
       },
-      // Static fonts — immutable forever
+      // Static media files in /public (videos, audio) with byte-range streaming support
       {
-        source: '/fonts/(.*)',
+        source: '/:path*.(mp4|webm|ogg|mp3|wav)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // Portfolio video
-      {
-        source: '/portfolio_vid(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=2592000, immutable',
           },
           {
             key: 'Accept-Ranges',
@@ -57,13 +48,43 @@ const nextConfig = {
           },
         ],
       },
-      // Next.js optimized images
+      // Static self-hosted fonts in /public
       {
-        source: '/_next/image(.*)',
+        source: '/fonts/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=86400, stale-while-revalidate=604800',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Static images, icons, and documents in /public
+      {
+        source: '/:path*.(svg|png|jpg|jpeg|gif|webp|avif|ico|pdf)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Next.js optimized images
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, stale-while-revalidate=604800',
+          },
+        ],
+      },
+      // Next.js static hashed bundles (CSS, JS)
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
