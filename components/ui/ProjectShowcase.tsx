@@ -27,6 +27,8 @@ interface ProjectShowcaseProps {
 
 function PhoneScreenshot({ src, index, scrollYProgress }: { src: string, index: number, scrollYProgress: any }) {
   const yOffset = useTransform(scrollYProgress, [0, 1], [0, (index % 2 === 0 ? -60 : -120)]);
+  const optimizedSrc = src.replace(/\.(jpe?g|png)$/, '.webp');
+  const avifSrc = src.replace(/\.(jpe?g|png|webp)$/, '.avif');
 
   return (
     <motion.div
@@ -39,18 +41,25 @@ function PhoneScreenshot({ src, index, scrollYProgress }: { src: string, index: 
         <div className="w-1/3 h-4 bg-[#1a1a1e] rounded-b-xl"></div>
       </div>
 
-      <img
-        src={src}
-        alt={`Project Screenshot ${index + 1}`}
-        className="w-full h-full object-cover"
-        loading={index < 2 ? "eager" : "lazy"}
-      />
+      <picture>
+        <source srcSet={avifSrc} type="image/avif" />
+        <source srcSet={optimizedSrc} type="image/webp" />
+        <img
+          src={optimizedSrc}
+          alt={`Project Screenshot ${index + 1}`}
+          className="w-full h-full object-cover"
+          loading={index < 2 ? "eager" : "lazy"}
+          decoding="async"
+        />
+      </picture>
     </motion.div>
   );
 }
 
 function DesktopScreenshot({ src, index, scrollYProgress }: { src: string, index: number, scrollYProgress: any }) {
   const yOffset = useTransform(scrollYProgress, [0, 1], [0, -80 * (index + 1)]);
+  const optimizedSrc = src.replace(/\.(jpe?g|png)$/, '.webp');
+  const avifSrc = src.replace(/\.(jpe?g|png|webp)$/, '.avif');
 
   return (
     <motion.div
@@ -66,12 +75,17 @@ function DesktopScreenshot({ src, index, scrollYProgress }: { src: string, index
         <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></div>
       </div>
 
-      <img
-        src={src}
-        alt={`Project Screenshot ${index + 1}`}
-        className="w-full h-auto object-cover"
-        loading={index < 2 ? "eager" : "lazy"}
-      />
+      <picture>
+        <source srcSet={avifSrc} type="image/avif" />
+        <source srcSet={optimizedSrc} type="image/webp" />
+        <img
+          src={optimizedSrc}
+          alt={`Project Screenshot ${index + 1}`}
+          className="w-full h-auto object-cover"
+          loading={index < 2 ? "eager" : "lazy"}
+          decoding="async"
+        />
+      </picture>
     </motion.div>
   );
 }

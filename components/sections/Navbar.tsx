@@ -120,7 +120,7 @@ export default function Navbar() {
         {/* CTA Button Desktop */}
         <div className="hidden lg:block">
           <Button href="#contact" variant="primary" className="py-2.5 px-6 text-sm">
-            Let's Talk
+            Let&apos;s Talk
           </Button>
         </div>
 
@@ -161,7 +161,7 @@ export default function Navbar() {
               window.scrollTo({ top: y, behavior: 'smooth' });
             }
           }}>
-            Let's Talk
+            Let&apos;s Talk
           </Button>
         </nav>
       </motion.div>

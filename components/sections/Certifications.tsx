@@ -12,7 +12,7 @@ const certifications: ExpandingCardItem[] = [
     title: 'Artificial Intelligence Fundamentals',
     description:
       'Validated knowledge in core Artificial Intelligence concepts, machine learning algorithms, deep learning architectures, computer vision, and ethical AI deployment.',
-    imgSrc: '/certifications/ibm_cred.png',
+    imgSrc: '/certifications/ibm_cred.webp',
     icon: Brain,
   },
   {
@@ -20,7 +20,7 @@ const certifications: ExpandingCardItem[] = [
     title: 'Big Data 101',
     description:
       'Foundational mastery in Big Data architecture, distributed storage, Hadoop ecosystem, MapReduce processing framework, and data analytics pipelines.',
-    imgSrc: '/certifications/bigdata101_preview-1.png',
+    imgSrc: '/certifications/bigdata101_preview-1.webp',
     icon: Database,
   },
   {
@@ -28,7 +28,7 @@ const certifications: ExpandingCardItem[] = [
     title: 'POF Internship in Flutter',
     description:
       'Official recognition for leading cross-platform Flutter application development, Firebase integration, and Agile sprint execution.',
-    imgSrc: '/certifications/pof_certificate.jpg',
+    imgSrc: '/certifications/pof_certificate.webp',
     icon: Smartphone,
     date: 'Summer 2024',
   },
@@ -37,7 +37,7 @@ const certifications: ExpandingCardItem[] = [
     title: 'Machine Learning & Python',
     description:
       'Applied Machine Learning and Python project demonstrating end-to-end data analysis, model training, and evaluation pipelines.',
-    imgSrc: '/certifications/Ml&Python.png',
+    imgSrc: '/certifications/Ml&Python.webp',
     icon: Code2,
   },
   {
@@ -45,7 +45,7 @@ const certifications: ExpandingCardItem[] = [
     title: 'Emotional Intelligence',
     description:
       'Developed essential soft skills in emotional intelligence, self-awareness, empathy, and effective communication through Deloitte\'s WorldClass initiative.',
-    imgSrc: '/certifications/deloitte.jpeg',
+    imgSrc: '/certifications/deloitte.webp',
     icon: Lightbulb,
   },
 ];

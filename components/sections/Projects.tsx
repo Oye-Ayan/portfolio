@@ -14,66 +14,66 @@ import Image from 'next/image';
 const ProjectShowcase = dynamic(() => import('../ui/ProjectShowcase'), { ssr: false });
 
 const articuliCareImages = [
-  "/fyp_interface/IMG-20250508-WA0011.jpg", "/fyp_interface/IMG-20250508-WA0012.jpg",
-  "/fyp_interface/IMG-20250508-WA0013.jpg", "/fyp_interface/IMG-20250508-WA0015.jpg",
-  "/fyp_interface/IMG-20250508-WA0016.jpg", "/fyp_interface/IMG-20250508-WA0019.jpg",
-  "/fyp_interface/IMG-20250519-WA0003.jpg", "/fyp_interface/IMG-20250519-WA0004.jpg",
-  "/fyp_interface/IMG-20250519-WA0005.jpg", "/fyp_interface/IMG-20250519-WA0006.jpg",
-  "/fyp_interface/IMG-20250519-WA0007.jpg", "/fyp_interface/IMG-20250519-WA0008.jpg",
-  "/fyp_interface/IMG-20250519-WA0009.jpg", "/fyp_interface/IMG-20250519-WA0010.jpg",
-  "/fyp_interface/IMG-20250519-WA0011.jpg", "/fyp_interface/IMG-20250519-WA0012.jpg",
-  "/fyp_interface/IMG-20250519-WA0013.jpg", "/fyp_interface/IMG-20250519-WA0014.jpg",
-  "/fyp_interface/IMG-20250519-WA0015.jpg", "/fyp_interface/IMG-20250519-WA0016.jpg",
-  "/fyp_interface/IMG-20250519-WA0017.jpg", "/fyp_interface/IMG-20250519-WA0018.jpg",
-  "/fyp_interface/IMG-20250519-WA0019.jpg", "/fyp_interface/IMG-20250519-WA0020.jpg",
-  "/fyp_interface/IMG-20250519-WA0021.jpg"
+  "/fyp_interface/IMG-20250508-WA0011.webp", "/fyp_interface/IMG-20250508-WA0012.webp",
+  "/fyp_interface/IMG-20250508-WA0013.webp", "/fyp_interface/IMG-20250508-WA0015.webp",
+  "/fyp_interface/IMG-20250508-WA0016.webp", "/fyp_interface/IMG-20250508-WA0019.webp",
+  "/fyp_interface/IMG-20250519-WA0003.webp", "/fyp_interface/IMG-20250519-WA0004.webp",
+  "/fyp_interface/IMG-20250519-WA0005.webp", "/fyp_interface/IMG-20250519-WA0006.webp",
+  "/fyp_interface/IMG-20250519-WA0007.webp", "/fyp_interface/IMG-20250519-WA0008.webp",
+  "/fyp_interface/IMG-20250519-WA0009.webp", "/fyp_interface/IMG-20250519-WA0010.webp",
+  "/fyp_interface/IMG-20250519-WA0011.webp", "/fyp_interface/IMG-20250519-WA0012.webp",
+  "/fyp_interface/IMG-20250519-WA0013.webp", "/fyp_interface/IMG-20250519-WA0014.webp",
+  "/fyp_interface/IMG-20250519-WA0015.webp", "/fyp_interface/IMG-20250519-WA0016.webp",
+  "/fyp_interface/IMG-20250519-WA0017.webp", "/fyp_interface/IMG-20250519-WA0018.webp",
+  "/fyp_interface/IMG-20250519-WA0019.webp", "/fyp_interface/IMG-20250519-WA0020.webp",
+  "/fyp_interface/IMG-20250519-WA0021.webp"
 ];
 
 const loanApprovalImages = [
-  "/loan_approval_interface/main.png",
-  "/loan_approval_interface/validation.png",
-  "/loan_approval_interface/approve.png",
-  "/loan_approval_interface/reject.png"
+  "/loan_approval_interface/main.webp",
+  "/loan_approval_interface/validation.webp",
+  "/loan_approval_interface/approve.webp",
+  "/loan_approval_interface/reject.webp"
 ];
 
 const apparelStoreImages = [
-  "/ayan_apparel_interface/register.png",
-  "/ayan_apparel_interface/login.png",
-  "/ayan_apparel_interface/homepage.png",
-  "/ayan_apparel_interface/shop.png",
-  "/ayan_apparel_interface/cart1.png",
-  "/ayan_apparel_interface/cart.png",
-  "/ayan_apparel_interface/checkout.png",
-  "/ayan_apparel_interface/order_confirmation.png",
-  "/ayan_apparel_interface/user_account.png",
-  "/ayan_apparel_interface/user_orders.png",
-  "/ayan_apparel_interface/user_payment.png",
-  "/ayan_apparel_interface/wishlist.png",
-  "/ayan_apparel_interface/aboutus.png",
-  "/ayan_apparel_interface/blog.png",
-  "/ayan_apparel_interface/contactus.png",
-  "/ayan_apparel_interface/delete_account.png"
+  "/ayan_apparel_interface/register.webp",
+  "/ayan_apparel_interface/login.webp",
+  "/ayan_apparel_interface/homepage.webp",
+  "/ayan_apparel_interface/shop.webp",
+  "/ayan_apparel_interface/cart1.webp",
+  "/ayan_apparel_interface/cart.webp",
+  "/ayan_apparel_interface/checkout.webp",
+  "/ayan_apparel_interface/order_confirmation.webp",
+  "/ayan_apparel_interface/user_account.webp",
+  "/ayan_apparel_interface/user_orders.webp",
+  "/ayan_apparel_interface/user_payment.webp",
+  "/ayan_apparel_interface/wishlist.webp",
+  "/ayan_apparel_interface/aboutus.webp",
+  "/ayan_apparel_interface/blog.webp",
+  "/ayan_apparel_interface/contactus.webp",
+  "/ayan_apparel_interface/delete_account.webp"
 ];
 
 const chatMateImages = [
-  "/chatMate_interface/ChatMatelayout.png",
-  "/chatMate_interface/preview_chatmate.png"
+  "/chatMate_interface/ChatMatelayout.webp",
+  "/chatMate_interface/preview_chatmate.webp"
 ];
 
 const dipStoreImages = [
-  "/dipstore_interface/dipstoresplash.png",
-  "/dipstore_interface/dipstorelogin.png",
-  "/dipstore_interface/shop.png",
-  "/dipstore_interface/account.png"
+  "/dipstore_interface/dipstoresplash.webp",
+  "/dipstore_interface/dipstorelogin.webp",
+  "/dipstore_interface/shop.webp",
+  "/dipstore_interface/account.webp"
 ];
 
 const bmsImages = [
-  "/bms_interface/bank_register.png",
-  "/bms_interface/bank_login.png",
-  "/bms_interface/bank_mainpage.png",
-  "/bms_interface/success_transfer.png",
-  "/bms_interface/withdraw_success.png",
-  "/bms_interface/acc_notfound.png"
+  "/bms_interface/bank_register.webp",
+  "/bms_interface/bank_login.webp",
+  "/bms_interface/bank_mainpage.webp",
+  "/bms_interface/success_transfer.webp",
+  "/bms_interface/withdraw_success.webp",
+  "/bms_interface/acc_notfound.webp"
 ];
 
 const projects = [
@@ -85,7 +85,7 @@ const projects = [
     platform: "Cross-Platform Mobile",
     tags: ["Flutter", "Firebase", "TFLite", "Supabase", "AI/ML"],
     featured: true,
-    image: "/projects/articulicare_main.jpeg",
+    image: "/projects/articulicare_main.webp",
     demo: "https://youtu.be/BXg7ROtlc-M?si=Ruo2QvH0yKmTkV1t",
     github: "https://github.com/Oye-Ayan/Articu",
     caseStudyImages: articuliCareImages,
@@ -98,7 +98,7 @@ const projects = [
     role: "Machine Learning Engineer",
     platform: "Web Application",
     tags: ["Python", "Streamlit", "ML", "Colab"],
-    image: "/projects/loan-prediction.jpeg",
+    image: "/projects/loan-prediction.webp",
     github: "https://github.com/Oye-Ayan/Loan-Approval-",
     caseStudyImages: loanApprovalImages,
     isMobileLayout: false,
@@ -110,7 +110,7 @@ const projects = [
     role: "Full-Stack Developer",
     platform: "Web Application",
     tags: ["Laravel", "PHP", "MySQL", "Bootstrap"],
-    image: "/projects/ecommerce.jpeg",
+    image: "/projects/ecommerce.webp",
     github: "https://github.com/Oye-Ayan/ayan-apparel-Ecommerce",
     caseStudyImages: apparelStoreImages,
     isMobileLayout: false,
@@ -122,7 +122,7 @@ const projects = [
     role: "AI Integrator",
     platform: "Web Widget",
     tags: ["Botpress", "No-Code", "NLP", "AI"],
-    image: "/projects/chatMate.jpeg",
+    image: "/projects/chatMate.webp",
     caseStudyImages: chatMateImages,
     isMobileLayout: false,
   },
@@ -133,7 +133,7 @@ const projects = [
     role: "UI/UX Designer",
     platform: "Mobile App Design",
     tags: ["Figma", "UI/UX", "HCI", "Design"],
-    image: "/projects/DipStore.jpeg",
+    image: "/projects/DipStore.webp",
     demo: "https://www.figma.com/design/LSSVf2YNsTLvAya7Cyerel/Dipstore?node-id=0-1&t=e4bICOSXtuUkNRtX-1",
     caseStudyImages: dipStoreImages,
     isMobileLayout: true,
@@ -145,7 +145,7 @@ const projects = [
     role: "Java Developer",
     platform: "Desktop Application",
     tags: ["Java", "NetBeans", "Swing", "MySQL"],
-    image: "/projects/banking_app.jpeg",
+    image: "/projects/banking_app.webp",
     github: "https://github.com/Oye-Ayan/Bank-Management-System",
     caseStudyImages: bmsImages,
     isMobileLayout: false,

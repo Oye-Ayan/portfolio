@@ -160,40 +160,21 @@ export default function RootLayout({
           }}
         />
 
-        {/* Preconnect to critical third-party origins for faster loading */}
+        {/* Preconnect to critical third-party origins for fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-        {/* DNS Prefetch for external resources */}
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-        {/* Preload self-hosted Satoshi fonts — only the weights used above the fold */}
-        <link
-          rel="preload"
-          href="/fonts/Satoshi-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/Satoshi-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
       </head>
       <body className="antialiased custom-scrollbar noise-overlay">
         <ThemeProvider>
           {children}
         </ThemeProvider>
 
-        {/* Google Analytics — loaded after page is interactive, zero LCP impact */}
+        {/* Google Analytics — deferred to lazyOnload to completely eliminate network hang/render-blocking */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8J93HDK4N3"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga-config" strategy="afterInteractive">
+        <Script id="ga-config" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

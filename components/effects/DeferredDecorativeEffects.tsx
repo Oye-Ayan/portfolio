@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 
 // Code-split decorative ambient effects — they do not affect LCP or core content
-const CursorGlow = dynamic(() => import('@/components/effects/CursorGlow'), { ssr: false });
+const SmoothCursor = dynamic(() => import('@/components/effects/SmoothCursor'), { ssr: false });
 const ParticleField = dynamic(() => import('@/components/effects/ParticleField'), { ssr: false });
 const FloatingShapes = dynamic(() => import('@/components/effects/FloatingShapes'), { ssr: false });
 
@@ -26,7 +26,7 @@ export default function DeferredDecorativeEffects() {
 
   return (
     <>
-      <CursorGlow />
+      <SmoothCursor />
       <ParticleField />
       <FloatingShapes />
     </>
