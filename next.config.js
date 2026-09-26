@@ -2,6 +2,17 @@
 const nextConfig = {
   // Enable gzip and brotli compression
   compress: true,
+  poweredByHeader: false,
+  swcMinify: true,
+
+  // Optimize bundle imports for heavyweight icon & motion libraries
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'react-icons', 'framer-motion'],
+  },
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
 
   images: {
     remotePatterns: [

@@ -154,7 +154,7 @@ export default function Hero3DScene() {
     }
 
     // ─── 5. Surrounding Quantum Particle Swarm ─────────────────────────────
-    const particleCount = isMobile ? 180 : 350;
+    const particleCount = isMobile ? 120 : 220;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleScales = new Float32Array(particleCount);

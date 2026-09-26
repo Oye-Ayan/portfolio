@@ -8,12 +8,14 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
 });
 
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
   display: "swap",
+  fallback: ["system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
 });
 
 const BASE_URL = 'https://muhammad-ayan-khan.vercel.app';
@@ -159,10 +161,6 @@ export default function RootLayout({
             `,
           }}
         />
-
-        {/* Preconnect to critical third-party origins for fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="antialiased custom-scrollbar noise-overlay">
         <ThemeProvider>

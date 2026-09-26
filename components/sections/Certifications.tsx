@@ -1,6 +1,6 @@
 'use client';
 
-import { Brain, Database, Smartphone, Code2, Lightbulb } from 'lucide-react';
+import { Brain, Database, Smartphone, Code2, Lightbulb, Award } from 'lucide-react';
 import SectionTitle from '../ui/SectionTitle';
 import ScrollReveal from '../effects/ScrollReveal';
 import ExpandingCards, { type ExpandingCardItem } from '../ui/expanding-cards';
@@ -47,6 +47,15 @@ const certifications: ExpandingCardItem[] = [
       'Developed essential soft skills in emotional intelligence, self-awareness, empathy, and effective communication through Deloitte\'s WorldClass initiative.',
     imgSrc: '/certifications/deloitte.webp',
     icon: Lightbulb,
+  },
+  {
+    id: 'effective-leadership',
+    title: 'Effective Leadership',
+    description:
+      'Completed the Deloitte WorldClass Module on Effective Leadership, focusing on strategic leadership principles, impactful problem-solving, and driving sustainable societal outcomes.',
+    imgSrc: '/certifications/effective_leadership_deloitte.webp',
+    icon: Award,
+    date: 'September 2026',
   },
 ];
 

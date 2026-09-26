@@ -25,15 +25,16 @@ export default function ParticleField() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
     const isMobile = width < 768;
-    const count = isMobile ? 65 : 140;
-    const connectionDist3D = isMobile ? 140 : 180;
+    const count = isMobile ? 40 : 80;
+    const connectionDist3D = isMobile ? 120 : 160;
+    const maxDistSq = connectionDist3D * connectionDist3D;
     const focalLength = isMobile ? 320 : 420;
 
     // Create 3D particles distributed in a spatial cube
@@ -43,10 +44,10 @@ export default function ParticleField() {
         x: (Math.random() - 0.5) * width * 1.5,
         y: (Math.random() - 0.5) * height * 1.5,
         z: Math.random() * 800 + 100,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        vz: -0.35 - Math.random() * 0.4,
-        baseRadius: Math.random() * 1.6 + 0.8,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        vz: -0.3 - Math.random() * 0.35,
+        baseRadius: Math.random() * 1.5 + 0.8,
       });
     }
 
@@ -58,8 +59,8 @@ export default function ParticleField() {
     const handlePointerMove = (e: MouseEvent) => {
       const normX = (e.clientX / window.innerWidth) - 0.5;
       const normY = (e.clientY / window.innerHeight) - 0.5;
-      targetAngleY = normX * 0.4;
-      targetAngleX = -normY * 0.4;
+      targetAngleY = normX * 0.35;
+      targetAngleX = -normY * 0.35;
     };
 
     window.addEventListener('mousemove', handlePointerMove, { passive: true });
@@ -73,13 +74,27 @@ export default function ParticleField() {
 
     let animationFrameId: number;
     let clock = 0;
+    let isTabVisible = !document.hidden;
+
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const render = () => {
+      if (!isTabVisible) {
+        animationFrameId = 0;
+        return;
+      }
+
       clock += 0.01;
 
       if (isMobile) {
-        targetAngleY = Math.sin(clock * 0.5) * 0.15;
-        targetAngleX = Math.cos(clock * 0.4) * 0.1;
+        targetAngleY = Math.sin(clock * 0.5) * 0.12;
+        targetAngleX = Math.cos(clock * 0.4) * 0.08;
       }
 
       currentAngleX += (targetAngleX - currentAngleX) * 0.05;
@@ -97,7 +112,14 @@ export default function ParticleField() {
       const halfW = width / 2;
       const halfH = height / 2;
 
-      const projected = [];
+      const projected: Array<{
+        x: number;
+        y: number;
+        origX: number;
+        origY: number;
+        origZ: number;
+        alpha: number;
+      }> = [];
 
       for (let i = 0; i < count; i++) {
         const p = particles[i];
@@ -129,42 +151,35 @@ export default function ParticleField() {
         projected.push({
           x: screenX,
           y: screenY,
-          z: z2,
           origX: p.x,
           origY: p.y,
           origZ: p.z,
-          radius,
           alpha,
         });
 
-        // Draw particle node
+        // Draw particle node without expensive shadowBlur
         ctx.beginPath();
         ctx.arc(screenX, screenY, Math.max(0.5, radius), 0, Math.PI * 2);
         ctx.fillStyle = isDark
           ? `rgba(100, 217, 154, ${alpha})`
           : `rgba(5, 150, 105, ${alpha * 0.85})`;
-        ctx.shadowBlur = radius * (isDark ? 4 : 2);
-        ctx.shadowColor = isDark
-          ? 'rgba(100, 217, 154, 0.4)'
-          : 'rgba(5, 150, 105, 0.25)';
         ctx.fill();
       }
 
-      ctx.shadowBlur = 0;
-
-      // Draw 3D spatial connections
+      // Draw 3D spatial connections using squared distances to avoid Math.sqrt in hot loop
       for (let i = 0; i < projected.length; i++) {
+        const p1 = projected[i];
         for (let j = i + 1; j < projected.length; j++) {
-          const p1 = projected[i];
           const p2 = projected[j];
 
           const dx = p1.origX - p2.origX;
           const dy = p1.origY - p2.origY;
           const dz = p1.origZ - p2.origZ;
-          const dist3D = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          const distSq = dx * dx + dy * dy + dz * dz;
 
-          if (dist3D < connectionDist3D) {
-            const lineAlpha = (1 - dist3D / connectionDist3D) * 0.18 * Math.min(p1.alpha, p2.alpha);
+          if (distSq < maxDistSq) {
+            const dist3D = Math.sqrt(distSq);
+            const lineAlpha = (1 - dist3D / connectionDist3D) * 0.16 * Math.min(p1.alpha, p2.alpha);
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -184,6 +199,7 @@ export default function ParticleField() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousemove', handlePointerMove);
       window.removeEventListener('resize', handleResize);
     };

@@ -31,6 +31,11 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
+    // Respect user's data-saver preference
+    if (typeof navigator !== 'undefined' && (navigator as any).connection?.saveData) {
+      return;
+    }
+
     const loadVideo = () => {
       video.defaultMuted = true;
       video.muted = true;

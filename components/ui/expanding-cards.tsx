@@ -1,12 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from 'framer-motion';
+import React, { useState, useCallback, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { type LucideIcon, X, ExternalLink } from 'lucide-react';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -62,58 +58,21 @@ export default function ExpandingCards({
 }: ExpandingCardsProps) {
   const [activeIndex, setActiveIndex] = useState(defaultOpenIndex);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
-  const [isUserInteracting, setIsUserInteracting] = useState(false);
-  const interactionTimer = useRef<NodeJS.Timeout | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const isDesktop = useIsDesktop();
 
-  // ── Scroll-driven auto-advance ──────────────────────────────────────────
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start 75%', 'end 25%'],
-  });
-
-  useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (isUserInteracting || typeof v !== 'number' || isNaN(v)) return;
-    const clamped = Math.max(0, Math.min(0.999, v));
-    const idx = Math.min(
-      Math.floor(clamped * (items?.length || 1)),
-      (items?.length || 1) - 1,
-    );
-    if (!isNaN(idx) && idx >= 0 && idx < items.length) {
-      setActiveIndex(idx);
-    }
-  });
-
-  // ── Hover ───────────────────────────────────────────────────────────────
+  // ── Hover-triggered expansion (:hover) ──────────────────────────────────
   const handleMouseEnter = useCallback((index: number) => {
-    setIsUserInteracting(true);
     setActiveIndex(index);
-    if (interactionTimer.current) clearTimeout(interactionTimer.current);
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    if (interactionTimer.current) clearTimeout(interactionTimer.current);
-    interactionTimer.current = setTimeout(() => {
-      setIsUserInteracting(false);
-    }, 1500);
-  }, []);
-
-  // ── Click: collapsed → expand, expanded → lightbox ──────────────────────
+  // ── Click / Tap: collapsed → expand, expanded → lightbox ────────────────
   const handleClick = useCallback(
     (index: number) => {
-      setIsUserInteracting(true);
-      if (interactionTimer.current) clearTimeout(interactionTimer.current);
-
       if (index === activeIndex) {
         setLightboxSrc(items[index].imgSrc);
       } else {
         setActiveIndex(index);
       }
-
-      interactionTimer.current = setTimeout(() => {
-        setIsUserInteracting(false);
-      }, 2500);
     },
     [activeIndex, items],
   );
@@ -127,13 +86,6 @@ export default function ExpandingCards({
     },
     [handleClick],
   );
-
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (interactionTimer.current) clearTimeout(interactionTimer.current);
-    };
-  }, []);
 
   // ── Grid template ───────────────────────────────────────────────────────
   // Desktop: horizontal columns. Mobile: vertical rows.
@@ -156,7 +108,6 @@ export default function ExpandingCards({
   return (
     <>
       <div
-        ref={containerRef}
         className={`grid w-full gap-2 md:gap-3 ${className}`}
         style={gridStyle}
       >
@@ -167,7 +118,6 @@ export default function ExpandingCards({
             isActive={index === activeIndex}
             isDesktop={isDesktop}
             onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
             onClick={() => handleClick(index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
           />
@@ -225,7 +175,6 @@ function ExpandCard({
   isActive,
   isDesktop,
   onMouseEnter,
-  onMouseLeave,
   onClick,
   onKeyDown,
 }: {
@@ -233,7 +182,6 @@ function ExpandCard({
   isActive: boolean;
   isDesktop: boolean;
   onMouseEnter: () => void;
-  onMouseLeave: () => void;
   onClick: () => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }) {
@@ -256,23 +204,26 @@ function ExpandCard({
       `}
       style={{ minHeight: 0, minWidth: 0 }}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       onClick={onClick}
       onKeyDown={onKeyDown}
     >
-      {/* ── Background image — always present, styled differently ── */}
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-out"
-        style={{
-          backgroundImage: `url(${item.imgSrc})`,
-          filter: isActive ? 'grayscale(0%) brightness(1)' : 'grayscale(80%) brightness(0.35)',
-        }}
-        aria-hidden="true"
-      />
+      {/* ── Background image with next/image for lazy loading & compression ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <Image
+          src={item.imgSrc}
+          alt={item.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`object-cover object-center transition-all duration-700 ease-out ${
+            isActive ? 'grayscale-0 brightness-100' : 'grayscale-[80%] brightness-[0.35]'
+          }`}
+          loading="lazy"
+        />
+      </div>
 
       {/* ── Gradient overlay for expanded card text readability ── */}
       <div
-        className="absolute inset-0 transition-opacity duration-600"
+        className="absolute inset-0 transition-opacity duration-600 pointer-events-none"
         style={{ opacity: isActive ? 1 : 0 }}
         aria-hidden="true"
       >
@@ -284,25 +235,27 @@ function ExpandCard({
 
       {/* ── Extra darkening for collapsed cards ── */}
       <div
-        className="absolute inset-0 bg-black/40 transition-opacity duration-500"
+        className="absolute inset-0 bg-black/40 transition-opacity duration-500 pointer-events-none"
         style={{ opacity: isActive ? 0 : 1 }}
         aria-hidden="true"
-      />
+      >
+        {/* Hover highlight hint for collapsed cards */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-accent/[0.04]" />
+      </div>
 
       {/* ── Content ── */}
-      <div className="relative z-10 h-full w-full">
+      <div className="relative z-10 h-full w-full pointer-events-none">
 
         {/* ▸ COLLAPSED STATE ── */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{ opacity: isActive ? 0 : 1 }}
           transition={{ duration: 0.3 }}
-          style={{ pointerEvents: isActive ? 'none' : 'auto' }}
         >
           {isDesktop ? (
             /* Desktop collapsed: vertical rotated text */
             <span
-              className="text-white/70 text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] font-display select-none"
+              className="text-white/70 text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] font-display select-none group-hover:text-accent transition-colors duration-300"
               style={{
                 writingMode: 'vertical-rl',
                 transform: 'rotate(180deg)',
@@ -316,7 +269,7 @@ function ExpandCard({
               <div className="w-8 h-8 rounded-lg bg-accent/[0.08] border border-accent/[0.12] flex items-center justify-center shrink-0">
                 <IconComponent className="w-4 h-4 text-accent/50" strokeWidth={1.5} />
               </div>
-              <h3 className="text-sm font-semibold text-white/60 truncate tracking-wide font-display">
+              <h3 className="text-sm font-semibold text-white/60 truncate tracking-wide font-display group-hover:text-white transition-colors">
                 {item.title}
               </h3>
               {item.date && (
@@ -339,7 +292,6 @@ function ExpandCard({
             ...CONTENT_SPRING,
             delay: isActive ? 0.12 : 0,
           }}
-          style={{ pointerEvents: isActive ? 'auto' : 'none' }}
         >
           {/* Icon */}
           <motion.div
@@ -369,7 +321,7 @@ function ExpandCard({
 
           {/* Action Row */}
           <motion.div
-            className="mt-4 flex items-center gap-4 flex-wrap"
+            className="mt-4 flex items-center gap-4 flex-wrap pointer-events-auto"
             animate={{ opacity: isActive ? 1 : 0 }}
             transition={{ delay: 0.3, duration: 0.4 }}
           >
