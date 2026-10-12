@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useCallback, ReactNode } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface TiltCardProps {
   children: ReactNode;
@@ -17,13 +17,25 @@ export default function TiltCard({
   glareEnabled = true,
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+  const prefersReduced = useReducedMotion();
+
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, scale: 1 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
-  const calculateTilt = (clientX: number, clientY: number) => {
-    if (!cardRef.current) return;
+  const handleMouseEnter = useCallback(() => {
+    if (cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
+  }, []);
 
-    const rect = cardRef.current.getBoundingClientRect();
+  const calculateTilt = useCallback((clientX: number, clientY: number) => {
+    if (!rectRef.current && cardRef.current) {
+      rectRef.current = cardRef.current.getBoundingClientRect();
+    }
+    const rect = rectRef.current;
+    if (!rect || rect.width === 0 || rect.height === 0) return;
+
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
@@ -40,32 +52,36 @@ export default function TiltCard({
     const glareY = ((clientY - rect.top) / rect.height) * 100;
 
     setGlare({ x: glareX, y: glareY, opacity: 0.12 });
-  };
+  }, [tiltStrength]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (prefersReduced) return;
     calculateTilt(e.clientX, e.clientY);
-  };
+  }, [calculateTilt, prefersReduced]);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (e.touches.length > 0) {
-      calculateTilt(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  };
-
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
+    rectRef.current = null;
     setTilt({ rotateX: 0, rotateY: 0, scale: 1 });
     setGlare({ x: 50, y: 50, opacity: 0 });
-  };
+  }, []);
+
+  if (prefersReduced) {
+    return (
+      <div className={`relative ${className}`}>
+        <div className="relative z-10 w-full h-full">
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
       ref={cardRef}
       className={`relative preserve-3d ${className}`}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleReset}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleReset}
-      onTouchCancel={handleReset}
       animate={{
         rotateX: tilt.rotateX,
         rotateY: tilt.rotateY,
@@ -89,7 +105,7 @@ export default function TiltCard({
           animate={{ opacity: glare.opacity }}
           transition={{ duration: 0.2 }}
           style={{
-            background: `radial-gradient(circle 350px at ${glare.x}% ${glare.y}%, rgba(100, 217, 154, 0.15) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 70%)`,
+            background: `radial-gradient(circle 350px at ${glare.x}% ${glare.y}%, var(--color-accent-glow) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 70%)`,
           }}
         />
       )}

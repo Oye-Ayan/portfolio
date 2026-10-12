@@ -83,9 +83,10 @@ export default function ParticleField() {
       }
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const render = () => {
-      if (!isTabVisible) {
+      if (!isTabVisible || prefersReducedMotion) {
         animationFrameId = 0;
         return;
       }

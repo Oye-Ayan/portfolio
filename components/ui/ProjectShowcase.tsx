@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react';
 import { FaTimes, FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
+import { lockScroll, unlockScroll } from '@/lib/scrollLock';
 
 export interface ProjectShowcaseData {
   title: string;
@@ -99,6 +100,14 @@ function ProjectShowcaseModal({
 }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const { scrollYProgress } = useScroll({
     container: scrollContainerRef,
   });
@@ -109,6 +118,9 @@ function ProjectShowcaseModal({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: '100%', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${project.title} Case Study`}
       className="fixed inset-0 z-[100] bg-dark overflow-hidden"
     >
       <button
@@ -224,13 +236,9 @@ function ProjectShowcaseModal({
 export default function ProjectShowcase({ isOpen, onClose, project }: ProjectShowcaseProps) {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      lockScroll('project-showcase');
+      return () => unlockScroll('project-showcase');
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
   if (!project) return null;

@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
 export default function SmoothCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const prefersReduced = useReducedMotion();
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -27,7 +28,7 @@ export default function SmoothCursor() {
   }, []);
 
   useEffect(() => {
-    if (isTouchDevice) return;
+    if (isTouchDevice || prefersReduced) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -44,8 +45,8 @@ export default function SmoothCursor() {
       setIsHovering(!!interactive);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
@@ -53,9 +54,9 @@ export default function SmoothCursor() {
       window.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [cursorX, cursorY, isVisible, isTouchDevice]);
+  }, [cursorX, cursorY, isVisible, isTouchDevice, prefersReduced]);
 
-  if (isTouchDevice) return null;
+  if (isTouchDevice || prefersReduced) return null;
 
   return (
     <>

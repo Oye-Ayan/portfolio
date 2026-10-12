@@ -18,9 +18,15 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
     setMounted(true);
   }, []);
 
+  const sizeClasses = showLabel ? 'p-2' : 'w-10 h-10 justify-center';
+
   if (!mounted) {
+    // Same footprint as the real button to avoid a layout shift; theme-neutral tokens avoid a flash.
     return (
-      <div className={`w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] ${className}`} />
+      <div
+        aria-hidden="true"
+        className={`rounded-xl border border-border bg-surface/40 ${sizeClasses} ${className}`}
+      />
     );
   }
 
@@ -28,30 +34,28 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
 
   return (
     <motion.button
+      type="button"
       onClick={toggleTheme}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-      className={`relative flex items-center gap-2 p-2 rounded-xl transition-all duration-300 border ${
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+      className={`relative flex items-center gap-2 rounded-xl transition-colors duration-300 border touch-manipulation ${sizeClasses} ${
         isDark
           ? 'bg-white/[0.04] hover:bg-white/[0.08] border-white/[0.08] hover:border-accent/40 text-text-secondary hover:text-accent'
           : 'bg-black/[0.04] hover:bg-black/[0.08] border-black/[0.08] hover:border-accent/50 text-text-secondary hover:text-accent'
       } ${className}`}
     >
-      <motion.div
+      <motion.span
         key={theme}
         initial={{ rotate: -90, opacity: 0, scale: 0.8 }}
         animate={{ rotate: 0, opacity: 1, scale: 1 }}
-        exit={{ rotate: 90, opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="text-lg flex items-center justify-center"
+        aria-hidden="true"
       >
-        {isDark ? (
-          <FiSun className="text-accent" />
-        ) : (
-          <FiMoon className="text-accent" />
-        )}
-      </motion.div>
+        {isDark ? <FiSun className="text-accent" /> : <FiMoon className="text-accent" />}
+      </motion.span>
 
       {showLabel && (
         <span className="text-xs font-medium tracking-wide capitalize text-text-primary">

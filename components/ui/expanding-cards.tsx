@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { type LucideIcon, X, ExternalLink } from 'lucide-react';
+import { lockScroll, unlockScroll } from '@/lib/scrollLock';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -59,6 +60,21 @@ export default function ExpandingCards({
   const [activeIndex, setActiveIndex] = useState(defaultOpenIndex);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const isDesktop = useIsDesktop();
+
+  useEffect(() => {
+    if (!lightboxSrc) return;
+
+    lockScroll('cert-lightbox');
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxSrc(null);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      unlockScroll('cert-lightbox');
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [lightboxSrc]);
 
   // ── Hover-triggered expansion (:hover) ──────────────────────────────────
   const handleMouseEnter = useCallback((index: number) => {
@@ -129,6 +145,9 @@ export default function ExpandingCards({
         {lightboxSrc && (
           <motion.div
             key="lightbox-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Certificate preview"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

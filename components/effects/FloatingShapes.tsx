@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 export default function FloatingShapes() {
   const [mounted, setMounted] = useState(false);
+  const prefersReduced = useReducedMotion();
   const { scrollY } = useScroll();
 
   // Scroll-linked 3D rotations
@@ -19,7 +20,7 @@ export default function FloatingShapes() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted || prefersReduced) return null;
 
   return (
     <div

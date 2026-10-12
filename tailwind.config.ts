@@ -9,21 +9,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Channel-based tokens so opacity modifiers (e.g. `bg-dark/95`, `border-accent/40`) compile.
       colors: {
-        bg: 'var(--color-bg)',
-        'bg-alt': 'var(--color-bg-alt)',
-        dark: 'var(--color-bg)',
-        surface: 'var(--color-surface)',
-        'surface-hover': 'var(--color-surface-hover)',
+        bg: 'rgb(var(--color-bg-rgb) / <alpha-value>)',
+        'bg-alt': 'rgb(var(--color-bg-alt-rgb) / <alpha-value>)',
+        dark: 'rgb(var(--color-bg-rgb) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface-rgb) / <alpha-value>)',
+        'surface-hover': 'rgb(var(--color-surface-hover-rgb) / <alpha-value>)',
         border: 'var(--color-border)',
         accent: {
-          DEFAULT: 'var(--color-accent)',
-          hover: 'var(--color-accent-hover)',
+          DEFAULT: 'rgb(var(--color-accent-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--color-accent-hover-rgb) / <alpha-value>)',
           glow: 'var(--color-accent-glow)',
         },
-        'text-primary': 'var(--color-text-primary)',
-        'text-secondary': 'var(--color-text-secondary)',
-        'text-tertiary': 'var(--color-text-tertiary)',
+        'text-primary': 'rgb(var(--color-text-primary-rgb) / <alpha-value>)',
+        'text-secondary': 'rgb(var(--color-text-secondary-rgb) / <alpha-value>)',
+        'text-tertiary': 'rgb(var(--color-text-tertiary-rgb) / <alpha-value>)',
       },
       fontFamily: {
         display: ['var(--font-outfit)', 'sans-serif'],

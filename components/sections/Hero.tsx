@@ -1,12 +1,22 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { useRef, useEffect } from 'react';
 import Button from '../ui/Button';
 import Hero3DScene from '../3d/Hero3DSceneDynamic';
 
 function RevealWord({ word, index, total }: { word: string; index: number; total: number }) {
+  const prefersReduced = useReducedMotion();
+
+  if (prefersReduced) {
+    return (
+      <span className="inline-block">
+        {word}{index < total - 1 ? '\u00A0' : ''}
+      </span>
+    );
+  }
+
   return (
     <motion.span
       initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
@@ -31,8 +41,11 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    // Respect user's data-saver preference
+    // Respect user's data-saver and reduced-motion preferences
     if (typeof navigator !== 'undefined' && (navigator as any).connection?.saveData) {
+      return;
+    }
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
 
@@ -43,12 +56,19 @@ export default function Hero() {
       video.play().catch(() => {});
     };
 
-    // Defer video load until after initial paint so it never competes with fonts and critical JS
+    let idleId: number | null = null;
+    let timerId: NodeJS.Timeout | null = null;
+
     if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadVideo, { timeout: 2000 });
+      idleId = requestIdleCallback(loadVideo, { timeout: 2000 });
     } else {
-      setTimeout(loadVideo, 1200);
+      timerId = setTimeout(loadVideo, 1200);
     }
+
+    return () => {
+      if (idleId !== null && 'cancelIdleCallback' in window) cancelIdleCallback(idleId);
+      if (timerId !== null) clearTimeout(timerId);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({
