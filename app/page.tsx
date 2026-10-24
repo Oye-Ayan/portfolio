@@ -5,6 +5,7 @@ import About from '@/components/sections/About';
 import JsonLd from '@/components/seo/JsonLd';
 import LoadingScreen from '@/components/ui/LoadingScreen';
 import FloatingNav from '@/components/ui/FloatingNav';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 import DeferredDecorativeEffects from '@/components/effects/DeferredDecorativeEffects';
 
 // Below-the-fold sections: Dynamically loaded to prevent asset/JS execution during initial paint (FCP/LCP)
@@ -55,6 +56,7 @@ export default function Home() {
         <Education />
         <Certifications />
         <Contact />
+        <ScrollToTop />
       </main>
     </>
   );

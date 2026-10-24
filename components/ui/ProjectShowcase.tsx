@@ -1,7 +1,8 @@
 'use client';
 
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { FaTimes, FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 import { lockScroll, unlockScroll } from '@/lib/scrollLock';
@@ -15,9 +16,11 @@ export interface ProjectShowcaseData {
   platform: string;
   tags: string[];
   demo?: string;
+  demoLabel?: string;
   github?: string;
   images: string[];
   isMobileLayout?: boolean;
+  enterprise?: boolean;
 }
 
 interface ProjectShowcaseProps {
@@ -187,7 +190,7 @@ function ProjectShowcaseModal({
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 px-8 py-4 bg-accent text-dark rounded-xl font-bold text-sm transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/20"
                 >
-                  <FiExternalLink className="text-lg" /> Watch Demo
+                  <FiExternalLink className="text-lg" /> {project.demoLabel || 'Watch Demo'}
                 </a>
               )}
               {project.github && (
@@ -234,6 +237,13 @@ function ProjectShowcaseModal({
 }
 
 export default function ProjectShowcase({ isOpen, onClose, project }: ProjectShowcaseProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => unlockScroll('project-showcase');
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
       lockScroll('project-showcase');
@@ -241,13 +251,14 @@ export default function ProjectShowcase({ isOpen, onClose, project }: ProjectSho
     }
   }, [isOpen]);
 
-  if (!project) return null;
+  if (!project || !mounted) return null;
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <ProjectShowcaseModal onClose={onClose} project={project} />
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

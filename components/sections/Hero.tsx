@@ -11,7 +11,7 @@ function RevealWord({ word, index, total }: { word: string; index: number; total
 
   if (prefersReduced) {
     return (
-      <span className="inline-block">
+      <span className="inline-block opacity-100">
         {word}{index < total - 1 ? '\u00A0' : ''}
       </span>
     );
@@ -19,14 +19,17 @@ function RevealWord({ word, index, total }: { word: string; index: number; total
 
   return (
     <motion.span
-      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
       animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       transition={{
-        duration: 0.8,
-        delay: 0.3 + index * 0.08,
+        duration: 0.7,
+        delay: 0.15 + index * 0.08,
         ease: [0.16, 1, 0.3, 1],
       }}
       className="inline-block"
+      style={{
+        animation: 'heroRevealFallback 0.6s ease-out 0.7s forwards',
+      }}
     >
       {word}{index < total - 1 ? '\u00A0' : ''}
     </motion.span>
@@ -124,12 +127,19 @@ export default function Hero() {
         style={{ y: contentY }}
         className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 text-center pointer-events-none"
       >
+        <style>{`
+          @keyframes heroRevealFallback {
+            to { opacity: 1; transform: none; filter: none; }
+          }
+        `}</style>
+
         {/* Role label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-6"
+          style={{ animation: 'heroRevealFallback 0.6s ease-out 0.5s forwards' }}
         >
           <span className=" text-xs sm:text-sm tracking-[0.15em] text-accent uppercase">
             Software Engineer & Flutter Developer
@@ -147,8 +157,9 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="text-text-secondary text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          style={{ animation: 'heroRevealFallback 0.6s ease-out 0.7s forwards' }}
         >
           Building sleek, scalable mobile & web applications with clean architecture and a passion for elegant solutions.
         </motion.p>
@@ -157,8 +168,9 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 pointer-events-auto"
+          style={{ animation: 'heroRevealFallback 0.6s ease-out 0.8s forwards' }}
         >
           <Button href="https://github.com/Oye-Ayan" variant="primary" aria-label="View Muhammad Ayan Khan's GitHub profile">
             <FaGithub className="text-lg" />
@@ -177,8 +189,9 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="flex flex-wrap justify-center gap-6 text-xs text-text-tertiary pointer-events-auto"
+          style={{ animation: 'heroRevealFallback 0.6s ease-out 0.9s forwards' }}
         >
           <a href="mailto:mayan921111@gmail.com" className="hover:text-accent transition-colors duration-300">
             mayan921111@gmail.com
@@ -191,8 +204,9 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        transition={{ delay: 1.1, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        style={{ animation: 'heroRevealFallback 0.6s ease-out 1.2s forwards' }}
       >
         <motion.button
           onClick={() => {

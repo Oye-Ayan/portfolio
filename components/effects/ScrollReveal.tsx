@@ -20,8 +20,8 @@ export default function ScrollReveal({
   delay = 0,
   direction = 'up',
   duration = 0.75,
-  once = false,
-  amount = 0.15,
+  once = true,
+  amount = 0.05,
   scale = 1,
 }: ScrollRevealProps) {
   const prefersReduced = useReducedMotion();
@@ -61,7 +61,15 @@ export default function ScrollReveal({
         ease: [0.16, 1, 0.3, 1],
       }}
       className={className}
+      style={{
+        animation: 'scrollRevealFallback 0.8s ease-out 1.5s forwards',
+      }}
     >
+      <style>{`
+        @keyframes scrollRevealFallback {
+          to { opacity: 1; transform: none; }
+        }
+      `}</style>
       {children}
     </motion.div>
   );

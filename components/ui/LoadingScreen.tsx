@@ -1,32 +1,49 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
-export default function LoadingScreen() {
+interface LoadingScreenProps {
+  onLoadingComplete?: () => void;
+}
+
+export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const completedRef = useRef(false);
+
+  const notifyComplete = useCallback(() => {
+    if (completedRef.current) return;
+    completedRef.current = true;
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('loadingComplete'));
+    }
+    onLoadingComplete?.();
+  }, [onLoadingComplete]);
 
   useEffect(() => {
-    // Fail-open immediately: never gatekeep DOM visibility or wait on slow third-party scripts.
-    // Cap screen display to a maximum of 400ms under all network conditions.
     const dismiss = () => setIsLoading(false);
 
+    // If page is already loaded, transition after a smooth micro-moment
     if (typeof document !== 'undefined' && document.readyState === 'complete') {
-      dismiss();
-      return;
+      const quickTimer = setTimeout(dismiss, 150);
+      return () => clearTimeout(quickTimer);
     }
 
-    const timer = setTimeout(dismiss, 400);
-
+    const timer = setTimeout(dismiss, 350);
     window.addEventListener('load', dismiss, { once: true });
+
+    // Failsafe timer: ensures completion is always signaled even if animation interrupts
+    const fallbackTimer = setTimeout(notifyComplete, 800);
+
     return () => {
       clearTimeout(timer);
+      clearTimeout(fallbackTimer);
       window.removeEventListener('load', dismiss);
     };
-  }, []);
+  }, [notifyComplete]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={notifyComplete}>
       {isLoading && (
         <motion.div
           key="loader"
@@ -49,7 +66,7 @@ export default function LoadingScreen() {
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className="mt-6 w-24 h-px bg-accent transform origin-left"
           />
         </motion.div>

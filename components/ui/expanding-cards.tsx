@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { type LucideIcon, X, ExternalLink } from 'lucide-react';
@@ -59,14 +60,27 @@ export default function ExpandingCards({
 }: ExpandingCardsProps) {
   const [activeIndex, setActiveIndex] = useState(defaultOpenIndex);
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const isDesktop = useIsDesktop();
+
+  const closeLightbox = useCallback(() => {
+    setLightboxSrc(null);
+    unlockScroll('cert-lightbox');
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+    return () => {
+      unlockScroll('cert-lightbox');
+    };
+  }, []);
 
   useEffect(() => {
     if (!lightboxSrc) return;
 
     lockScroll('cert-lightbox');
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxSrc(null);
+      if (e.key === 'Escape') closeLightbox();
     };
     document.addEventListener('keydown', handleKeyDown);
 
@@ -74,7 +88,9 @@ export default function ExpandingCards({
       unlockScroll('cert-lightbox');
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [lightboxSrc]);
+  }, [lightboxSrc, closeLightbox]);
+
+  const activeItem = lightboxSrc ? items.find((item) => item.imgSrc === lightboxSrc) ?? items[activeIndex] : null;
 
   // ── Hover-triggered expansion (:hover) ──────────────────────────────────
   const handleMouseEnter = useCallback((index: number) => {
@@ -140,49 +156,102 @@ export default function ExpandingCards({
         ))}
       </div>
 
-      {/* ── Lightbox Modal ── */}
-      <AnimatePresence>
-        {lightboxSrc && (
-          <motion.div
-            key="lightbox-overlay"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Certificate preview"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-lg flex items-center justify-center p-4 sm:p-8"
-            onClick={() => setLightboxSrc(null)}
-          >
-            <motion.button
-              initial={{ opacity: 0, scale: 0.7 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.7 }}
-              transition={SPRING}
-              onClick={() => setLightboxSrc(null)}
-              className="absolute top-5 right-5 sm:top-8 sm:right-8 w-12 h-12 rounded-full
-                         bg-black/40 border border-white/[0.1] text-white backdrop-blur-md
-                         flex items-center justify-center
-                         hover:bg-black/60 hover:scale-105 transition-all z-[60]"
-              aria-label="Close certificate preview"
-            >
-              <X className="w-5 h-5" />
-            </motion.button>
+      {/* ── Lightbox Modal Portaled to document.body (Immune to parent transforms) ── */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {lightboxSrc && (
+              <motion.div
+                key="lightbox-overlay"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Certificate preview"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 overscroll-contain select-none"
+                onClick={closeLightbox}
+              >
+                {/* Fixed Viewport Close Button: Always visible and pinned to top-right of screen */}
+                <motion.button
+                  type="button"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={SPRING}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeLightbox();
+                  }}
+                  className="fixed top-4 right-4 sm:top-6 sm:right-6 z-[10000] w-12 h-12 rounded-full
+                             bg-black/80 hover:bg-black border border-white/20 text-white backdrop-blur-md
+                             flex items-center justify-center
+                             hover:scale-105 active:scale-95 transition-all shadow-2xl cursor-pointer"
+                  aria-label="Close certificate preview"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </motion.button>
 
-            <motion.img
-              initial={{ opacity: 0, scale: 0.88, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={SPRING}
-              src={lightboxSrc}
-              alt="Certificate preview"
-              className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl relative z-50"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
+                {/* Certificate Preview Card Container */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94, y: 15 }}
+                  transition={SPRING}
+                  className="relative z-[9999] flex flex-col items-center max-w-4xl w-full max-h-[92vh]"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Top Bar with Title and Card Close Button */}
+                  <div className="w-full flex items-center justify-between gap-4 mb-3 px-2 text-white/90">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      {activeItem && <activeItem.icon className="w-5 h-5 text-accent shrink-0" />}
+                      <h4 className="text-sm sm:text-base font-semibold truncate font-display">
+                        {activeItem?.title || 'Certificate Preview'}
+                      </h4>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={closeLightbox}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors shrink-0 border border-white/10 cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                      <span>Close</span>
+                    </button>
+                  </div>
+
+                  {/* Certificate Image Frame */}
+                  <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black/60 flex items-center justify-center max-h-[76vh]">
+                    <img
+                      src={lightboxSrc}
+                      alt={activeItem?.title || 'Certificate preview'}
+                      className="w-auto h-auto max-w-full max-h-[76vh] object-contain rounded-2xl"
+                    />
+                  </div>
+
+                  {/* Footer with Hint and Optional Link */}
+                  <div className="w-full flex items-center justify-between gap-4 mt-3 px-2 text-xs text-text-tertiary">
+                    <p className="text-[11px] text-white/60">
+                      Click outside or press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">ESC</kbd> to close
+                    </p>
+                    {activeItem?.verifyUrl && (
+                      <a
+                        href={activeItem.verifyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-accent hover:underline text-xs font-medium ml-auto"
+                      >
+                        Verify Credential
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
         )}
-      </AnimatePresence>
     </>
   );
 }

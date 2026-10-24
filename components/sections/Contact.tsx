@@ -11,8 +11,8 @@ export default function Contact() {
     {
       icon: <FaEnvelope className="text-xl" />,
       label: "Email",
-      value: "mayan921111@gmail.com",
-      href: "mailto:mayan921111@gmail.com"
+      value: "ayan.dev@yahoo.com",
+      href: "mailto:ayan.dev@yahoo.com"
     },
     {
       icon: <FaPhone className="text-xl" />,

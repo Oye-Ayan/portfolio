@@ -97,13 +97,25 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
-  // Active section tracking
+  // Active section tracking and URL hash synchronization
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            const sectionId = entry.target.id;
+            setActiveSection(sectionId);
+
+            // Synchronize browser address bar cleanly without triggering scroll jumps
+            if (typeof window !== 'undefined') {
+              const targetHash = sectionId === 'home' ? '' : `#${sectionId}`;
+              if (window.location.hash !== targetHash) {
+                const newUrl = sectionId === 'home'
+                  ? window.location.pathname + window.location.search
+                  : `${window.location.pathname}${window.location.search}#${sectionId}`;
+                window.history.replaceState(null, '', newUrl);
+              }
+            }
           }
         });
       },
@@ -120,7 +132,15 @@ export default function Navbar() {
     // Release the lock imperatively so the programmatic scroll isn't swallowed by overflow: hidden.
     unlockScroll(SCROLL_LOCK_OWNER);
     setMobileMenuOpen(false);
-    scrollToId(href.replace('#', ''));
+    const targetId = href.replace('#', '');
+    scrollToId(targetId);
+
+    if (typeof window !== 'undefined') {
+      const newUrl = targetId === 'home'
+        ? window.location.pathname + window.location.search
+        : `${window.location.pathname}${window.location.search}#${targetId}`;
+      window.history.replaceState(null, '', newUrl);
+    }
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -186,7 +206,11 @@ export default function Navbar() {
 
             {/* CTA Button Desktop */}
             <div className="hidden lg:block">
-              <Button href="#contact" variant="primary" className="py-2.5 px-6 text-sm">
+              <Button
+                variant="primary"
+                className="py-2.5 px-6 text-sm"
+                onClick={() => navigateTo('#contact')}
+              >
                 Let&apos;s Talk
               </Button>
             </div>

@@ -8,6 +8,7 @@ export default function Hero3DScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isInteractive, setIsInteractive] = useState(false);
+  const [hasWebGL, setHasWebGL] = useState(true);
   const { theme } = useTheme();
 
   // References for live theme color transitions
@@ -36,12 +37,19 @@ export default function Hero3DScene() {
     const isMobile = width < 768;
     camera.position.z = isMobile ? 12 : 9.5;
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance',
-    });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: 'high-performance',
+      });
+    } catch (e) {
+      console.warn('WebGL is not supported or context could not be initialized:', e);
+      setHasWebGL(false);
+      return;
+    }
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -358,25 +366,27 @@ export default function Hero3DScene() {
     animate();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       observer.disconnect();
       window.removeEventListener('pointermove', handlePointerMove);
-      canvas.removeEventListener('pointerdown', handlePointerDown);
+      canvas?.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
       window.removeEventListener('resize', handleResize);
 
-      innerGeo.dispose();
-      innerMat.dispose();
-      wireGeo.dispose();
-      wireMat.dispose();
-      nodesGeo.dispose();
-      nodesMat.dispose();
-      satGeo.dispose();
-      satMat.dispose();
-      particleGeo.dispose();
-      particleMat.dispose();
-      renderer.dispose();
+      try {
+        innerGeo.dispose();
+        innerMat.dispose();
+        wireGeo.dispose();
+        wireMat.dispose();
+        nodesGeo.dispose();
+        nodesMat.dispose();
+        satGeo.dispose();
+        satMat.dispose();
+        particleGeo.dispose();
+        particleMat.dispose();
+        renderer?.dispose();
+      } catch {}
     };
   }, []);
 
@@ -410,6 +420,17 @@ export default function Hero3DScene() {
       ambientLight.intensity = 1.0;
     }
   }, [theme]);
+
+  if (!hasWebGL) {
+    return (
+      <div
+        className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-accent/5 blur-3xl animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <div

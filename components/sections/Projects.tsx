@@ -76,7 +76,32 @@ const bmsImages = [
   "/bms_interface/acc_notfound.webp"
 ];
 
+const ntsImages = [
+  "/nts_interface/login_nts.webp",
+  "/nts_interface/register_nts.webp",
+  "/nts_interface/user_dashboard_nts.webp",
+  "/nts_interface/mock_test_dashboard_nts.webp",
+  "/nts_interface/mock_test_nts.webp",
+  "/nts_interface/user_test_viloation_nts.webp",
+  "/nts_interface/user_violation_attempt.webp",
+  "/nts_interface/user_test_summary_nts.webp"
+];
+
 const projects = [
+  {
+    title: "NTS (Online Testing & Assessment Portal)",
+    subtitle: "Enterprise Client Solution • eConceptions",
+    description: "Enterprise-grade online testing and assessment portal built with React, Vite, and Spring Boot REST APIs. Engineered candidate-facing test execution workflows, timed assessment sessions, real-time browser integrity monitors, interactive mock tests, and automated instant scoring.",
+    role: "Software Engineer (eConceptions)",
+    platform: "Web Application (Enterprise)",
+    tags: ["React", "Vite", "Spring Boot", "REST APIs", "Enterprise"],
+    enterprise: true,
+    image: "/projects/nts.webp",
+    demo: "https://demonts.ecnstg.com/login",
+    demoLabel: "Request Demo Access",
+    caseStudyImages: ntsImages,
+    isMobileLayout: false,
+  },
   {
     title: "ArticuliCare",
     subtitle: "Final Year Project",
@@ -164,9 +189,11 @@ export default function Projects() {
       platform: project.platform,
       tags: project.tags,
       demo: project.demo,
+      demoLabel: project.demoLabel,
       github: project.github,
       images: project.caseStudyImages,
       isMobileLayout: project.isMobileLayout,
+      enterprise: project.enterprise,
     });
   };
 
@@ -233,6 +260,14 @@ export default function Projects() {
                       </div>
                     )}
 
+                    {project.enterprise && (
+                      <div className="absolute top-4 left-4 z-30 [transform:translateZ(30px)]">
+                        <span className="px-3 py-1 text-[10px] font-bold text-white bg-emerald-600/90 rounded-md uppercase tracking-wider shadow-lg shadow-emerald-950/20 backdrop-blur-sm">
+                          Enterprise
+                        </span>
+                      </div>
+                    )}
+
                     {project.featured && (
                       <div className="absolute top-4 right-4 z-30 [transform:translateZ(30px)]">
                         <span className="px-3 py-1 text-[10px] font-bold text-dark bg-accent rounded-md uppercase tracking-wider shadow-lg shadow-accent/20">
@@ -275,7 +310,7 @@ export default function Projects() {
                           onClick={(e) => e.stopPropagation()}
                           className="flex items-center gap-2.5 text-sm font-semibold text-accent hover:text-text-primary transition-colors group/link"
                         >
-                          <FiExternalLink className="text-lg" /> Live Demo
+                          <FiExternalLink className="text-lg" /> {project.demoLabel || 'Live Demo'}
                         </a>
                       </div>
                     )}

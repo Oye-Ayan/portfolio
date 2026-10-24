@@ -5,10 +5,7 @@ const nextConfig = {
   poweredByHeader: false,
   swcMinify: true,
 
-  // Optimize bundle imports for heavyweight icon & motion libraries
-  experimental: {
-    optimizePackageImports: ['lucide-react', 'react-icons', 'framer-motion'],
-  },
+
 
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
@@ -31,13 +28,13 @@ const nextConfig = {
 
   async headers() {
     return [
-      // SEO: Root page — fresh with stale-while-revalidate
+      // SEO: Root page — fresh HTML ensures chunk hashes stay aligned with deployments
       {
         source: '/',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+            value: 'public, max-age=0, must-revalidate',
           },
           {
             key: 'X-Robots-Tag',
@@ -86,16 +83,6 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, stale-while-revalidate=604800',
-          },
-        ],
-      },
-      // Next.js static hashed bundles (CSS, JS)
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
           },
         ],
       },

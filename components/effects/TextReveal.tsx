@@ -27,19 +27,27 @@ export default function TextReveal({
 
   return (
     <Tag className={className}>
+      <style>{`
+        @keyframes textRevealFallback {
+          to { opacity: 1; transform: none; filter: none; }
+        }
+      `}</style>
       {words.map((word, i) => (
         <motion.span
           key={`${word}-${i}`}
           initial={{ opacity: 0, y: 28, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
           transition={{
             duration: 0.7,
             delay: delay + i * stagger,
             ease: [0.16, 1, 0.3, 1],
           }}
           className="inline-block"
-          style={{ marginRight: i < words.length - 1 ? '0.3em' : 0 }}
+          style={{
+            marginRight: i < words.length - 1 ? '0.3em' : 0,
+            animation: 'textRevealFallback 0.7s ease-out 1.2s forwards',
+          }}
         >
           {word}
         </motion.span>
