@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
   // ── Core Meta ──
   title: {
-    default: "Muhammad Ayan Khan | Software Engineer & Flutter Developer",
+    default: "Muhammad Ayan Khan",
     template: "%s | Muhammad Ayan Khan",
   },
   description:
